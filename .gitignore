@@ -1,2 +1,3 @@
 wordpress/*.*
-!*pbw/*.*
+!*/pbf/*.*
+!wordpress/wp-content/plugins/qtranslate-xt/*.*

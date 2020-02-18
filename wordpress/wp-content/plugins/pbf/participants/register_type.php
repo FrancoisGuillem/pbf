@@ -1,39 +1,39 @@
 <?php
  // Register Custom Post Type: Participants
- function register_participants_type() {
+ function register_type_participant() {
 
  	$labels = array(
- 		'name'                  => _x( 'Participants', 'Post Type General Name', 'pbw' ),
- 		'singular_name'         => _x( 'Participant', 'Post Type Singular Name', 'pbw' ),
- 		'menu_name'             => __( 'Participants', 'pbw' ),
- 		'name_admin_bar'        => __( 'Participants', 'pbw' ),
- 		'archives'              => __( 'Participants', 'pbw' ),
- 		'attributes'            => __( 'Item Attributes', 'pbw' ),
- 		'parent_item_colon'     => __( 'Parent Item:', 'pbw' ),
- 		'all_items'             => __( 'Tous les participants', 'pbw' ),
- 		'add_new_item'          => __( 'Add New Item', 'pbw' ),
- 		'add_new'               => __( 'Add New', 'pbw' ),
- 		'new_item'              => __( 'New Item', 'pbw' ),
- 		'edit_item'             => __( 'Edit Item', 'pbw' ),
- 		'update_item'           => __( 'Update Item', 'pbw' ),
- 		'view_item'             => __( 'View Item', 'pbw' ),
- 		'view_items'            => __( 'View Items', 'pbw' ),
- 		'search_items'          => __( 'Search Item', 'pbw' ),
- 		'not_found'             => __( 'Not found', 'pbw' ),
- 		'not_found_in_trash'    => __( 'Not found in Trash', 'pbw' ),
- 		'featured_image'        => __( 'Featured Image', 'pbw' ),
- 		'set_featured_image'    => __( 'Set featured image', 'pbw' ),
- 		'remove_featured_image' => __( 'Remove featured image', 'pbw' ),
- 		'use_featured_image'    => __( 'Use as featured image', 'pbw' ),
- 		'insert_into_item'      => __( 'Insert into item', 'pbw' ),
- 		'uploaded_to_this_item' => __( 'Uploaded to this item', 'pbw' ),
- 		'items_list'            => __( 'Items list', 'pbw' ),
- 		'items_list_navigation' => __( 'Items list navigation', 'pbw' ),
- 		'filter_items_list'     => __( 'Filter items list', 'pbw' ),
+ 		'name'                  => _x( 'Participants', 'Post Type General Name', 'pbf' ),
+ 		'singular_name'         => _x( 'Participant', 'Post Type Singular Name', 'pbf' ),
+ 		'menu_name'             => __( 'Participants', 'pbf' ),
+ 		'name_admin_bar'        => __( 'Participants', 'pbf' ),
+ 		'archives'              => __( 'Participants', 'pbf' ),
+ 		'attributes'            => __( 'Item Attributes', 'pbf' ),
+ 		'parent_item_colon'     => __( 'Parent Item:', 'pbf' ),
+ 		'all_items'             => __( 'Tous les participants', 'pbf' ),
+ 		'add_new_item'          => __( 'Ajouter un Participant', 'pbf' ),
+ 		'add_new'               => __( 'Ajouter un Participant', 'pbf' ),
+ 		'new_item'              => __( 'Nouveau Participant', 'pbf' ),
+ 		'edit_item'             => __( 'Edit Item', 'pbf' ),
+ 		'update_item'           => __( 'Update Item', 'pbf' ),
+ 		'view_item'             => __( 'View Item', 'pbf' ),
+ 		'view_items'            => __( 'View Items', 'pbf' ),
+ 		'search_items'          => __( 'Search Item', 'pbf' ),
+ 		'not_found'             => __( 'Not found', 'pbf' ),
+ 		'not_found_in_trash'    => __( 'Not found in Trash', 'pbf' ),
+ 		'featured_image'        => __( 'Featured Image', 'pbf' ),
+ 		'set_featured_image'    => __( 'Set featured image', 'pbf' ),
+ 		'remove_featured_image' => __( 'Remove featured image', 'pbf' ),
+ 		'use_featured_image'    => __( 'Use as featured image', 'pbf' ),
+ 		'insert_into_item'      => __( 'Insert into item', 'pbf' ),
+ 		'uploaded_to_this_item' => __( 'Uploaded to this item', 'pbf' ),
+ 		'items_list'            => __( 'Items list', 'pbf' ),
+ 		'items_list_navigation' => __( 'Items list navigation', 'pbf' ),
+ 		'filter_items_list'     => __( 'Filter items list', 'pbf' ),
  	);
  	$args = array(
- 		'label'                 => __( 'Participant', 'pbw' ),
- 		'description'           => __( 'Organisateur des évènements Paris Beer Festival', 'pbw' ),
+ 		'label'                 => __( 'Participant', 'pbf' ),
+ 		'description'           => __( 'Organisateur des évènements Paris Beer Festival', 'pbf' ),
  		'labels'                => $labels,
  		'supports'              => array( 'title', 'editor', 'thumbnail' ),
  		'hierarchical'          => false,
@@ -52,4 +52,4 @@
  	register_post_type( 'participant', $args );
 
  }
- add_action( 'init', 'register_participants_type', 0 );
+ add_action( 'init', 'register_type_participant', 0 );

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PBF\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-17 07:40+0000\n"
+"POT-Creation-Date: 2020-02-17 20:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -15,10 +15,121 @@ msgstr ""
 "X-Generator: Loco https://localise.biz/\n"
 "X-Loco-Version: 2.3.1; wp-5.3.2"
 
+#: participants/register_type.php:15
+msgid "Add New"
+msgstr ""
+
+#: participants/register_type.php:14
+msgid "Add New Item"
+msgstr ""
+
+#: participants/register_type.php:17
+msgid "Edit Item"
+msgstr ""
+
+#: participants/register_type.php:24
+msgid "Featured Image"
+msgstr ""
+
+#: participants/register_type.php:32
+msgid "Filter items list"
+msgstr ""
+
+#: participants/register_type.php:28
+msgid "Insert into item"
+msgstr ""
+
+#: participants/register_type.php:11
+msgid "Item Attributes"
+msgstr ""
+
+#: participants/register_type.php:30
+msgid "Items list"
+msgstr ""
+
+#: participants/register_type.php:31
+msgid "Items list navigation"
+msgstr ""
+
+#: participants/register_type.php:16
+msgid "New Item"
+msgstr ""
+
+#: participants/register_type.php:22
+msgid "Not found"
+msgstr ""
+
+#: participants/register_type.php:23
+msgid "Not found in Trash"
+msgstr ""
+
+#: participants/register_type.php:36
+msgid "Organisateur des évènements Paris Beer Festival"
+msgstr ""
+
+#: participants/register_type.php:12
+msgid "Parent Item:"
+msgstr ""
+
+#: participants/register_type.php:35
+msgid "Participant"
+msgstr ""
+
+#: participants/register_type.php:8 participants/register_type.php:9
+#: participants/register_type.php:10
+msgid "Participants"
+msgstr ""
+
 #. Name of the plugin
 msgid "PBF"
 msgstr ""
 
+#: participants/register_type.php:6
+msgctxt "Post Type General Name"
+msgid "Participants"
+msgstr ""
+
+#: participants/register_type.php:7
+msgctxt "Post Type Singular Name"
+msgid "Participant"
+msgstr ""
+
+#: participants/register_type.php:26
+msgid "Remove featured image"
+msgstr ""
+
+#: participants/register_type.php:21
+msgid "Search Item"
+msgstr ""
+
+#: participants/register_type.php:25
+msgid "Set featured image"
+msgstr ""
+
 #. Description of the plugin
 msgid "The Wordpress Extension of Paris Beer Festival"
+msgstr ""
+
+#: participants/register_type.php:13
+msgid "Tous les participants"
+msgstr ""
+
+#: participants/register_type.php:18
+msgid "Update Item"
+msgstr ""
+
+#: participants/register_type.php:29
+msgid "Uploaded to this item"
+msgstr ""
+
+#: participants/register_type.php:27
+msgid "Use as featured image"
+msgstr ""
+
+#: participants/register_type.php:19
+msgid "View Item"
+msgstr ""
+
+#: participants/register_type.php:20
+msgid "View Items"
 msgstr ""
