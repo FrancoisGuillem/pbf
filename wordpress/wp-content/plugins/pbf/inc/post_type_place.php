@@ -53,3 +53,31 @@
 
  }
  add_action( 'init', 'register_type_place', 0 );
+
+ // Set metadata for place post type
+ // Add custom fields
+ add_action( 'add_meta_boxes', 'meta_box_place' );
+ function meta_box_place() {
+     add_meta_box(
+         'meta_box_place',
+         __( 'Adresse', 'pbw' ),
+         'meta_box_place_content',
+         'place',
+         'normal',
+         'high'
+     );
+ }
+
+ function meta_box_place_content( $post ) {
+   $metadata = get_post_meta($post->ID);
+
+   wp_nonce_field('save_pbf_post', 'pbf_post_form_nonce' );
+   echo '';
+   ?>
+   <input type="text" id="address" name="address" value="<?= $metadata["address"][0] ?? "" ?>" placeholder="Adresse" style="width:100%;"/>
+   Longitude
+   <input type="text" id="long" name="long" value="<?= $metadata['long'][0] ?? "" ?>" placeholder="Longitude"/>
+   Lattitude
+   <input type="text" id="lat" name="lat" value="<?= $metadata['lat'][0] ?? "" ?>" placeholder="Longitude"/>
+   <?php
+ }
