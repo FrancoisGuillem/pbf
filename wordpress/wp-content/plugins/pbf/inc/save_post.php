@@ -31,5 +31,17 @@ function meta_box_place_save( $post_id ) {
     }
   }
 
+  // Save Events organized by a participant
+  if (array_key_exists("events", $_POST))
+  delete_post_meta($post_id,"events");
+    //j'éclate mon input
+    $events = explode(',',$_POST['events']);
+    $events = array_slice($events, 0, 3);
+
+    foreach($events as $evt){
+        //pour chaque entrée j'ajoute une meta
+        add_post_meta($post_id, "events", intval($evt));
+    }
+
 }
 ?>
