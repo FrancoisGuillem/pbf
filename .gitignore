@@ -1,3 +1,10 @@
 wordpress/*.*
-!*/pbf/*.*
-!wordpress/wp-content/plugins/qtranslate-xt/*.*
+wordpress/wp-admin
+wordpress/wp-includes
+wordpress/wp-content/*.*
+wordpress/wp-content/upgrade
+wordpress/wp-content/languages
+wordpress/wp-content/plugins/*.*
+wordpress/wp-content/plugins/loco*
+wordpress/wp-content/themes/*.*
+wordpress/wp-content/themes/twenty*
