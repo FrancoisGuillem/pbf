@@ -16,7 +16,7 @@ get_header(); ?>
 		if ( have_posts() ) : ?>
 
 			<header class="page-header">
-				'<h1 class="page-title"><?= _e("Les Participants du Paris Beer Festival", "pbf") ?></h1>'
+				'<h1 class="page-title"><?= _e("Les Evènements du Paris Beer Festival", "pbf") ?></h1>'
 				<?php
 					the_archive_description( '<div class="archive-description">', '</div>' );
 				?>
@@ -31,7 +31,7 @@ get_header(); ?>
 				 * If you want to override this in a child theme, then include a file
 				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
 				 */
-				get_template_part( 'template-parts/content-participant', get_post_format() );
+				get_template_part( 'template-parts/content-event', get_post_format() );
 
 			endwhile;
 
@@ -39,7 +39,7 @@ get_header(); ?>
 
 		else :
 
-			get_template_part( 'template-parts/content_participant', 'none' );
+			get_template_part( 'template-parts/content-event', 'none' );
 
 		endif; ?>
 

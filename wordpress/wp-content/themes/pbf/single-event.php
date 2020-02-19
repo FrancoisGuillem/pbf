@@ -8,13 +8,12 @@
  */
 
 get_header(); ?>
-	<section id="primary" class="content-area col-sm-12 col-lg-8">
+	<section id="primary" class="content-area col-sm-12 col-lg-12">
 		<main id="main" class="site-main" role="main">
-	  <h1>Ceci est une page d'évènement</h1>
 		<?php
 		while ( have_posts() ) : the_post();
 
-			get_template_part( 'template-parts/content', get_post_format() );
+			get_template_part( 'template-parts/content-event', get_post_format() );
 
 			    the_post_navigation();
 
