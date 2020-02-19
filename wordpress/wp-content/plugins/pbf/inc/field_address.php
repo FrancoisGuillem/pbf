@@ -3,7 +3,7 @@
 function field_address( $post ) {
   $metadata = get_post_meta($post->ID);
 
-  wp_nonce_field('save_pbf_post', 'pbf_post_form_nonce' );
+  wp_nonce_field('save_pbf_post', 'field_address' );
   echo '';
   ?>
   <input type="text" id="address" name="address" value="<?= $metadata["address"][0] ?? "" ?>" placeholder="Adresse" style="width:100%;"/>

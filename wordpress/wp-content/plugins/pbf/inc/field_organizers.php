@@ -6,7 +6,7 @@ function field_organizers($post) {
 $organizers = get_post_meta($post->ID, 'organizers', false);
 
 //je créer un nonce
-wp_nonce_field("save_pbf_post", "pbf_post_form_nonce");
+wp_nonce_field("save_pbf_post", "field_organizers");
 
 //mon widget
 echo '<div class="ui-widget">';
