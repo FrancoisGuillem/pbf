@@ -1,6 +1,7 @@
 <?php
- // Register Custom Post Type: Participants
- function register_type_participant() {
+include_once( plugin_dir_path( __FILE__ ) . 'field_address.php');
+// Register Custom Post Type: Participants
+function register_type_participant() {
 
  	$labels = array(
  		'name'                  => _x( 'Participants', 'Post Type General Name', 'pbf' ),
@@ -54,128 +55,15 @@
  }
  add_action( 'init', 'register_type_participant', 0 );
 
- add_action('add_meta_boxes','meta_box_participant');
- function meta_box_participant(){
-   add_meta_box('meta_box_participant', 'Evènements du participant', 'meta_box_participant_content', 'participant', 'normal', 'default');
+ // Add address metabox
+ add_action( 'add_meta_boxes', 'participant_address' );
+ function participant_address() {
+     add_meta_box(
+         'participant_address',
+         __( 'Adresse du participant', 'pbw' ),
+         'field_address',
+         'participant',
+         'normal',
+         'high'
+     );
  }
-
-function meta_box_participant_content($post) {
-//je récupère la meta potentiellement sauvegardée
-$events = get_post_meta($post->ID, 'events', false);
-
-//je créer un nonce
-wp_nonce_field("save_pbf_post", "pbf_post_form_nonce");
-
-//mon widget
-echo '<div class="ui-widget">';
-echo "<p>Utiliser le champ ci-dessous pour rechercher et ajouter un évènement. Seuls trois évènements peuvent être associés à un participant.</p>";
-echo '<label for="nom"></label><input id="title_event" type="text" placeholder="Rechercher un évènement"/>';
-echo '<ul id="events-selected">';
-// j'y affiche toutes les entrées déjà sauvegardées dans la meta</ul>
-if( ! empty( $events) )
-  foreach( $events as $c )
-    echo '<li data-id="' . $c . '"><span class="erase">x</span> ' . get_the_title($c) . '</li>';
-echo '</ul>';
-
-// mon champ caché, que je mettrai à jour et sauvegarderai
-// il contient déjà les valeurs de la meta
-echo'<input id="events" type="hidden" name="events" value="'. implode(',',$events) .'" />';
-
-//fin du widget
-echo '</div>';
-// script autocomplete
-?>
-<script type="text/javascript">
-//no-conflict
-jQuery(function($) {
-
-// un tableau avec tous les conférenciers que l'on peut sélectionner
-var availableTags = [
-<?php $all_events = get_posts('post_type=event&posts_per_page=-1');
-foreach($all_events as $evt){
-  if ($evt != $all_events[0]) echo ",";
-  echo '{value:"'.$evt->ID.'",label:"'.get_the_title($evt).'"}'."\n";
-}?>
-];
-
-
-$( "#title_event" ).autocomplete({
-  // je mets le tableau précédemment crée en source
-  source: availableTags,
-  // lorsqe l'on sélectionne un élément
-  select: function(event,ui){
-    //je crée un nouveauv<ul><li>
-    var li = '<li data-id="' + ui.item.value + '"><span class="erase">x</span> ' + ui.item.label + '</li>';
-    //je fais un tableaux des conférencier déjà ajouté
-    var events = new Array();
-    events =($('#events').val()!='') ? $('#events').val().split(',') : [];
-    // si il est déjà dans la liste, j'en tiens pas compte
-    if($.inArray(ui.item.value, events)!="-1"){
-      $(this).val('');
-    }else{
-      //sinon je l'ajoute à la liste
-      events.push(ui.item.value);
-      //je pousse cette liste dans le champ caché
-      $('#events').val(events);
-      //et j'ajoute la nouvelle entrée dans le <ul>
-      $( "#events-selected" ).append(li);
-
-      listenerremove();
-
-      $(this).val('');
-    }
-    //juste pour que la sélection d'un élément ne remplisse pas le input (comportement normal)
-    return false;
-  }
-});
-
-//function qui me sert à supprimer l'ID d'un conférencier dans #conf_presents
-function removeByElement(arrayName,arrayElement){
-  for(var i=0; i < arrayName.length; i++) {
-    if(arrayName[i]==arrayElement)
-    arrayName.splice(i,1);
-  }
-}
-
-//évènement de suppression de conférencier
-function listenerremove(){
-  $( "#events-selected" ).find('li .erase').on('click',function(){
-    // suppression élément
-    var $elem = $(this).parent('li'); //je cible l'élément à supprimer
-    //je construit un talbeau avec les conférencier actuellement liés
-    var events_selected = new Array();
-    events_selected =$('#events').val().split(',');
-    //je récupère l'ID à retirer
-    var dataval = $elem.attr('data-id');
-    // je supprime l'ID du tableau
-    removeByElement(events_selected,dataval);
-    //je supprime le conférencier dans la liste
-    $elem.remove();
-    //je supprime son ID dans le champ caché
-    $('#events').val(events_selected.join(","));
-  });
-}
-
-//je lance la fonction
-listenerremove();
-
-});
-
-</script>
-<style>
-.erase{
-    background:#2e2e2e;
-    color:#FFF;
-    padding:0 4px;
-    -moz-border-radius:10px;
-    -webkit-border-radius:10px;
-    -o-border-radius:10px;
-    border-radius:10px;
-}
-.erase:hover{
-    background:#F20;
-    cursor:pointer;
-}
-</style>
-<?php
-}

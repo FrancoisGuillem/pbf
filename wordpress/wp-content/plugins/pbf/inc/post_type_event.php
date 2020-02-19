@@ -1,8 +1,6 @@
 <?php
-/**
- * Plugin Name: PBF
- * Description: Plugin du Paris Beer Festival
- */
+include_once( plugin_dir_path( __FILE__ ) . 'field_address.php');
+include_once( plugin_dir_path( __FILE__ ) . 'field_organizers.php');
 
  // Register Custom Post Type: Evènement
 add_action( 'init', 'register_type_events', 0 );
@@ -57,4 +55,30 @@ function register_type_events() {
  	);
  	register_post_type( 'event', $args );
 
+ }
+
+ // Add address metabox
+ add_action( 'add_meta_boxes', 'event_address' );
+ function event_address() {
+     add_meta_box(
+         'event_address',
+         __( "Adresse (Laisser vide si l'évènement a lieu chez l'organisateur principal)", 'pbw' ),
+         'field_address',
+         'event',
+         'normal',
+         'high'
+     );
+ }
+
+ // Add participants metabox
+ add_action( 'add_meta_boxes', 'event_organizers' );
+ function event_organizers() {
+     add_meta_box(
+         'event_organizers',
+         __( "Organisateurs de l'évènement", 'pbw' ),
+         'field_organizers',
+         'event',
+         'normal',
+         'high'
+     );
  }
