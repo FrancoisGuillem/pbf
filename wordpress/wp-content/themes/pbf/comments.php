@@ -1,15 +1,14 @@
 <?php
 /**
- * The template for displaying comments.
+ * The template for displaying comments
  *
- * The area of the page that contains both current comments
+ * This is the template that displays the area of the page that contains both the current comments
  * and the comment form.
  *
- * @package understrap
+ * @link https://codex.wordpress.org/Template_Hierarchy
+ *
+ * @package WP_Bootstrap_Starter
  */
-
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
 
 /*
  * If the current post is protected by a password and
@@ -21,108 +20,97 @@ if ( post_password_required() ) {
 }
 ?>
 
-<div class="comments-area" id="comments">
+<div id="comments" class="comments-area">
 
-	<?php // You can start editing here -- including this comment! ?>
+    <?php
+    // You can start editing here -- including this comment!
+    if ( have_comments() ) : ?>
 
-	<?php if ( have_comments() ) : ?>
-
-		<h2 class="comments-title">
-
-			<?php
-			$comments_number = get_comments_number();
-			if ( 1 === (int) $comments_number ) {
-				printf(
-					/* translators: %s: post title */
-					esc_html_x( 'One thought on &ldquo;%s&rdquo;', 'comments title', 'understrap' ),
-					'<span>' . get_the_title() . '</span>'
+        <h2 class="comments-title">
+            <?php
+            $comments_number = get_comments_number();
+            if ( '1' === $comments_number ) {
+                printf(
+					/* translators: 1: title. */
+					esc_html__( 'One thought on &ldquo;%1$s&rdquo;', 'pbf' ),
+					'<span>' . esc_html(get_the_title()) . '</span>'
 				);
-			} else {
-				printf( // WPCS: XSS OK.
-					/* translators: 1: number of comments, 2: post title */
-					esc_html( _nx(
-						'%1$s thought on &ldquo;%2$s&rdquo;',
-						'%1$s thoughts on &ldquo;%2$s&rdquo;',
-						$comments_number,
-						'comments title',
-						'understrap'
-					) ),
-					number_format_i18n( $comments_number ),
-					'<span>' . get_the_title() . '</span>'
+            } else {
+                printf( // WPCS: XSS OK.
+					/* translators: 1: comment count number, 2: title. */
+					esc_html( _nx( '%1$s thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', $underscore_comment_count, 'comments title', 'pbf' ) ),
+					esc_html( number_format_i18n( $underscore_comment_count ) ),
+					'<span>' . esc_html( get_the_title() ) . '</span>'
 				);
-			}
-			?>
+            }
+            ?>
+        </h2><!-- .comments-title -->
 
-		</h2><!-- .comments-title -->
 
-		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through. ?>
+        <?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // Are there comments to navigate through? ?>
+            <nav id="comment-nav-above" class="navigation comment-navigation" role="navigation">
+                <h2 class="screen-reader-text"><?php esc_html_e( 'Comment navigation', 'pbf' ); ?></h2>
+                <div class="nav-links">
 
-			<nav class="comment-navigation" id="comment-nav-above">
+                    <div class="nav-previous"><?php previous_comments_link( esc_html__( 'Older Comments', 'pbf' ) ); ?></div>
+                    <div class="nav-next"><?php next_comments_link( esc_html__( 'Newer Comments', 'pbf' ) ); ?></div>
 
-				<h1 class="screen-reader-text"><?php esc_html_e( 'Comment navigation', 'understrap' ); ?></h1>
+                </div><!-- .nav-links -->
+            </nav><!-- #comment-nav-above -->
+        <?php endif; // Check for comment navigation. ?>
 
-				<?php if ( get_previous_comments_link() ) { ?>
-					<div class="nav-previous">
-						<?php previous_comments_link( __( '&larr; Older Comments', 'understrap' ) ); ?>
-					</div>
-				<?php } ?>
+        <ul class="comment-list">
+            <?php
+            wp_list_comments( array( 'callback' => 'wp_bootstrap_starter_comment', 'avatar_size' => 50 ));
+            ?>
+        </ul><!-- .comment-list -->
 
-				<?php	if ( get_next_comments_link() ) { ?>
-					<div class="nav-next">
-						<?php next_comments_link( __( 'Newer Comments &rarr;', 'understrap' ) ); ?>
-					</div>
-				<?php } ?>
+        <?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // Are there comments to navigate through? ?>
+            <nav id="comment-nav-below" class="navigation comment-navigation" role="navigation">
+                <h2 class="screen-reader-text"><?php esc_html_e( 'Comment navigation', 'pbf' ); ?></h2>
+                <div class="nav-links">
 
-			</nav><!-- #comment-nav-above -->
+                    <div class="nav-previous"><?php previous_comments_link( esc_html__( 'Older Comments', 'pbf' ) ); ?></div>
+                    <div class="nav-next"><?php next_comments_link( esc_html__( 'Newer Comments', 'pbf' ) ); ?></div>
 
-		<?php endif; // check for comment navigation. ?>
+                </div><!-- .nav-links -->
+            </nav><!-- #comment-nav-below -->
+            <?php
+        endif; // Check for comment navigation.
 
-		<ol class="comment-list">
+    endif; // Check for have_comments().
 
-			<?php
-			wp_list_comments(
-				array(
-					'style'      => 'ol',
-					'short_ping' => true,
-				)
-			);
-			?>
 
-		</ol><!-- .comment-list -->
+    // If comments are closed and there are comments, let's leave a little note, shall we?
+    if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) : ?>
 
-		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through. ?>
+        <p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'pbf' ); ?></p>
+        <?php
+    endif; ?>
 
-			<nav class="comment-navigation" id="comment-nav-below">
+    <?php comment_form( $args = array(
+        'id_form'           => 'commentform',  // that's the wordpress default value! delete it or edit it ;)
+        'id_submit'         => 'commentsubmit',
+        'title_reply'       => __( 'Leave a Reply', 'pbf' ),  // that's the wordpress default value! delete it or edit it ;)
+		/* translators: 1: Reply Specific User */
+        'title_reply_to'    => __( 'Leave a Reply to %s', 'pbf' ),  // that's the wordpress default value! delete it or edit it ;)
+        'cancel_reply_link' => __( 'Cancel Reply', 'pbf' ),  // that's the wordpress default value! delete it or edit it ;)
+        'label_submit'      => __( 'Post Comment', 'pbf' ),  // that's the wordpress default value! delete it or edit it ;)
 
-				<h1 class="screen-reader-text"><?php esc_html_e( 'Comment navigation', 'understrap' ); ?></h1>
+        'comment_field' =>  '<p><textarea placeholder="Start typing..." id="comment" class="form-control" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>',
 
-				<?php if ( get_previous_comments_link() ) { ?>
-					<div class="nav-previous">
-						<?php previous_comments_link( __( '&larr; Older Comments', 'understrap' ) ); ?>
-					</div>
-				<?php } ?>
+        'comment_notes_after' => '<p class="form-allowed-tags">' .
+            __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes:', 'pbf' ) .
+            '</p><div class="alert alert-info">' . allowed_tags() . '</div>'
 
-				<?php	if ( get_next_comments_link() ) { ?>
-					<div class="nav-next">
-						<?php next_comments_link( __( 'Newer Comments &rarr;', 'understrap' ) ); ?>
-					</div>
-				<?php } ?>
+        // So, that was the needed stuff to have bootstrap basic styles for the form elements and buttons
 
-			</nav><!-- #comment-nav-below -->
+        // Basically you can edit everything here!
+        // Checkout the docs for more: http://codex.wordpress.org/Function_Reference/comment_form
+        // Another note: some classes are added in the bootstrap-wp.js - ckeck from line 1
 
-		<?php endif; // check for comment navigation. ?>
+    ));
 
-	<?php endif; // endif have_comments(). ?>
-
-	<?php
-	// If comments are closed and there are comments, let's leave a little note, shall we?
-	if ( ! comments_open() && '0' != get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) :
-		?>
-
-		<p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'understrap' ); ?></p>
-
-	<?php endif; ?>
-
-	<?php comment_form(); // Render comments form. ?>
+	?>
 
 </div><!-- #comments -->

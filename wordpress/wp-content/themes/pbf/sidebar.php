@@ -1,20 +1,17 @@
 <?php
 /**
- * The sidebar containing the main widget area.
+ * The sidebar containing the main widget area
  *
- * @package understrap
+ * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
+ *
+ * @package PBF
  */
-
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
 
 if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 	return;
 }
 ?>
 
-<div class="col-md-4 widget-area" id="secondary" role="complementary">
-
+<aside id="secondary" class="widget-area col-sm-12 col-lg-4" role="complementary">
 	<?php dynamic_sidebar( 'sidebar-1' ); ?>
-
-</div><!-- #secondary -->
+</aside><!-- #secondary -->
