@@ -10,9 +10,21 @@ function meta_box_place_save( $post_id ) {
   if (!array_key_exists("pbf_post_form_nonce", $_POST) || !wp_verify_nonce( $_POST['pbf_post_form_nonce'], 'save_pbf_post' ) )
   return;
 
-  // Save metadata
+  // Save address
   $valid_keys = ['address', 'long', 'lat'];
 
+  foreach ($valid_keys as $key) {
+    if (array_key_exists($key, $_POST)) {
+          update_post_meta(
+              $post_id,
+              $key,
+              $_POST[$key]
+          );
+    }
+  }
+
+  // Save schedule
+  $valid_keys = ['start_date', 'end_date', 'start_time', 'end_time'];
   foreach ($valid_keys as $key) {
     if (array_key_exists($key, $_POST)) {
           update_post_meta(
