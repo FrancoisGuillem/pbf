@@ -2,13 +2,23 @@
 
 function field_address( $post ) {
   $metadata = get_post_meta($post->ID);
+  $long = $metadata["long"][0] ?? 2.3522218999999955;
+  $lat = $metadata["lat"][0] ?? 48.856670471898596;
+  if ($long == "") {
+    $long = 2.352221899999995;
+  }
+  $address = $metadata["address"][0] ?? "";
+  if ($lat == "") {
+    $lat = 48.856670471898596;
+  }
+
 
   wp_nonce_field('save_pbf_post', 'field_address' );
   echo '';
   ?>
   <p>
     Adresse
-    <input type="text" id="address" name="address" value="<?= $metadata["address"][0] ?? "" ?>" placeholder="Adresse" style="width:100%;"/>
+    <input type="text" id="address" name="address" value="<?= $address ?>" placeholder="Adresse" style="width:100%;"/>
   </p>
   <div style="float:left;width:200px;">
     <button type="button" id="search-address" class="button">
@@ -16,11 +26,11 @@ function field_address( $post ) {
     </button>
     <p>
       Longitude
-      <input type="text" id="long" name="long" value="<?= $metadata['long'][0] ?? "" ?>" placeholder="Longitude"/>
+      <input type="text" id="long" name="long" value="<?= $long ?>" placeholder="Longitude"/>
     </p>
     <p>
       Lattitude
-      <input type="text" id="lat" name="lat" value="<?= $metadata['lat'][0] ?? "" ?>" placeholder="Longitude"/>
+      <input type="text" id="lat" name="lat" value="<?= $lat ?>" placeholder="Longitude"/>
     </p>
     <p>Vous pouvez aussi déplacer le curseur sur la carte pour modifier les coordonnées.</p>
   </div>
@@ -48,7 +58,7 @@ function field_address( $post ) {
 
   function initMap() {
     // The location of Uluru
-     var coords = {lat: <?= $metadata["lat"][0] ?? 48.856670471898596 ?>, lng: <?= $metadata["long"][0] ?? 2.3522218999999955 ?>};
+     var coords = {lat: <?= $lat ?>, lng: <?= $long ?>};
      // The map, centered at Uluru
      map = new google.maps.Map(
          document.getElementById('map'), {zoom: 14, center: coords});
