@@ -40,7 +40,7 @@ function meta_box_place_save( $post_id ) {
       $organizers_old = get_post_meta($post_id, "organizers", true) ?? "";
       update_post_meta($post_id, "organizers", $_POST["organizers"]);
 
-      $organizers = explode(',', $organizers);
+      $organizers = explode(',', $_POST["organizers"]);
       $organizers_old = explode(',', $organizers_old);
 
       $removed_organizers = array_diff($organizers_old, $organizers);
@@ -49,8 +49,13 @@ function meta_box_place_save( $post_id ) {
       $organizers = explode(',', $_POST['organizers']);
 
       foreach($organizers as $org_id){
-          $event_ids = get_post_meta($org_id, "events");
-          $event_ids = explode(",", $event_ids);
+          $event_ids = get_post_meta($org_id, "events", true);
+          if (empty($event_ids)) {
+            $event_ids = [];
+          } else {
+            $event_ids = explode(",", $event_ids);
+          }
+
           if (in_array($org_id, $removed_organizers)) {
             $event_ids = array_diff($event_ids, array(strval($post_id)));
           } else {

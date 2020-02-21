@@ -39,22 +39,23 @@ function field_address( $post ) {
   var map;
   var marker;
 
-  $("#search-address").click(function(e) {
-    $.get("https://maps.googleapis.com/maps/api/geocode/json", {
-      key: '<?= $_ENV["GMAP_API_KEY"] ?>',
-      address: $("#address").val()
-    }, function(data) {
-      if (data.results) {
-        marker.setPosition(data.results[0].geometry.location);
-        map.setCenter(data.results[0].geometry.location);
-        map.setZoom(14);
-        $("#long").val(data.results[0].geometry.location.lng);
-        $("#lat").val(data.results[0].geometry.location.lat);
-      }
+  jQuery(function($) {
+    $("#search-address").click(function(e) {
+      $.get("https://maps.googleapis.com/maps/api/geocode/json", {
+        key: '<?= $_ENV["GMAP_API_KEY"] ?>',
+        address: $("#address").val()
+      }, function(data) {
+        if (data.results) {
+          marker.setPosition(data.results[0].geometry.location);
+          map.setCenter(data.results[0].geometry.location);
+          map.setZoom(14);
+          $("#long").val(data.results[0].geometry.location.lng);
+          $("#lat").val(data.results[0].geometry.location.lat);
+        }
 
-    })
-  })
-  //
+      })
+    });
+  });
 
   function initMap() {
     // The location of Uluru
@@ -67,8 +68,8 @@ function field_address( $post ) {
 
      google.maps.event.addListener(marker, 'dragend', function()
       {
-        $("#long").val(marker.position.lng());
-        $("#lat").val(marker.position.lat());
+        document.getElementById("long").value = (marker.position.lng());
+        document.getElementById("lat").value = (marker.position.lat());
       });
   }
 </script>

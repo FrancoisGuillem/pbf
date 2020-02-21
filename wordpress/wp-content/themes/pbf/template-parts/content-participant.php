@@ -8,6 +8,7 @@
  */
 
 $metadata = get_post_meta(get_the_ID());
+$events = $metadata["events"][0];
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -21,6 +22,7 @@ $metadata = get_post_meta(get_the_ID());
 		else :
 			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
 		endif;
+		echo "<p> Events: ". $events . "</p>";
 
 		if ( 'post' === get_post_type() ) : ?>
 		<div class="entry-meta">
