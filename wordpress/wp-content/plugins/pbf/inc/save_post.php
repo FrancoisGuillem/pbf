@@ -36,15 +36,28 @@ function meta_box_place_save( $post_id ) {
   // Save or update organizers for a given event
   if (array_key_exists("field_organizers", $_POST) && wp_verify_nonce( $_POST['field_organizers'], 'save_pbf_post' ) ) {
     if (array_key_exists("organizers", $_POST)) {
-      delete_post_meta($post_id,"organizers");
-        //j'éclate mon input
-        $organizers = explode(',',$_POST['organizers']);
-        $organizers = array_slice($organizers, 0, 3);
 
-        foreach($organizers as $evt){
-            //pour chaque entrée j'ajoute une meta
-            add_post_meta($post_id, "organizers", intval($evt));
-        }
+      $organizers_old = get_post_meta($post_id, "organizers", true) ?? "";
+      update_post_meta($post_id, "organizers", $_POST["organizers"]);
+
+      $organizers = explode(',', $organizers);
+      $organizers_old = explode(',', $organizers_old);
+
+      $removed_organizers = array_diff($organizers_old, $organizers);
+
+      // Pour chaque organisateur, on ajoute l'évènemnet aux évènements
+      $organizers = explode(',', $_POST['organizers']);
+
+      foreach($organizers as $org_id){
+          $event_ids = get_post_meta($org_id, "events");
+          $event_ids = explode(",", $event_ids);
+          if (in_array($org_id, $removed_organizers)) {
+            $event_ids = array_diff($event_ids, array(strval($post_id)));
+          } else {
+            $event_ids = array_unique(array_merge($event_ids, array(strval($post_id))));
+          }
+          update_post_meta($org_id, "events", implode(",", $event_ids));
+      }
     }
   }
 }
