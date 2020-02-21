@@ -4,7 +4,11 @@
 function field_organizers($post) {
 //List of participants already saved
 $organizers = get_post_meta($post->ID, 'organizers', true);
-$organizers = explode(",", $organizers);
+if (empty($organizers)) {
+  $organizers = array();
+} else {
+  $organizers = explode(",", $organizers);
+}
 
 //je créer un nonce
 wp_nonce_field("save_pbf_post", "field_organizers");
