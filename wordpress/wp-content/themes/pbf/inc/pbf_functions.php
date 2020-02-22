@@ -4,12 +4,21 @@
 // soit l'adresse du premier organisateur de l'évènement
 function pbf_get_event_address($event_metadata) {
   if (array_key_exists("address", $event_metadata) && $event_metadata["address"][0] != "") {
-    return $event_metadata["address"][0];
+    return array(
+      "address" => $event_metadata["address"][0] ?? "",
+      "long" => $event_metadata["long"][0] ?? "",
+      "lat" => $event_metadata["lat"][0] ?? "",
+    );
   }
 
-  if (array_key_exists("organizers", $event_metadata)) {
-    $organizer_metadata = get_post_meta($event_metadata["organizers"][0]);
-    return $organizer_metadata["address"][0] ?? "";
+  if (array_key_exists("organizers", $event_metadata) && ! empty($event_metadata["organizers"])) {
+    $org_id = explode(",", $event_metadata["organizers"][0])[0];
+    $organizer_metadata = get_post_meta($org_id);
+    return array(
+      "address" => $organizer_metadata["address"][0] ?? "",
+      "long" => $organizer_metadata["long"][0] ?? "",
+      "lat" => $organizer_metadata["lat"][0] ?? "",
+    );
   }
 
   return "";
@@ -41,7 +50,7 @@ function pbf_event_schedule($event_metadata) {
 
 // Template function qui renvoie la liste des organisateurs d'un évènements
 function pbf_event_organizers($event_metadata) {
-  
+
 }
 
  ?>

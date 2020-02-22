@@ -8,6 +8,7 @@
  */
 
 $metadata = get_post_meta(get_the_ID());
+$geo = pbf_get_event_address($metadata);
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -40,13 +41,13 @@ $metadata = get_post_meta(get_the_ID());
 							  // COntenu affiché sur la page de l'évènement
 				 				the_content();
 								echo '<div>'. __("Adresse:", "pbf") .'</div>';
-								echo "<div class='address'>". pbf_get_event_address($metadata) ."</div>";
+								echo "<div class='address'>". $geo["address"] ."</div>";
 								echo '<div>'. __("Dates et horaires:", "pbf") .'</div>';
 								pbf_event_schedule($metadata);
 						else :
 							 // Contenu affiché dans la liste des évènements
 								the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'pbf' ) );
-								echo "<div class='address'>". pbf_get_event_address($metadata) ."</div>";
+								echo "<div class='address'>". $geo["address"] ."</div>";
 								pbf_event_schedule($metadata);
 						endif;
 
