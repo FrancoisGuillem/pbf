@@ -50,7 +50,29 @@ function pbf_event_schedule($event_metadata) {
 
 // Template function qui renvoie la liste des organisateurs d'un évènements
 function pbf_event_organizers($event_metadata) {
+  if (array_key_exists("organizers", $event_metadata) && ! empty($event_metadata["organizers"][0])) {
+    $organizers = explode(",", $event_metadata["organizers"][0]);
+    $links = array();
+    foreach ($organizers as $org_id) {
+      $post = get_post($org_id);
+      $link = get_permalink($post);
+      array_push($links, '<a href="'.$link.'">'. get_the_title($post) .'</a>');
+    }
+  }
+  echo implode(", ", $links);
+}
 
+function pbf_participant_events($participant_metadata) {
+  if (array_key_exists("events", $participant_metadata) && ! empty($participant_metadata["events"][0])) {
+    $events = explode(",", $participant_metadata["events"][0]);
+    $links = array();
+    foreach ($events as $evt_id) {
+      $post = get_post($evt_id);
+      $link = get_permalink($post);
+      array_push($links, '<a href="'.$link.'">'. get_the_title($post) .'</a>');
+    }
+  }
+  echo implode("<br/>", $links);
 }
 
  ?>

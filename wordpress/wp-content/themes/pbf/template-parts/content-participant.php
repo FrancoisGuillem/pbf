@@ -22,7 +22,6 @@ $events = $metadata["events"][0];
 		else :
 			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
 		endif;
-		echo "<p> Events: ". $events . "</p>";
 
 		if ( 'post' === get_post_type() ) : ?>
 		<div class="entry-meta">
@@ -34,11 +33,13 @@ $events = $metadata["events"][0];
 	<div class="entry-content">
 		<?php
         if ( is_single() ) :
-			the_content();
+						the_content();
         else :
             the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'pbf' ) );
         endif;
-
+				echo "<h2>". __("Evènements", "pbf") ."</h2>";
+				pbf_participant_events($metadata);
+				
 			echo "<div class='address'>".$metadata["address"][0]."</div>";
 
 			wp_link_pages( array(
