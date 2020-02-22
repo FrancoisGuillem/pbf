@@ -10,19 +10,18 @@ if (empty($organizers)) {
   $organizers = explode(",", $organizers);
 }
 
-//je créer un nonce
 wp_nonce_field("save_pbf_post", "field_organizers");
 
 //mon widget
 echo '<div class="ui-widget">';
-echo "<p>Utiliser le champ ci-dessous pour rechercher et ajouter des organisateurs.</p>";
-echo '<label for="nom"></label><input id="title_organizer" type="text" placeholder="Rechercher un organisateur."/>';
 echo '<ul id="organizers-selected">';
 // j'y affiche toutes les entrées déjà sauvegardées dans la meta</ul>
 if( ! empty( $organizers) )
   foreach( $organizers as $c )
     echo '<li data-id="' . $c . '"><span class="erase">x</span> ' . get_the_title($c) . '</li>';
 echo '</ul>';
+echo "<p>Utiliser le champ ci-dessous pour rechercher et ajouter des organisateurs.</p>";
+echo '<label for="nom"></label><input id="title_organizer" type="text" placeholder="Rechercher un organisateur."/>';
 
 // mon champ caché, que je mettrai à jour et sauvegarderai
 // il contient déjà les valeurs de la meta
@@ -30,6 +29,7 @@ echo'<input id="organizers" type="hidden" name="organizers" value="'. implode(',
 
 //fin du widget
 echo '</div>';
+echo '<div style="clear:both;"></div>'
 // script autocomplete
 ?>
 <script type="text/javascript">
@@ -111,7 +111,7 @@ listenerremove();
 </script>
 <style>
 .erase{
-    background:#2e2e2e;
+    background:#999;
     color:#FFF;
     padding:0 4px;
     -moz-border-radius:10px;
@@ -123,6 +123,19 @@ listenerremove();
     background:#F20;
     cursor:pointer;
 }
+
+#organizers-selected {
+  display: block;
+  width: 50%;
+  float: right;
+}
+
+#organizers-selected li {
+  border: solid 1px #999;
+  padding: 5px;
+  background-color: #f1f1f1;
+}
+
 </style>
 <?php
 }

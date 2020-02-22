@@ -34,7 +34,7 @@ function field_address( $post ) {
     </p>
     <p>Vous pouvez aussi déplacer le curseur sur la carte pour modifier les coordonnées.</p>
   </div>
-  <div id="map" style="width:500px;height:500px;"></div>
+  <div id="map" style="width:500px;height:300px;"></div>
   <script>
   var map;
   var marker;
