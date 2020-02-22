@@ -1034,12 +1034,12 @@ body:not(.theme-preset-active) footer#colophon {
   }
 }
 
-/*
-Custom styles
-*/
+/*--------------------------------------------------------------
+## Custom styles
+--------------------------------------------------------------*/
 
 header#masthead {
-  background-color: #291c2d;
+  background-color: #3b1d82;
 }
 
 #masthead .navbar-nav > li > a:hover {
@@ -1047,5 +1047,13 @@ header#masthead {
 }
 
 #masthead .navbar-nav > li > a {
-  color: #f8e890 !important;
+  color: #fff !important;
+}
+
+h1, h2, h3, h4 {
+  color: #3b1d82;
+}
+
+h1 {
+  font-size: 48px;
 }

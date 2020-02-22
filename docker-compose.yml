@@ -23,6 +23,7 @@ services:
        WORDPRESS_DB_HOST: db:3306
        WORDPRESS_DB_USER: wordpress
        WORDPRESS_DB_PASSWORD: wordpress
+       GMAP_API_KEY: $GMAP_API_KEY
      volumes:
        - ./wordpress:/var/www/html
 volumes:

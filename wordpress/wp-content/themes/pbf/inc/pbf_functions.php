@@ -75,4 +75,80 @@ function pbf_participant_events($participant_metadata) {
   echo implode("<br/>", $links);
 }
 
+function get_pbf_participant_events($participant_metadata) {
+  $events = array();
+
+  if (array_key_exists("events", $participant_metadata) && ! empty($participant_metadata["events"][0])) {
+    $event_ids = explode(",", $participant_metadata["events"][0]);
+    foreach ($event_ids as $evt_id) {
+      $post = get_post($evt_id);
+      $metadata = get_post_meta($evt_id);
+
+      $content = $post->post_content;
+      $content = apply_filters('the_content', $content);
+      $content = str_replace(']]>', ']]&gt;', $content);
+
+      $new_event = array(
+        "link" => get_permalink($post),
+        "title" => get_the_title($post),
+        "content" => $content,
+        "address" => pbf_get_event_address($metadata),
+        "start_date" => $metadata["start_date"][0],
+        "start_time" => $metadata["start_time"][0],
+        "end_date" => $metadata["end_date"][0],
+        "end_time" => $metadata["end_time"][0]
+      );
+      array_push($events, $new_event);
+    }
+  }
+  usort($events, "pbf_compare_date_events");
+  return $events;
+}
+
+function pbf_compare_date_events($a, $b) {
+  return strcmp($a["start_date"], $b["start_date"]);
+}
+
+function pbf_month($date) {
+  if (empty($date)) return "";
+  $month = substr($date, 5, 2);
+  $ref = array(
+    "01"=>__("[:en]January[:][:fr]Janvier[:]"),
+    "02"=>__("[:en]February[:][:fr]Février[:]"),
+    "03"=>__("[:en]March[:][:fr]Mars[:]"),
+    "04"=>__("[:en]April[:][:fr]Avril[:]"),
+    "05"=>__("[:en]May[:][:fr]Mai[:]"),
+    "06"=>__("[:en]June[:][:fr]Juin[:]")
+  );
+  if (!array_key_exists($month, $ref)) return "";
+  return $ref[$month];
+}
+
+function pbf_dow($date) {
+  $dow = strftime("%w", strtotime($date));
+  $ref = array(
+    "0"=>__("[:en]Sunday[:][:fr]Dimanche[:]"),
+    "1"=>__("[:en]Monday[:][:fr]Lundi[:]"),
+    "2"=>__("[:en]Tuesday[:][:fr]Mardi[:]"),
+    "3"=>__("[:en]Wednesday[:][:fr]Mercredi[:]"),
+    "4"=>__("[:en]Thursday[:][:fr]Jeudi[:]"),
+    "5"=>__("[:en]Friday[:][:fr]Vendredi[:]"),
+    "6"=>__("[:en]Saturday[:][:fr]Samedi[:]"),
+    "7"=>__("[:en]Sunday[:][:fr]Dimanche[:]")
+  );
+  return $ref[$dow];
+}
+
+function pbf_day($date) {
+  return substr($date, 8, 2);
+}
+
+function pbf_time($event) {
+  if (empty($event["end_time"])) {
+    if (empty($event['start_time'])) return "";
+    return __("[:en]At[:][:fr]à[:]"). " " .$event["start_time"];
+  }
+  return $event["start_time"] . " / " .$event["end_time"];
+}
+
  ?>
