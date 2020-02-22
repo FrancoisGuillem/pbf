@@ -1033,3 +1033,19 @@ body:not(.theme-preset-active) footer#colophon {
     font-size: 75%;
   }
 }
+
+/*
+Custom styles
+*/
+
+header#masthead {
+  background-color: #291c2d;
+}
+
+#masthead .navbar-nav > li > a:hover {
+  color: #ffc509 !important;
+}
+
+#masthead .navbar-nav > li > a {
+  color: #f8e890 !important;
+}
