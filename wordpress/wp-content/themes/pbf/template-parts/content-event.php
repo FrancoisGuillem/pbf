@@ -38,13 +38,13 @@ $geo = pbf_get_event_address($metadata);
 							  // COntenu affiché sur la page de l'évènement
 				 				the_content();
 								echo '<div>'. __("Adresse:", "pbf") .'</div>';
-								echo "<div class='address'>". $geo["address"] ."</div>";
+								echo "<div class='address'>". ($geo["address"] ?? "") ."</div>";
 								echo '<div>'. __("Dates et horaires:", "pbf") .'</div>';
 								pbf_event_schedule($metadata);
 						else :
 							 // Contenu affiché dans la liste des évènements
 								the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'pbf' ) );
-								echo "<div class='address'>". $geo["address"] ."</div>";
+								echo "<div class='address'>". ($geo["address"] ?? "") ."</div>";
 								pbf_event_schedule($metadata);
 						endif;
 

@@ -50,9 +50,10 @@ function pbf_event_schedule($event_metadata) {
 
 // Template function qui renvoie la liste des organisateurs d'un évènements
 function pbf_event_organizers($event_metadata) {
+  $links = array();
+
   if (array_key_exists("organizers", $event_metadata) && ! empty($event_metadata["organizers"][0])) {
     $organizers = explode(",", $event_metadata["organizers"][0]);
-    $links = array();
     foreach ($organizers as $org_id) {
       $post = get_post($org_id);
       $link = get_permalink($post);
@@ -96,7 +97,8 @@ function get_pbf_participant_events($participant_metadata) {
         "start_date" => $metadata["start_date"][0],
         "start_time" => $metadata["start_time"][0],
         "end_date" => $metadata["end_date"][0],
-        "end_time" => $metadata["end_time"][0]
+        "end_time" => $metadata["end_time"][0],
+        "metadata" => $metadata
       );
       array_push($events, $new_event);
     }
@@ -144,11 +146,11 @@ function pbf_day($date) {
 }
 
 function pbf_time($event) {
-  if (empty($event["end_time"])) {
-    if (empty($event['start_time'])) return "";
-    return __("[:en]At[:][:fr]à[:]"). " " .$event["start_time"];
+  if (empty($event["end_time"][0])) {
+    if (empty($event['start_time'][0])) return "";
+    return __("[:en]At[:][:fr]à[:]"). " " .$event["start_time"][0];
   }
-  return $event["start_time"] . " / " .$event["end_time"];
+  return $event["start_time"][0] . " / " .$event["end_time"][0];
 }
 
  ?>
