@@ -15,9 +15,6 @@ get_header(); ?>
 
 	<section id="primary" class="content-area col-sm-12 col-lg-12">
 		<main id="main" class="site-main" role="main">
-
-		<?php
-		if ( have_posts() ) : ?>
 			<style media="screen">
 			  h1 {
 					text-align: center;
@@ -80,8 +77,14 @@ get_header(); ?>
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
 			<script type="text/javascript">
-			var today = new Date();
-			today = today.toISOString().split('T')[0];
+			<?php
+			if (isset($_GET["date"])) {
+				echo "var today = '" . $_GET["date"] . "'";
+			}  else {
+				echo "var today = new Date();";
+				echo "today = today.toISOString().split('T')[0];";
+			}
+			?>
 
 			$( document ).ready(function() {
 				if (today < "2020-04-25") {today = "2020-04-25";}
@@ -89,9 +92,12 @@ get_header(); ?>
 			});
 
 			function select_date(date) {
-				$("#filter-" + today).removeClass("selected");
-				today = date;
-				$("#filter-" + today).addClass("selected");
+				current_url = window.location.href;
+				if (current_url.indexOf("?") > -1) {
+					current_url = current_url.substring(0, current_url.indexOf("?"));
+				}
+				new_url = current_url + "?date=" + date;
+				window.location.href = new_url;
 			}
 			</script>
 			<header class="page-header">
@@ -113,7 +119,7 @@ get_header(); ?>
 					</div>
 				</div>
 			</div>
-
+			<?php if ( have_posts() ) : ?>
 			<?php
 			/* Start the Loop */
 			while ( have_posts() ) : the_post();
@@ -130,8 +136,7 @@ get_header(); ?>
 			the_posts_navigation();
 
 		else :
-
-			get_template_part( 'template-parts/content-event-preview', 'none' );
+			_e("[:en]No event for this date for now[:][:fr]Pas d'évènement pour cette date[:]");
 
 		endif; ?>
 

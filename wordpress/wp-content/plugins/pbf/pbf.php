@@ -9,6 +9,7 @@ include( plugin_dir_path( __FILE__ ) . 'inc/post_type_participant.php');
 include( plugin_dir_path( __FILE__ ) . 'inc/post_type_event.php');
 include( plugin_dir_path( __FILE__ ) . 'inc/save_post.php');
 include( plugin_dir_path( __FILE__ ) . 'inc/delete_post.php');
+include( plugin_dir_path( __FILE__ ) . 'inc/filter_events_by_date.php');
 
 
 // Add jquery to admin pages
