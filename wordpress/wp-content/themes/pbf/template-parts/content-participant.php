@@ -27,6 +27,18 @@ $events = get_pbf_participant_events($metadata);
 	.participant-description h1 {
 		font-size: 28px;
 		text-align: center;
+		margin-bottom: 0px;
+	}
+
+	.participant-cat {
+		text-align: center;
+		color: #5a5a5a;
+		font-size: 16px;
+	}
+
+	.custom-separator {
+		text-align: center;
+		margin: 20px;
 	}
 </style>
 <div class="row">
@@ -36,6 +48,17 @@ $events = get_pbf_participant_events($metadata);
 				<?php the_post_thumbnail(); ?>
 			</div>
 			<?php the_title("<h1>", "</h1>"); ?>
+			<div class="participant-cat">
+				<?php
+					$terms = get_the_terms( $post->ID , 'participant_cat' );
+					foreach ( $terms as $term ) {
+						echo $term->name;
+					}
+				?>
+			</div>
+			<div class="custom-separator">
+				<img src="<?php echo get_template_directory_uri(); ?>/inc/assets/img/funfact_wave.png">
+			</div>
 			<?php echo "<div class='address'>".$metadata["address"][0]."</div>"; ?>
 			<?php the_content(); ?>
 			<div class="social">
