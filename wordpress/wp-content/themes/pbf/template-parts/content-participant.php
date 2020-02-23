@@ -38,6 +38,16 @@ $events = get_pbf_participant_events($metadata);
 			<?php the_title("<h1>", "</h1>"); ?>
 			<?php echo "<div class='address'>".$metadata["address"][0]."</div>"; ?>
 			<?php the_content(); ?>
+			<div class="social">
+					<?php
+					if (!empty($metadata["facebook"][0])) {
+						echo "<a href='".$metadata["facebook"][0]."'><i class='fab fa-facebook'></i></a>";
+					}
+					if (!empty($metadata["instagram"][0])) {
+						echo "<a href='".$metadata["instagram"][0]."'><i class='fab fa-instagram'></i></a>";
+					}
+					 ?>
+			</div>
 			<?php edit_post_link(); ?>
 		</div>
 	</div>

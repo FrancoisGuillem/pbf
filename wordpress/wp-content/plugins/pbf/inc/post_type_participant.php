@@ -1,4 +1,5 @@
 <?php
+include_once( plugin_dir_path( __FILE__ ) . 'field_social.php');
 include_once( plugin_dir_path( __FILE__ ) . 'field_address.php');
 // Register Custom Post Type: Participants
 function register_type_participant() {
@@ -54,6 +55,19 @@ function register_type_participant() {
 
  }
  add_action( 'init', 'register_type_participant', 0 );
+
+add_action("add_meta_boxes", "participant_social");
+function participant_social() {
+  add_meta_box(
+    "participant_social",
+    __("Réseaux sociaux", "pbf"),
+    "field_social",
+    "participant",
+    "normal",
+    "high"
+  );
+}
+
 
  // Add address metabox
  add_action( 'add_meta_boxes', 'participant_address' );

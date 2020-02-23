@@ -1118,3 +1118,19 @@ h1 {
     font-size: 24px;
   }
 }
+
+
+/* Icons social networks */
+.social {
+  text-align: center;
+}
+
+.social a {
+  color: #ff007a;
+  font-size: 36px;
+  margin: 5px;
+}
+
+.social a:hover {
+  color: #3b1d82;
+}
