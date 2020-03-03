@@ -35,12 +35,12 @@ get_header(); ?>
 					cursor: pointer;
 				}
 
-				.date-selector > .selected {
+				.date-selector  .selected {
 					background-color: #ff007a;
 					color: #fff;
 				}
 
-				.date-selector > .selected h3 {
+				.date-selector  .selected h3 {
 					color: #fff;
 				}
 
@@ -56,7 +56,7 @@ get_header(); ?>
 
 				#nav-grand-finale {
 					background-color: #ffc509 !important;
-					font-size: 24px;
+					font-size: 18px;
 					font-weight: bold;
 					padding: 7px 0 0 0;
 				}
@@ -70,6 +70,10 @@ get_header(); ?>
 				#nav-grand-finale h3 {
 					font-size: 16px;
 					margin-top: 0px;
+				}
+
+				.small-date-btn {
+					height: 58px;
 				}
 			</style>
 			<script
@@ -104,18 +108,18 @@ get_header(); ?>
 				'<h1 class="page-title"><?= __("[:en]Schedule[:][:fr]Le Programme[:]") ?></h1>'
 			</header><!-- .page-header -->
 			<div class="row date-selector">
-				<?= pbf_get_formatted_date("2020-04-25", "col-sm-2 no-gutters offset-sm-1")?>
-				<?= pbf_get_formatted_date("2020-04-26", "col-sm-2 no-gutters")?>
-				<?= pbf_get_formatted_date("2020-04-27", "col-sm-2 no-gutters")?>
-				<?= pbf_get_formatted_date("2020-04-28", "col-sm-2 no-gutters")?>
-				<?= pbf_get_formatted_date("2020-04-29", "col-sm-2 no-gutters")?>
-				<?= pbf_get_formatted_date("2020-04-30", "col-sm-2 no-gutters offset-sm-2")?>
-				<?= pbf_get_formatted_date("2020-05-01", "col-sm-2 no-gutters")?>
-				<div class="col-sm-4 np-gutters" id="nav-grand-finale">
+				<?= pbf_get_formatted_date("2020-04-25", "col-4 col-md-2 no-gutters offset-md-1")?>
+				<?= pbf_get_formatted_date("2020-04-26", "col-4 col-md-2 no-gutters")?>
+				<?= pbf_get_formatted_date("2020-04-27", "col-4 col-md-2 no-gutters")?>
+				<?= pbf_get_formatted_date("2020-04-28", "col-4 col-md-2 no-gutters")?>
+				<?= pbf_get_formatted_date("2020-04-29", "col-4 col-md-2 offset-md-0 no-gutters")?>
+				<?= pbf_get_formatted_date("2020-04-30", "col-4 col-md-2 no-gutters offset-md-2")?>
+				<?= pbf_get_formatted_date("2020-05-01", "col-4 col-md-2 no-gutters")?>
+				<div class="col-8 col-md-4 np-gutters" id="nav-grand-finale">
 					GROUND CONTROL
-					<div class="row">
-							<?= pbf_get_formatted_date("2020-05-02", "col-sm-6 no-gutters")?>
-							<?= pbf_get_formatted_date("2020-05-03", "col-sm-6 no-gutters")?>
+					<div class="row no-gutters">
+							<?= pbf_get_formatted_date("2020-05-02", "col-6 no-gutters small-date-btn")?>
+							<?= pbf_get_formatted_date("2020-05-03", "col-6 no-gutters small-date-btn")?>
 					</div>
 				</div>
 			</div>
