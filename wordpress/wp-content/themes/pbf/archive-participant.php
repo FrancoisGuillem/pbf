@@ -53,6 +53,11 @@ get_header(); ?>
 		.participant:hover .participant-preview-title a {
 			color: #ff007a;
 		}
+
+		.category-title {
+			width: 100%;
+			text-align: center;
+		}
 	</style>
 	<section id="primary" class="content-area col-sm-12 col-lg-12">
 		<main id="main" class="site-main" role="main">
@@ -66,16 +71,32 @@ get_header(); ?>
 			<div class="row">
 				<?php
 				/* Start the Loop */
+				$categories = array();
+
 				while ( have_posts() ) : the_post();
 
-					/*
-					 * Include the Post-Format-specific template for the content.
-					 * If you want to override this in a child theme, then include a file
-					 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-					 */
-					get_template_part( 'template-parts/content-participant-preview' );
+					$terms = get_the_terms( $post->ID , 'participant_cat' );
+					if (empty($terms)) {
+						$category = "No Category";
+					}	 else {
+						$category = $terms[0]->name;
+					}
 
+					if (!array_key_exists($category, $categories)) {$categories[$category] = array();}
+
+					array_push($categories[$category], $post);
 				endwhile;
+
+				foreach ($categories as $category => $participants) {
+					echo "<h2 class='category-title'>" . $category . "</h2>";
+
+					foreach ($participants as $participant) {
+						set_query_var( 'post', $participant );
+						get_template_part( 'template-parts/content-participant-preview' );
+					}
+
+				}
+				# get_template_part( 'template-parts/content-participant-preview' );
 
 				the_posts_navigation();
 
