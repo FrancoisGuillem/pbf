@@ -84,14 +84,20 @@ get_header(); ?>
 
 					if (!array_key_exists($category, $categories)) {$categories[$category] = array();}
 
-					array_push($categories[$category], $post);
+					$participant = array(
+						"title" => get_the_title(),
+						"id" => get_the_ID(),
+						"permalink" => get_permalink(),
+						"thumbnail" => get_the_post_thumbnail()
+					);
+					array_push($categories[$category], $participant);
 				endwhile;
 
 				foreach ($categories as $category => $participants) {
 					echo "<h2 class='category-title'>" . $category . "</h2>";
 
 					foreach ($participants as $participant) {
-						set_query_var( 'post', $participant );
+						set_query_var( 'participant', $participant );
 						get_template_part( 'template-parts/content-participant-preview' );
 					}
 
