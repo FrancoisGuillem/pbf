@@ -7,8 +7,8 @@
  * @package pbf
  */
 
-$metadata = get_post_meta(get_the_ID());
-$events = $metadata["events"][0];
+//$metadata = get_post_meta(get_the_ID());
+//$events = $metadata["events"][0];
 ?>
 
 <div class="col-lg-3 col-md-4 participant" id="post-<?php the_ID(); ?>">
