@@ -61,10 +61,7 @@ get_header(); ?>
 		if ( have_posts() ) : ?>
 
 			<header class="page-header">
-				<h1 class="page-title"><?= _e("Les Participants du Paris Beer Festival", "pbf") ?></h1>
-				<?php
-					the_archive_description( '<div class="archive-description">', '</div>' );
-				?>
+				<h1 class="page-title"><?= _e("[:fr]Les Participants du[:en]The Participants of the[:] Paris Beer Festival", "pbf") ?></h1>
 			</header><!-- .page-header -->
 			<div class="row">
 				<?php

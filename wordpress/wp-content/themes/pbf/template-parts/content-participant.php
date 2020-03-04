@@ -51,9 +51,11 @@ $events = get_pbf_participant_events($metadata);
 			<div class="participant-cat">
 				<?php
 					$terms = get_the_terms( $post->ID , 'participant_cat' );
-					foreach ( $terms as $term ) {
-						echo $term->name;
-					}
+					if (!empty($terms)) {
+						foreach ( $terms as $term ) {
+							echo $term->name;
+						}
+					}	
 				?>
 			</div>
 			<div class="custom-separator">
