@@ -9,7 +9,7 @@ function pbf_filter_events_by_date( $query ) {
 	}
 
 	// only modify queries for 'event' post type
-	if( isset($query->query_vars['post_type']) && $query->query_vars['post_type'] == 'event' ) {
+	if( isset($query->query_vars['post_type']) && is_archive() && $query->query_vars['post_type'] == 'event' ) {
     $date = strval(date('Y-m-d', time()));
     if (isset($_GET["date"])) {$date = $_GET["date"];}
 
