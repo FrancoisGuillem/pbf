@@ -162,6 +162,8 @@ add_action( 'rest_api_init', function () {
               $response["events"] = array_map('intval', $events);
             }
 
+            $response["thumbnail"] = get_the_post_thumbnail($participant["id"]);
+
             return $response;
         },
         'schema' => array(
