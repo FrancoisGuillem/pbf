@@ -53,6 +53,7 @@ function register_type_events() {
  		'exclude_from_search'   => false,
  		'publicly_queryable'    => true,
  		'capability_type'       => 'page',
+    'show_in_rest'          => true,
  	);
  	register_post_type( 'event', $args );
 
@@ -96,3 +97,77 @@ function register_type_events() {
          'high'
      );
  }
+
+// Ajouter métadonnées dans l'API rest
+add_action( 'rest_api_init', function () {
+  register_rest_field( 'event', 'meta', array(
+    'get_callback' => function( $event) {
+      $metadata = get_post_meta($event["id"]);
+
+      $response = array();
+
+
+      $response["geo"] = pbf_get_event_address($metadata);
+
+      $response["social"] = array();
+      if (array_key_exists("facebook", $metadata) && !empty($metadata["facebook"][0])) {
+        $response["social"]["facebook"] = $metadata["facebook"][0];
+      }
+      if (array_key_exists("instagram", $metadata) && !empty($metadata["instagram"][0])) {
+        $response["social"]["instagram"] = $metadata["instagram"][0];
+      }
+
+      $response["schedule"] = array();
+      if (array_key_exists("start_date", $metadata) && !empty($metadata["start_date"][0])) {
+        $response["schedule"]["start_date"] = $metadata["start_date"][0];
+      }
+      if (array_key_exists("end_date", $metadata) && !empty($metadata["end_date"][0])) {
+        $response["schedule"]["end_date"] = $metadata["end_date"][0];
+      }
+      if (array_key_exists("start_time", $metadata) && !empty($metadata["start_time"][0])) {
+        $response["schedule"]["start_time"] = $metadata["start_time"][0];
+      }
+      if (array_key_exists("end_time", $metadata) && !empty($metadata["end_time"][0])) {
+        $response["schedule"]["end_time"] = $metadata["end_time"][0];
+      }
+
+      $response["organizers"] = array();
+
+      if (array_key_exists("organizers", $metadata) && !empty($metadata["organizers"][0])) {
+        $organizers = explode(",", $metadata["organizers"][0]);
+        $response["organizers"] = array_map('intval', $organizers);
+      }
+
+      return $response;
+    },
+    'schema' => array(
+      'description' => __( 'metadonnees evenements' ),
+      'type'        => 'integer'
+    ),
+  ));
+});
+
+// Récupère l'adresse d'un évènement.
+// Il s'agit soit de l'adresse directement entrée dans la page de l'évènement,
+// soit l'adresse du premier organisateur de l'évènement
+function pbf_get_event_address($event_metadata) {
+  if (array_key_exists("address", $event_metadata) && $event_metadata["address"][0] != "") {
+    return array(
+      "address" => $event_metadata["address"][0] ?? "",
+      "long" => floatval($event_metadata["long"][0] ?? ""),
+      "lat" => floatval($event_metadata["lat"][0] ?? "")
+    );
+  }
+
+  if (array_key_exists("organizers", $event_metadata) && ! empty($event_metadata["organizers"])) {
+    $org_id = explode(",", $event_metadata["organizers"][0])[0];
+    $organizer_metadata = get_post_meta($org_id);
+    return array(
+      "address" => $organizer_metadata["address"][0] ?? "",
+      "long" => floatval($organizer_metadata["long"][0] ?? ""),
+      "lat" => floatval($organizer_metadata["lat"][0] ?? "")
+    );
+  }
+
+  return array();
+}
