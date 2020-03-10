@@ -1,3 +1,4 @@
+node_modules/
 wordpress/*.*
 wordpress/wp-admin
 wordpress/wp-includes

@@ -1,0 +1,50 @@
+// Convert pixels to ems
+@function em( $size ) {
+  @return ( $size * 1em );
+}
+
+// Convert pixels to rems
+@function rem( $size ) {
+  @return ( $size / 16 * 1rem );
+}
+
+
+// Hide only visually, but have it available for screenreaders
+@mixin hide() {
+  border: 0;
+  clip: rect( 0 0 0 0 );
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+@mixin hide-reset() {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+
+
+@mixin interact() {
+  .user-input-mouse &:hover,
+  .user-input-keyboard &:focus,
+  .user-input-touch &:active {
+    @content;
+  }
+}
+
+
+@mixin title-level( $size, $height, $spacing: false ) {
+  font-size: rem( $size );
+  line-height: ( $height / $size );
+
+  @if $spacing {
+    letter-spacing: em( $spacing / $size );
+  }
+}

@@ -1,0 +1,94 @@
+
+/* --------------------------------------------------------------
+## Custom styles
+-------------------------------------------------------------- */
+
+// header#masthead {
+//   background-color: #3b1d82;
+// }
+
+#masthead .navbar-nav > li > a:hover {
+  color: #ffc509 !important;
+}
+
+#masthead .navbar-nav > li > a {
+  color: #fff !important;
+}
+
+/* Style pour les liste d'évènements */
+
+// .event-preview h1 {
+//   font-size: 28px;
+// }
+
+// .event-preview-date {
+//   background: #ff007a;
+//   color: white;
+//   text-align: center;
+//   padding: 15px 0;
+// }
+
+// .event-preview-date-container div {
+//   display: inline-block;
+// }
+
+// .event-preview:nth-of-type(even) .event-preview-date {
+//   background-color: #cc0461;
+// }
+
+// .event-preview-info {
+//   padding: 30px;
+//   border: 1px solid #e5e5e5;
+//   border-left: none;
+//   color: #5a5a5a;
+// }
+
+// .event-preview-date-container {
+//   width: 100%;
+// }
+
+// @media ( min-width: 766px ) {
+//   .event-preview-date {
+//     padding: 30px 0;
+//     position: relative;
+//     -webkit-box-flex: 0;
+//     -ms-flex: 0 0 100%;
+//     flex: 0 0 100%;
+//     display: -webkit-box;
+//     display: -ms-flexbox;
+//     display: flex;
+//     text-align: center;
+//     -webkit-box-align: center;
+//     -ms-flex-align: center;
+//     align-items: center;
+//   }
+
+//   .event-preview-date-container div {
+//     display: block;
+//   }
+
+//   .event-preview-day {
+//     font-size: 48px;
+//   }
+
+//   .event-preview-month,
+//   .event-preview-daymonth {
+//     font-size: 24px;
+//   }
+// }
+
+
+/* Icons social networks */
+.social {
+  text-align: center;
+}
+
+.social a {
+  color: #ff007a;
+  font-size: 36px;
+  margin: 5px;
+}
+
+.social a:hover {
+  color: #3b1d82;
+}

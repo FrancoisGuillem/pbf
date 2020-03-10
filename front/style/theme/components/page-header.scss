@@ -1,0 +1,34 @@
+.page-header {
+  min-height: rem( 160 );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url( "/wp-content/themes/pbf/assets/background/header.jpg" ) no-repeat 60% 50%;
+  position: relative;
+
+  // &::after {
+  //   content: "";
+  //   position: absolute;
+  //   z-index: 0;
+  //   width: 100%;
+  //   height: 100%;
+  //   background-color: rgba( $blue, 0.3 );
+  // }
+
+  .page-title {
+    @extend %title-leve1;
+
+    color: $blue;
+    text-align: center;
+    margin: 0;
+    // text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+  }
+
+  // @media ( min-width: #{em( 768 / 16 )} ) {
+  //   .page-title {
+  //     font-size: rem( 64 );
+  //   }
+  // }
+}

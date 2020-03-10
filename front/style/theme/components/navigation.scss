@@ -1,0 +1,78 @@
+header#masthead {
+  margin-bottom: 0;
+  // background-color: #563d7c;
+  // box-shadow:
+  //   0 0.5rem 1rem rgba( 0, 0, 0, 0.05 ),
+  //   inset 0 -1px 0 rgba( 0, 0, 0, 0.1 );
+  padding: 0.74rem 1rem;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  color: black;
+}
+
+.navbar-brand > a {
+  font-size: 1.1rem;
+  outline: medium none;
+  text-decoration: none;
+  color: black;
+  font-weight: 700;
+}
+
+.navbar-brand > a:visited,
+.navbar-brand > a:hover {
+  text-decoration: none;
+}
+
+#page-sub-header {
+  position: relative;
+  padding-top: 5rem;
+  padding-bottom: 0;
+  text-align: center;
+  font-size: 1.25rem;
+  background-size: cover !important;
+}
+
+body:not(.theme-preset-active) #page-sub-header h1 {
+  line-height: 1.6;
+  font-size: 4rem;
+  color: #563e7c;
+  margin: 0 0 1rem;
+  border: 0;
+  padding: 0;
+}
+
+#page-sub-header p {
+  margin-bottom: 0;
+  line-height: 1.4;
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+
+body:not(.theme-preset-active) #page-sub-header p {
+  color: #212529;
+}
+
+a.page-scroller {
+  color: #333;
+  font-size: 2.6rem;
+  display: inline-block;
+  margin-top: 2rem;
+}
+
+@media screen and ( min-width: $medium ) {
+  body:not(.theme-preset-active) #page-sub-header h1 {
+    font-size: 3.75rem;
+  }
+
+  body:not(.theme-preset-active) #page-sub-header {
+    font-size: 1.25rem;
+  }
+}
+
+@media screen and ( min-width: $large ) {
+  #page-sub-header p {
+    max-width: rem( 688 );
+    margin: 0 auto;
+  }
+}

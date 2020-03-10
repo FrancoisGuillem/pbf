@@ -1,0 +1,9 @@
+last 2 versions,
+not Android < 56,
+not ie < 11,
+not ie_mob < 11,
+not op_mini all,
+not BlackBerry <= 10,
+not UCAndroid <=11.4,
+not Baidu <= 7.12,
+not QQAndroid <= 1.2

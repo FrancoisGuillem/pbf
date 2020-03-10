@@ -1,0 +1,29 @@
+.widget {
+  margin: 0 0 1.5em;
+  font-size: 0.875rem;
+
+  /* Make sure select elements fit in widgets. */
+}
+
+.widget select {
+  max-width: 100%;
+}
+
+.widget_search .search-form input[type="submit"] {
+  display: none;
+}
+
+.nav > li > a:focus,
+.nav > li > a:hover {
+  background-color: #eee;
+  text-decoration: none;
+}
+
+.half-rule {
+  width: 6rem;
+  margin: 2.5rem 0;
+}
+
+.widget_categories .nav-link {
+  display: inline-block;
+}

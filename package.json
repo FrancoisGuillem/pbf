@@ -1,0 +1,40 @@
+{
+  "name": "pbf2020",
+  "version": "1.0.0",
+  "description": "Paris Beer Festival 2020 wordpress theme",
+  "main": "index.js",
+  "scripts": {
+    "dev": "gulp",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FrancoisGuillem/pbf.git"
+  },
+  "author": "Paris Beer Club",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FrancoisGuillem/pbf/issues"
+  },
+  "homepage": "https://github.com/FrancoisGuillem/pbf#readme",
+  "dependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "prettier": "1.19.1",
+    "stylelint": "^13.2.0",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-scss": "^3.14.2"
+  },
+  "devDependencies": {
+    "@babel/register": "^7.8.6",
+    "autoprefixer": "^9.7.4",
+    "browser-sync": "^2.26.7",
+    "clean-css": "^4.2.3",
+    "fibers": "^4.0.2",
+    "gulp": "^4.0.2",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sass": "^4.0.2",
+    "postcss-clean": "^1.1.0",
+    "sass": "^1.26.2"
+  }
+}

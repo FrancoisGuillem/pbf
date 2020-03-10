@@ -54,3 +54,20 @@ docker-compose up -d
 ```
 
 Maintenant dans un navigateur, ouvrez la page `http://localhost:8000` pour procéder à l'installation de Wordpress en local. Dans la page des extensions, activez tous les plugins disponibles, puis dans les thèmes activez le thème "pbf".
+
+## Développer en local
+Pour développer en local vous avez besoin de nodejs en version supérieure ou égale à 10 ainsi que `gulp-cli` installé en global (`npm i gulp-cli -g`).
+
+Un fois nodejs et gulp-cli d'installé, mettez-vous dans le dossier du projet et lancez la commande suivante pour installer les dépendances :
+
+```bash
+npm install
+```
+
+Pour commencer à travailler, toujours dans le répertoire du projet, lancer la commande :
+
+```bash
+npm run dev
+```
+
+Cela lancera la compilation des assets puis un watcher pour recompiler les fichiers `.scss` ainsi qu'un serveur à l'adresse `http://localhost:3000` avec _live reload_ à chaque modification des fichiers `.scss` et `.php`

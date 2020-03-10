@@ -1,0 +1,47 @@
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local( "Roboto" ), local( "Roboto-Regular" ), url( /wp-content/themes/pbf/font/roboto/regular.woff2 ) format( "woff2" );
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local( "Roboto Bold" ), local( "Roboto-Bold" ), url( /wp-content/themes/pbf/font/roboto/bold.woff2 ) format( "woff2" );
+}
+
+@font-face {
+  font-family: "Roboto Slab";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url( /wp-content/themes/pbf/font/roboto-slab/regular.woff2 ) format( "woff2" );
+}
+
+@font-face {
+  font-family: "Roboto Slab";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url( /wp-content/themes/pbf/font/roboto-slab/bold.woff2 ) format( "woff2" );
+}
+
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local( "Open Sans Regular" ), local( "OpenSans-Regular" ), url( /wp-content/themes/pbf/font/open-sans/regular.woff2 ) format( "woff2" );
+}
+
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local( "Open Sans SemiBold" ), local( "OpenSans-SemiBold" ), url( /wp-content/themes/pbf/font/open-sans/semibold.woff2 ) format( "woff2" );
+}

@@ -1,0 +1,30 @@
+footer#colophon {
+  font-size: 85%;
+}
+
+body:not(.theme-preset-active) footer#colophon {
+  color: #99979c;
+  background-color: #f7f7f7;
+}
+
+.navbar-dark .site-info {
+  color: #fff;
+}
+
+.copyright {
+  font-size: 0.875rem;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.copyright a,
+footer#colophon a {
+  color: inherit;
+}
+
+// @media screen and ( max-width: 767px ) {
+//   #masthead .navbar-nav > li > a {
+//     padding-bottom: 0.938rem;
+//     padding-top: 0.938rem;
+//   }
+// }
