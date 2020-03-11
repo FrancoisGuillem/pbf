@@ -1,14 +1,56 @@
 <?php
 /**
- * Template part for displaying posts
+ * Template de la page d'un participant.
  *
- * @link https://codex.wordpress.org/Template_Hierarchy
+ * variables
+ * ---------
+ * $title : nom du participant
+ * $thumbnail : code html de l'image du participant
+ * $content : description du participant
+ * $category : categorie du participant
+ * $address : adresse du participant
+ * $facebook : lien facebook (chaine vide si pas renseigné)
+ * $instagram : lien instagram (chaine vide si pas renseigné)
+ *
+ * Variables boucle événements
+ * ---------------------------
+ * $evt["title"] : titre de l'événement
+ * $evt["link"] : lien de l'évènement
+ * $evt["content"]: description de l'événement
+ * $evt["geo"]["address"]: addresse de l'évènement
  *
  * @package pbf
  */
 
+/* ----------------------------------------------------------------------------
+ * Préparation des données. Ne pas modifier.
+ * ----------------------------------------------------------------------------
+ *
+ * On récupère tous les participants et on les organise par catégorie.
+ */
+$title = get_the_title();
+$thumbnail = get_the_post_thumbnail();
+$content =get_the_content();
+
 $metadata = get_post_meta(get_the_ID());
+
+$address = $metadata["address"][0];
+$facebook = $metadata["facebook"][0];
+$instagram = $metadata["instagram"][0];
+
+$terms = get_the_terms( $post->ID , 'participant_cat' );
+if (!empty($terms)) {
+	$category = $terms[0]->name;
+} else {
+	$category = "";
+}
+
 $events = get_pbf_participant_events($metadata);
+
+/* ----------------------------------------------------------------------------
+ * Fin de la préparation des données
+ * ----------------------------------------------------------------------------
+*/
 ?>
 
 
@@ -45,31 +87,24 @@ $events = get_pbf_participant_events($metadata);
 	<div class="col-md-4">
 		<div class="participant-description">
 			<div class="post-thumbnail">
-				<?php the_post_thumbnail(); ?>
+				<?= $thumbnail; ?>
 			</div>
-			<?php the_title("<h1>", "</h1>"); ?>
+			<h1><?= $title ?></h1>
 			<div class="participant-cat">
-				<?php
-					$terms = get_the_terms( $post->ID , 'participant_cat' );
-					if (!empty($terms)) {
-						foreach ( $terms as $term ) {
-							echo $term->name;
-						}
-					}	
-				?>
+				<?= $category; ?>
 			</div>
 			<div class="custom-separator">
 				<img src="<?php echo get_template_directory_uri(); ?>/inc/assets/img/funfact_wave.png">
 			</div>
-			<?php echo "<div class='address'>".$metadata["address"][0]."</div>"; ?>
-			<?php the_content(); ?>
+			<div class='address'><?= $address; ?></div>
+			<?= $content; ?>
 			<div class="social">
 					<?php
-					if (!empty($metadata["facebook"][0])) {
-						echo "<a href='".$metadata["facebook"][0]."'><i class='fab fa-facebook'></i></a>";
+					if (!empty($facebook)) {
+						echo "<a href='".$facebook."'><i class='fab fa-facebook'></i></a>";
 					}
-					if (!empty($metadata["instagram"][0])) {
-						echo "<a href='".$metadata["instagram"][0]."'><i class='fab fa-instagram'></i></a>";
+					if (!empty($instagram)) {
+						echo "<a href='".$instagram."'><i class='fab fa-instagram'></i></a>";
 					}
 					 ?>
 			</div>
@@ -78,7 +113,14 @@ $events = get_pbf_participant_events($metadata);
 	</div>
 
 	<div class="col-md-8">
-		<?php foreach ($events as $evt) { ?>
+		<?php
+		/*
+		 * --------------------------------------------------------------------------
+		 * Boucle des événements
+		 * --------------------------------------------------------------------------
+		 */
+		foreach ($events as $evt) {
+		?>
 		<div class="row event-preview">
 			<div class="col-md-2 event-preview-date">
 				<?php
@@ -98,7 +140,13 @@ $events = get_pbf_participant_events($metadata);
 				</div>
 			</div>
 		</div>
-	  <?php } ?>
+	  <?php
+	  }
+		/* -------------------------------------------------------------------------
+		 * Fin boucle des événements
+     * -------------------------------------------------------------------------
+		 */
+		?>
 	</div>
 
 </div>

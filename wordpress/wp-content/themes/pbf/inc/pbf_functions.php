@@ -70,7 +70,7 @@ function get_pbf_participant_events($participant_metadata) {
         "link" => get_permalink($post),
         "title" => get_the_title($post),
         "content" => $content,
-        "address" => pbf_get_event_address($metadata),
+        "geo" => pbf_get_event_address($metadata),
         "start_date" => $metadata["start_date"][0],
         "start_time" => $metadata["start_time"][0],
         "end_date" => $metadata["end_date"][0],
