@@ -32,9 +32,15 @@
 
 
 @mixin interact() {
-  .user-input-mouse &:hover,
-  .user-input-keyboard &:focus,
-  .user-input-touch &:active {
+  -webkit-tap-highlight-color: rgba( black, 0 );
+
+  &:focus {
+    outline: none;
+  }
+
+  [data-input="mouse"] &:hover,
+  [data-input="keyboard"] &:focus,
+  [data-input="touch"] &:active {
     @content;
   }
 }

@@ -12,7 +12,7 @@
 
 ?>
 <!DOCTYPE html>
-<html <?php language_attributes(); ?>>
+<html <?php language_attributes(); ?> data-input="mouse">
 
 <head>
   <meta charset="<?php bloginfo('charset'); ?>">

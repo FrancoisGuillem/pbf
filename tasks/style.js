@@ -9,7 +9,7 @@ import autoprefixer from 'autoprefixer';
 
 sass.compiler = compiler;
 
-const css = () => {
+const style = () => {
   return src('./front/style/*.scss')
     .pipe(sass({ fiber: Fiber }).on('error', sass.logError))
     .pipe(
@@ -24,4 +24,4 @@ const css = () => {
     .pipe(browserSync.stream());
 };
 
-export default css;
+export default style;

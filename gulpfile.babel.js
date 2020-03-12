@@ -1,8 +1,9 @@
 import { parallel, series } from 'gulp';
-import css from './tasks/css';
+import css from './tasks/style';
+import script from './tasks/script';
 import watch from './tasks/watch';
 import browserSync from './tasks/browser-sync';
 
-export { css };
+export { css, script };
 
-export default series(css, parallel(browserSync, watch));
+export default series(parallel(css, script), parallel(browserSync, watch));
