@@ -17,7 +17,7 @@ $tt3: 26, 32, 0.2;
 
   @include title-level($tt2...);
 
-  @media ( min-width: #{$medium} ) {
+  @media ( min-width: $medium ) {
     @include title-level($tt1...);
   }
 }
@@ -27,7 +27,7 @@ $tt3: 26, 32, 0.2;
 
   @include title-level($tt3...);
 
-  @media ( min-width: #{$medium} ) {
+  @media ( min-width: $medium ) {
     @include title-level($tt2...);
   }
 }
@@ -37,7 +37,7 @@ $tt3: 26, 32, 0.2;
 
   @include title-level(18, 24);
 
-  @media ( min-width: #{$medium} ) {
+  @media ( min-width: $xsmall ) {
     @include title-level($tt3...);
   }
 }

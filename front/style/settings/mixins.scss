@@ -48,3 +48,37 @@
     letter-spacing: em( $spacing / $size );
   }
 }
+
+@mixin title-separator( $align, $color: currentColor ) {
+  $separator-height: 4;
+  $separator-width: 64;
+  $separator-spacing: 24;
+  $title-spacing: 32;
+  $pos: $align;
+  $pct: 0;
+
+
+  @if $align == center {
+    $pos: left;
+    $pct: 50%;
+  }
+
+  margin-bottom: rem( $title-spacing );
+  padding-bottom: rem( $separator-spacing + $separator-height );
+  position: relative;
+
+  &::after {
+    background-color: $color;
+    bottom: 0;
+    content: "";
+    display: inline-block;
+    position: absolute;
+    height: rem( $separator-height );
+    #{$pos}: $pct;
+    width: rem( $separator-width );
+
+    @if $align == center {
+      margin-left: rem( $separator-width / -2 );
+    }
+  }
+}

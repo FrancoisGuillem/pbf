@@ -70,4 +70,4 @@ Pour commencer à travailler, toujours dans le répertoire du projet, lancer la 
 npm run dev
 ```
 
-Cela lancera la compilation des assets puis un watcher pour recompiler les fichiers `.scss` ainsi qu'un serveur à l'adresse `http://localhost:3000` avec _live reload_ à chaque modification des fichiers `.scss` et `.php`
+Cela lancera la compilation des assets puis un watcher pour recompiler les fichiers `.scss` ainsi qu'un serveur à l'adresse `http://localhost:3000` avec live reload à chaque modification des fichiers `.scss` et `.php`
