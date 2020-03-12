@@ -178,7 +178,7 @@ function wp_bootstrap_starter_scripts()
   // load bootstrap css
   // load AItheme styles
   // load WP Bootstrap Starter styles
-  wp_enqueue_style('wp-bootstrap-starter-style', get_stylesheet_uri());
+  wp_enqueue_style('pbf', get_stylesheet_uri());
   // if (get_theme_mod('theme_option_setting') && get_theme_mod('theme_option_setting') !== 'default') {
   //   wp_enqueue_style('wp-bootstrap-starter-' . get_theme_mod('theme_option_setting'), get_template_directory_uri() . '/inc/assets/css/presets/theme-option/' . get_theme_mod('theme_option_setting') . '.css', false, '');
   // }
@@ -216,7 +216,13 @@ function wp_bootstrap_starter_scripts()
         wp_enqueue_style( 'wp-bootstrap-starter-default', get_template_directory_uri() . '/inc/assets/css/presets/color-scheme/blue.css', false, '' );
     }*/
 
-  // wp_enqueue_script('jquery');
+  wp_enqueue_script('jquery');
+  wp_enqueue_script('hoverIntent');
+
+  if (!is_user_logged_in()) {
+    wp_deregister_script('jquery');
+    wp_deregister_script('hoverIntent');
+  }
 
   // Internet Explorer HTML5 support
   // wp_enqueue_script('html5hiv', get_template_directory_uri() . '/inc/assets/js/html5.js', array(), '3.7.0', false);
@@ -240,26 +246,25 @@ function wp_bootstrap_starter_scripts()
 add_action('wp_enqueue_scripts', 'wp_bootstrap_starter_scripts');
 
 
-
 /**
  * Add Preload for CDN scripts and stylesheet
- */
-function wp_bootstrap_starter_preload($hints, $relation_type)
-{
-  if ('preconnect' === $relation_type && get_theme_mod('cdn_assets_setting') === 'yes') {
-    $hints[] = [
-      'href'        => 'https://cdn.jsdelivr.net/',
-      'crossorigin' => 'anonymous',
-    ];
-    $hints[] = [
-      'href'        => 'https://use.fontawesome.com/',
-      'crossorigin' => 'anonymous',
-    ];
-  }
-  return $hints;
-}
+//  */
+// function wp_bootstrap_starter_preload($hints, $relation_type)
+// {
+//   if ('preconnect' === $relation_type && get_theme_mod('cdn_assets_setting') === 'yes') {
+//     $hints[] = [
+//       'href'        => 'https://cdn.jsdelivr.net/',
+//       'crossorigin' => 'anonymous',
+//     ];
+//     $hints[] = [
+//       'href'        => 'https://use.fontawesome.com/',
+//       'crossorigin' => 'anonymous',
+//     ];
+//   }
+//   return $hints;
+// }
 
-add_filter('wp_resource_hints', 'wp_bootstrap_starter_preload', 10, 2);
+// add_filter('wp_resource_hints', 'wp_bootstrap_starter_preload', 10, 2);
 
 
 
