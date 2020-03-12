@@ -1,9 +1,15 @@
 <?php
 
 /**
- * Template part for displaying posts
+ * template pour afficher les partcipants dans la page qui les liste tous.
  *
- * @link https://codex.wordpress.org/Template_Hierarchy
+ * Variables
+ *----------
+ * $participant["id"] : ID du participant. Peut être utile pour récupérer
+ *    plus d'info via l'API.
+ * $participant["permalink"]: lien vers la page du partcipant
+ * $participant["thumbnail"]: code html de l'image du participant
+ * $participant["title"]: nom du participant
  *
  * @package pbf
  */

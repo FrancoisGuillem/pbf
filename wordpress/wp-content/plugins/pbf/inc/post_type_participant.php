@@ -51,6 +51,7 @@ function register_type_participant() {
  		'exclude_from_search'   => false,
  		'publicly_queryable'    => true,
  		'capability_type'       => 'page',
+    'show_in_rest'          => true,
  	);
  	register_post_type( 'participant', $args );
 
@@ -126,3 +127,48 @@ function participant_social() {
          'high'
      );
  }
+
+// Ajouter métadonnées dans l'API rest
+add_action( 'rest_api_init', function () {
+    register_rest_field( 'participant', 'meta', array(
+        'get_callback' => function( $participant) {
+            //$comment_obj = get_comment( $comment_arr['id'] );
+            $metadata = get_post_meta($participant["id"]);
+
+            $response = array();
+            $response["geo"] = array();
+            if (array_key_exists("address", $metadata)) {
+              $response["geo"]["address"] = $metadata["address"][0];
+            }
+            if (array_key_exists("long", $metadata)) {
+              $response["geo"]["long"] = floatval($metadata["long"][0]);
+            }
+            if (array_key_exists("lat", $metadata)) {
+              $response["geo"]["lat"] = floatval($metadata["lat"][0]);
+            }
+
+            $response["social"] = array();
+            if (array_key_exists("facebook", $metadata) && !empty($metadata["facebook"][0])) {
+              $response["social"]["facebook"] = $metadata["facebook"][0];
+            }
+            if (array_key_exists("instagram", $metadata) && !empty($metadata["instagram"][0])) {
+              $response["social"]["instagram"] = $metadata["instagram"][0];
+            }
+
+            $response["events"] = array();
+
+            if (array_key_exists("events", $metadata) && !empty($metadata["events"][0])) {
+              $events = explode(",", $metadata["events"][0]);
+              $response["events"] = array_map('intval', $events);
+            }
+
+            $response["thumbnail"] = get_the_post_thumbnail($participant["id"]);
+
+            return $response;
+        },
+        'schema' => array(
+            'description' => __( 'metadonnees participant' ),
+            'type'        => 'integer'
+        ),
+    ) );
+  });

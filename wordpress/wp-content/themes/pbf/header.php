@@ -27,6 +27,8 @@
     <a class="skip-link screen-reader-text" href="#content"><?php esc_html_e('Skip to content', 'pbf'); ?></a>
     <?php if (!is_page_template('blank-page.php') && !is_page_template('blank-page-with-container.php')) : ?>
       <header id="masthead" class="site-header navbar-static-top" role="banner">
+        <?php // Header du site disponible sur toutes les pages
+        ?>
         <div class="container">
           <nav class="navbar navbar-expand-xl p-0">
             <div class="navbar-brand">
