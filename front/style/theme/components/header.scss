@@ -1,0 +1,48 @@
+.site-header {
+  background-color: white;
+  padding: rem( 8 ) 0;
+  position: sticky;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+
+  .container {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.site-header-logo {
+  color: $blue;
+  transition: color $anim-duration $anim-easing;
+
+  @include interact() {
+    color: $purple;
+  }
+
+  svg {
+    height: rem( 64 );
+    width: rem( 74 );
+  }
+
+  span {
+    @include hide();
+  }
+}
+
+
+@media ( min-width: $medium ) {
+  .site-header {
+    .container {
+      display: block;
+    }
+  }
+
+  .site-header-logo {
+    position: absolute;
+    left: 50%;
+    top: rem( 8 );
+    margin-left: rem( 74 / -2 );
+  }
+}

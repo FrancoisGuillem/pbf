@@ -25,7 +25,14 @@ a {
   }
 }
 
-img {
+button {
+  font-size: inherit;
+  font-weight: inherit;
+  color: currentColor;
+}
+
+img,
+svg {
   display: inline-block;
   height: auto;
   max-width: 100%;

@@ -1,0 +1,30 @@
+[class^=cta-] {
+  align-items: center;
+  background: none;
+  border-width: 0;
+  cursor: pointer;
+  display: inline-flex;
+  padding: 0;
+  position: relative;
+  text-decoration: none;
+  transition: color $anim-duration $anim-easing;
+}
+
+.cta-solid {
+  border-radius: 4px;
+  transition: color $anim-duration $anim-easing, background-color $anim-duration $anim-easing;
+  height: rem( 40 );
+  min-width: rem( 160 );
+  padding: 0 rem( 16 );
+  font-weight: 600;
+  justify-content: center;
+
+  &.variant-primary {
+    background-color: $purple;
+    color: white;
+
+    @include interact() {
+      background-color: $blue;
+    }
+  }
+}

@@ -27,7 +27,7 @@ if (!function_exists('wp_bootstrap_starter_setup')) :
     load_theme_textdomain('pbf', get_template_directory() . '/languages');
 
     // Add default posts and comments RSS feed links to head.
-    add_theme_support('automatic-feed-links');
+    // add_theme_support('automatic-feed-links');
 
     /*
 	 * Let WordPress manage the document title.
@@ -216,11 +216,11 @@ function wp_bootstrap_starter_scripts()
         wp_enqueue_style( 'wp-bootstrap-starter-default', get_template_directory_uri() . '/inc/assets/css/presets/color-scheme/blue.css', false, '' );
     }*/
 
-  wp_enqueue_script('jquery');
+  // wp_enqueue_script('jquery');
   wp_enqueue_script('hoverIntent');
 
   if (!is_user_logged_in()) {
-    wp_deregister_script('jquery');
+    //   wp_deregister_script('jquery');
     wp_deregister_script('hoverIntent');
   }
 
