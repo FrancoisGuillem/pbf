@@ -40,7 +40,7 @@
 
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="" aria-expanded="false" aria-label="Toggle navigation">
-              <?php get_template_part("assets/menu.svg"); ?>
+              <?php get_template_part("inc/assets/menu.svg"); ?>
             </button>
 
             <?php

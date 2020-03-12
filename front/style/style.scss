@@ -1,12 +1,15 @@
 @import "./settings/mixins";
+@import "./settings/animations";
 @import "./settings/color";
 @import "./settings/breakpoints";
+@import "./settings/sizes";
 @import "./settings/typography";
 @import "./theme/reset";
 @import "./theme/font";
 @import "./theme/accessibility";
 @import "./theme/elements";
 @import "./theme/infinite-scroll";
+@import "./theme/components/container";
 @import "./theme/components/comments";
 @import "./theme/components/event-preview";
 @import "./theme/components/footer";
@@ -18,6 +21,7 @@
 @import "./theme/components/page-header";
 @import "./theme/components/posts-pages";
 @import "./theme/components/widgets";
+@import "./theme/components/festival-intro";
 @import "./theme/pages/event";
 @import "./theme/plugins/visual-composer";
 @import "./theme/plugins/woocommerce";
