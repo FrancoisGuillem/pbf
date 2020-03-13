@@ -21,35 +21,41 @@ if (empty($end)) {
 }
 ?>
 
-<article class="row event-preview" data-start="<?= $start ?>" data-end="<?= $end ?>">
+<article class="event-preview">
   <div class="event-organizer">
-    <span class="organizer-img">
-      <img src="<?= $organizer["thumbnail"]; ?>" alt="" />
-    </span>
+
+    <?php if ($organizer["thumbnail"]) { ?>
+      <span class="event-organizer-img">
+        <img src="<?= $organizer["thumbnail"]; ?>" alt="" />
+      </span>
+    <?php } ?>
     <div>
-      <h3><?= $organizer["title"]; ?></h3>
-      <ul>
+      <h3 class="event-organizer-title"><?= $organizer["title"]; ?></h3>
+      <ul class="event-organizer-tags">
         <?php foreach ($organizer["categories"] as $tag) { ?>
-          <li class="tag"><?= $tag; ?></li>
+          <li class="tag-solid variant-primary"><?= $tag; ?></li>
         <?php } ?>
       </ul>
 
     </div>
-    <div class="col-md-2 event-preview-date">
+  </div>
+  <div class="event-preview-details">
+    <div class="event-preview-info">
       <?php
       set_query_var('evt', $metadata);
       get_template_part('template-parts/content-schedule');
       ?>
     </div>
-    <div class="col-md-10 event-preview-info">
+    <div class="event-preview-content">
       <h2 class="event-preview-title">
         <a href="<?= esc_url(get_permalink()) ?>">
           <?= the_title() ?>
         </a>
       </h2>
-      <?= the_content() ?>
       <?php if (!empty($geo["address"])) { ?>
         <p class="event-preview-address"><?= $geo["address"] ?></p>
       <?php } ?>
+      <?= the_content() ?>
     </div>
+  </div>
 </article>

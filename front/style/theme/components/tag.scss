@@ -1,0 +1,25 @@
+[class^=tag-] {
+  align-items: center;
+  background: none;
+  border-width: 0;
+  display: inline-flex;
+  padding: 0;
+  position: relative;
+  text-decoration: none;
+  transition: color $anim-duration $anim-easing;
+}
+
+.tag-solid {
+  border-radius: rem( 20 );
+  transition: color $anim-duration $anim-easing, background-color $anim-duration $anim-easing;
+  height: rem( 40 );
+  // min-width: rem( 160 );
+  padding: 0 rem( 16 );
+  font-weight: 700;
+  justify-content: center;
+
+  &.variant-primary {
+    background-color: $yellow-dark;
+    color: white;
+  }
+}

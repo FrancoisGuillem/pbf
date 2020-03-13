@@ -170,5 +170,5 @@ function pbf_time($event)
     if (empty($event['start_time'][0])) return "";
     return __("[:en]At[:][:fr]À[:]") . " " . $event["start_time"][0];
   }
-  return $event["start_time"][0] . " / " . $event["end_time"][0];
+  return $event["start_time"][0] . "-" . $event["end_time"][0];
 }
