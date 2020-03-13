@@ -22,8 +22,8 @@
   }
 
   svg {
-    height: rem( 64 );
-    width: rem( 74 );
+    height: $header-logo-height;
+    width: $header-logo-width;
   }
 
   span {
@@ -44,5 +44,6 @@
     left: 50%;
     top: rem( 8 );
     margin-left: rem( 74 / -2 );
+    z-index: 1;
   }
 }

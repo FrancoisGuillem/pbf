@@ -24,7 +24,7 @@
     color: white;
 
     @include interact() {
-      background-color: $blue;
+      background-color: $blue-dark;
     }
   }
 }

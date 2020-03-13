@@ -38,22 +38,27 @@ function getUrlInTargetLanguage($targetLang)
             <?php get_template_part("inc/assets/logo.svg"); ?>
             <span><?php echo esc_attr(get_bloginfo('name')); ?></span>
           </a>
-          <button class="cta-icon site-navigation-opener" type="button" aria-controls="" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="cta-icon site-navigation-opener" type="button" aria-controls="main-navigation" aria-expanded="false" aria-label="Toggle navigation">
             <?php get_template_part("inc/assets/menu.svg"); ?>
           </button>
 
           <?php
+          $localized_page = get_localized_url();
+          $lang_switch = '<li><a href="' . $localized_page['path'] . '" hreflang="' . $localized_page['code'] . '" title="' . qtranxf_useCurrentLanguageIfNotFoundUseDefaultLanguage('[:fr]View the page in English[:en]Voir la page en français[:]') . '">' . $localized_page['code'] . '</a></li>';
+
           wp_nav_menu(array(
             'theme_location'  => 'primary',
             'container'       => 'nav',
-            'container_id'    => '',
+            'container_id'    => 'main-navigation',
             'container_class' => 'site-navigation',
             'menu_id'         => false,
             'menu_class'      => false,
             'depth'           => 3,
             'fallback_cb'     => 'wp_bootstrap_navwalker::fallback',
-            'walker'          => new wp_bootstrap_navwalker()
+            'walker'          => new wp_bootstrap_navwalker(),
+            'items_wrap' => '<ul>%3$s' . $lang_switch . '</ul>',
           ));
+
           ?>
 
         </div>
