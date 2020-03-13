@@ -22,8 +22,6 @@
   }
 }
 
-$fadeDuration: 0.5s;
-
 .site-navigation-opener {
   transition: color $anim-duration $anim-easing;
   padding: rem( 12 ) rem( 7 );
@@ -46,15 +44,17 @@ $fadeDuration: 0.5s;
   font-size: rem( 14 );
   font-weight: 600;
   line-height: ( 18 / 14 );
-  transition: height $fadeDuration $anim-easing;
+  transition: height $navFadeDuration $anim-easing, box-shadow $anim-duration $anim-easing;
+  box-shadow: 0 0 0 rgba( black, 0 );
 
-  &.t-play {
+  .t-play & {
     overflow: hidden;
     display: block;
   }
 
   &[aria-hidden=false] {
     display: block;
+    box-shadow: 4px 24px 24px rgba( 24, 35, 70, 0.24 );
   }
 
   .dropdown-menu {
@@ -121,7 +121,7 @@ $max-small: ($medium - em( 1 / 16 ));
     padding: 0  $gutter / 2;
 
     > ul {
-      animation: fadeIn $fadeDuration $anim-easing both;
+      animation: fadeIn $navFadeDuration $anim-easing both;
     }
 
     &[aria-hidden=true] {

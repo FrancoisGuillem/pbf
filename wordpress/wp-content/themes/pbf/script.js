@@ -25,91 +25,6 @@
     return Constructor;
   }
 
-  var Header = /*#__PURE__*/function () {
-    function Header() {
-      _classCallCheck(this, Header);
-
-      this.el = document.querySelector('.site-header');
-      this.refs = {
-        navigation: this.el.querySelector('nav'),
-        opener: this.el.querySelector('[aria-controls]')
-      };
-      this.data = {
-        opened: false
-      };
-      this.bind();
-    }
-
-    _createClass(Header, [{
-      key: "bind",
-      value: function bind() {
-        var _this = this;
-
-        this.refs.opener.addEventListener('click', function (event) {
-          _this.opened = !_this.opened;
-        });
-        this.refs.navigation.addEventListener('transitionend', function (event) {
-          if (event.target !== _this.refs.navigation) {
-            return;
-          }
-
-          _this.refs.navigation.removeAttribute('style');
-
-          _this.refs.navigation.classList.remove('t-play');
-
-          _this.refs.navigation.classList.remove('t-close');
-        });
-      }
-    }, {
-      key: "animate",
-      value: function animate() {
-        var _this2 = this;
-
-        this.refs.navigation.classList.add('t-play');
-        window.requestAnimationFrame(function () {
-          if (!_this2.opened) {
-            _this2.refs.navigation.style.height = "".concat(_this2.navigationHeight, "px");
-            window.requestAnimationFrame(function () {
-              _this2.refs.navigation.style.height = '0';
-            });
-            return;
-          }
-
-          _this2.refs.navigation.style.display = 'block';
-          _this2.navigationHeight = _this2.refs.navigation.clientHeight;
-          _this2.refs.navigation.style.height = '0';
-          window.requestAnimationFrame(function () {
-            _this2.refs.navigation.style.height = "".concat(_this2.navigationHeight, "px");
-          });
-        });
-      }
-    }, {
-      key: "navigationHeight",
-      get: function get() {
-        return this.data.navigationHeight;
-      },
-      set: function set(value) {
-        this.data.navigationHeight = value;
-      }
-    }, {
-      key: "opened",
-      get: function get() {
-        return this.data.opened;
-      },
-      set: function set(value) {
-        this.data.opened = value;
-        this.el.classList.toggle('opened');
-        this.refs.opener.setAttribute('aria-expanded', value);
-        this.refs.navigation.setAttribute('aria-hidden', !value);
-        this.animate();
-      }
-    }]);
-
-    return Header;
-  }();
-
-  new Header();
-
   var Ui = /*#__PURE__*/function () {
     function Ui() {
       var _this = this;
@@ -256,6 +171,105 @@
   }();
 
   var UI = new Ui();
+
+  var Header = /*#__PURE__*/function () {
+    function Header() {
+      _classCallCheck(this, Header);
+
+      this.el = document.querySelector('.site-header');
+      this.refs = {
+        navigation: this.el.querySelector('nav'),
+        opener: this.el.querySelector('[aria-controls]')
+      };
+      this.data = {
+        opened: false
+      };
+      this.bind();
+    }
+
+    _createClass(Header, [{
+      key: "bind",
+      value: function bind() {
+        var _this = this;
+
+        this.refs.opener.addEventListener('click', function (event) {
+          _this.opened = !_this.opened;
+        });
+        this.refs.navigation.addEventListener('transitionend', function (event) {
+          if (event.target !== _this.refs.navigation) {
+            return;
+          }
+
+          _this.refs.navigation.removeAttribute('style');
+
+          _this.el.classList.remove('t-play');
+        });
+        UI.observe('scrollY', function (position) {
+          _this.top = position <= 0;
+        });
+      }
+    }, {
+      key: "animate",
+      value: function animate() {
+        var _this2 = this;
+
+        this.el.classList.add('t-play');
+        window.requestAnimationFrame(function () {
+          if (!_this2.opened) {
+            _this2.refs.navigation.style.height = "".concat(_this2.navigationHeight, "px");
+            window.requestAnimationFrame(function () {
+              _this2.refs.navigation.style.height = '0';
+            });
+            return;
+          }
+
+          _this2.refs.navigation.style.display = 'block';
+          _this2.navigationHeight = _this2.refs.navigation.clientHeight;
+          _this2.refs.navigation.style.height = '0';
+          window.requestAnimationFrame(function () {
+            _this2.refs.navigation.style.height = "".concat(_this2.navigationHeight, "px");
+          });
+        });
+      }
+    }, {
+      key: "navigationHeight",
+      get: function get() {
+        return this.data.navigationHeight;
+      },
+      set: function set(value) {
+        this.data.navigationHeight = value;
+      }
+    }, {
+      key: "opened",
+      get: function get() {
+        return this.data.opened;
+      },
+      set: function set(value) {
+        this.data.opened = value;
+        this.el.classList.toggle('opened');
+        this.refs.opener.setAttribute('aria-expanded', value);
+        this.refs.navigation.setAttribute('aria-hidden', !value);
+        this.animate();
+      }
+    }, {
+      key: "top",
+      get: function get() {
+        return this.data.top;
+      },
+      set: function set(value) {
+        if (value === this.data.top) {
+          return;
+        }
+
+        this.data.top = value;
+        this.el.classList.toggle('sticky', !value);
+      }
+    }]);
+
+    return Header;
+  }();
+
+  new Header();
 
   var Slider = /*#__PURE__*/function () {
     function Slider(el) {

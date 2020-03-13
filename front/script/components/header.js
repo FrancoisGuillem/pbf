@@ -1,3 +1,5 @@
+import UI from '../ui';
+
 class Header {
   constructor() {
     this.el = document.querySelector('.site-header');
@@ -25,13 +27,16 @@ class Header {
       }
 
       this.refs.navigation.removeAttribute('style');
-      this.refs.navigation.classList.remove('t-play');
-      this.refs.navigation.classList.remove('t-close');
+      this.el.classList.remove('t-play');
+    });
+
+    UI.observe('scrollY', position => {
+      this.top = position <= 0;
     });
   }
 
   animate() {
-    this.refs.navigation.classList.add('t-play');
+    this.el.classList.add('t-play');
     window.requestAnimationFrame(() => {
       if (!this.opened) {
         this.refs.navigation.style.height = `${this.navigationHeight}px`;
@@ -72,6 +77,20 @@ class Header {
     this.refs.navigation.setAttribute('aria-hidden', !value);
 
     this.animate();
+  }
+
+  get top() {
+    return this.data.top;
+  }
+
+  set top(value) {
+    if (value === this.data.top) {
+      return;
+    }
+
+    this.data.top = value;
+
+    this.el.classList.toggle('sticky', !value);
   }
 }
 
