@@ -1,0 +1,76 @@
+$shadow-transition: box-shadow $anim-duration $anim-easing;
+
+.site-header {
+  background-color: white;
+  padding: rem( 8 ) 0;
+  position: sticky;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+  transition: box-shadow $anim-duration $anim-easing;
+  box-shadow: 0 0 0 rgba( black, 0 );
+
+  &.sticky {
+    box-shadow: $box-shadow;
+  }
+
+  .home & {
+    background-color: transparent;
+    transition: $shadow-transition, background-color $anim-duration $anim-easing;
+
+    &.t-play {
+      transition-delay: $navFadeDuration;
+    }
+
+    &.sticky,
+    &.opened {
+      background-color: white;
+    }
+
+    &.opened {
+      transition-duration: 0s;
+      transition-delay: 0s;
+    }
+  }
+
+  .container {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.site-header-logo {
+  color: $blue;
+  transition: color $anim-duration $anim-easing;
+
+  @include interact() {
+    color: $purple;
+  }
+
+  svg {
+    height: $header-logo-height;
+    width: $header-logo-width;
+  }
+
+  span {
+    @include hide();
+  }
+}
+
+
+@media ( min-width: $medium ) {
+  .site-header {
+    .container {
+      display: block;
+    }
+  }
+
+  .site-header-logo {
+    position: absolute;
+    left: 50%;
+    top: rem( 8 );
+    margin-left: rem( 74 / -2 );
+    z-index: 1;
+  }
+}

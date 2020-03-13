@@ -2,8 +2,12 @@
 /*
 Template Name: Homepage
 */
+add_filter('body_class', function ($classes) {
+  $classes['home'];
+  return $classes;
+});
+
 get_header(); ?>
-<h1>Coucou</h1>
 <!--
 <?php get_template_part("inc/assets/logo.svg"); ?> -->
 <section class="festival-intro container">

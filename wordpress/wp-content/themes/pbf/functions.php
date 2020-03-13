@@ -27,7 +27,7 @@ if (!function_exists('wp_bootstrap_starter_setup')) :
     load_theme_textdomain('pbf', get_template_directory() . '/languages');
 
     // Add default posts and comments RSS feed links to head.
-    add_theme_support('automatic-feed-links');
+    // add_theme_support('automatic-feed-links');
 
     /*
 	 * Let WordPress manage the document title.
@@ -216,11 +216,11 @@ function wp_bootstrap_starter_scripts()
         wp_enqueue_style( 'wp-bootstrap-starter-default', get_template_directory_uri() . '/inc/assets/css/presets/color-scheme/blue.css', false, '' );
     }*/
 
-  wp_enqueue_script('jquery');
+  // wp_enqueue_script('jquery');
   wp_enqueue_script('hoverIntent');
 
   if (!is_user_logged_in()) {
-    wp_deregister_script('jquery');
+    //   wp_deregister_script('jquery');
     wp_deregister_script('hoverIntent');
   }
 
@@ -280,6 +280,64 @@ function wp_bootstrap_starter_password_form()
 }
 add_filter('the_password_form', 'wp_bootstrap_starter_password_form');
 
+$lang = qtranxf_getLanguage();
+
+function filter_locales($entry)
+{
+  return $entry !== qtranxf_getLanguage();
+}
+
+function get_localized_url()
+{
+
+  global $wp;
+
+  $data = array();
+  $otherLang = array_values(array_filter(qtranxf_getSortedLanguages(), "filter_locales"))[0];
+
+  $data['code'] = $otherLang;
+  $data['name'] = qtranxf_getLanguageNameNative($otherLang);
+  $data['path'] = qtranxf_convertURL(home_url(add_query_arg(array(), $wp->request)), $otherLang);
+
+  return $data;
+}
+
+function filter_wp_nav_menu($nav_menu, $args)
+{
+  global $schemaURL;
+
+  //map out the nav_menu for parsing
+  $dom = new DOMDocument();
+  @$dom->loadHTML('<?xml encoding="utf-8" ?>' . $nav_menu);
+  $x = new DOMXPath($dom);
+
+  // //parse the <a> nodes
+  // foreach($x->query("//a") as $node) {
+  //     $node->setAttribute("itemprop","url");
+  // }
+
+  // //parse the <li> nodes
+  // foreach($x->query("//li") as $node) {
+  //     //$node->setAttribute("itemsomething","xxxx");
+  // }
+
+  // //parse the <ul> nodes
+  // foreach($x->query("//ul") as $node) {
+  //     //$node->setAttribute("itemsomething","xxxx");
+  // }
+
+  //parse the <nav> nodes
+  foreach ($x->query("//nav") as $node) {
+    $node->setAttribute("role", "navigation");
+    $node->setAttribute("aria-hidden", 'true');
+  }
+
+  //regenerate the html
+  $nav_menu = $node->c14n();
+
+  return $nav_menu;
+}
+add_filter('wp_nav_menu', 'filter_wp_nav_menu', 10, 2);
 
 
 /**

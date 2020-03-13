@@ -10,6 +10,12 @@
  * @package pbf
  */
 
+function getUrlInTargetLanguage($targetLang)
+{
+  global $qtranslate_slug;
+  return $qtranslate_slug->get_permalink($targetLang);
+}
+
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> data-input="mouse">
@@ -26,42 +32,37 @@
   <div id="page" class="site">
     <a class="skip-link screen-reader-text" href="#content"><?php esc_html_e('Skip to content', 'pbf'); ?></a>
     <?php if (!is_page_template('blank-page.php') && !is_page_template('blank-page-with-container.php')) : ?>
-      <header id="masthead" class="site-header navbar-static-top" role="banner">
-        <?php // Header du site disponible sur toutes les pages
-        ?>
+      <header class="site-header" role="banner">
         <div class="container">
-          <nav class="navbar navbar-expand-xl p-0">
-            <div class="navbar-brand">
-              <?php if (get_theme_mod('wp_bootstrap_starter_logo')) : ?>
-                <a href="<?php echo esc_url(home_url('/')); ?>">
-                  <img src="<?php echo esc_url(get_theme_mod('wp_bootstrap_starter_logo')); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>">
-                </a>
-              <?php else : ?>
-                <a class="site-title" href="<?php echo esc_url(home_url('/')); ?>"><?php esc_url(bloginfo('name')); ?></a>
-              <?php endif; ?>
+          <a class="site-header-logo" href="<?php echo esc_url(home_url('/')); ?>">
+            <?php get_template_part("inc/assets/logo.svg"); ?>
+            <span><?php echo esc_attr(get_bloginfo('name')); ?></span>
+          </a>
+          <button class="cta-icon site-navigation-opener" type="button" aria-controls="main-navigation" aria-expanded="false" aria-label="Toggle navigation">
+            <?php get_template_part("inc/assets/menu.svg"); ?>
+          </button>
 
-            </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="" aria-expanded="false" aria-label="Toggle navigation">
-              <?php get_template_part("inc/assets/menu.svg"); ?>
-            </button>
+          <?php
+          $localized_page = get_localized_url();
+          $lang_switch = '<li><a href="' . $localized_page['path'] . '" hreflang="' . $localized_page['code'] . '" title="' . qtranxf_useCurrentLanguageIfNotFoundUseDefaultLanguage('[:fr]View the page in English[:en]Voir la page en français[:]') . '">' . $localized_page['code'] . '</a></li>';
 
-            <?php
-            wp_nav_menu(array(
-              'theme_location'    => 'primary',
-              'container'       => 'div',
-              'container_id'    => 'main-nav',
-              'container_class' => 'collapse navbar-collapse justify-content-end',
-              'menu_id'         => false,
-              'menu_class'      => 'navbar-nav',
-              'depth'           => 3,
-              'fallback_cb'     => 'wp_bootstrap_navwalker::fallback',
-              'walker'          => new wp_bootstrap_navwalker()
-            ));
-            ?>
+          wp_nav_menu(array(
+            'theme_location'  => 'primary',
+            'container'       => 'nav',
+            'container_id'    => 'main-navigation',
+            'container_class' => 'site-navigation',
+            'menu_id'         => false,
+            'menu_class'      => false,
+            'depth'           => 3,
+            'fallback_cb'     => 'wp_bootstrap_navwalker::fallback',
+            'walker'          => new wp_bootstrap_navwalker(),
+            'items_wrap' => '<ul>%3$s' . $lang_switch . '</ul>',
+          ));
 
-          </nav>
+          ?>
+
         </div>
-      </header><!-- #masthead -->
+      </header>
       <?php if (is_front_page() && !get_theme_mod('header_banner_visibility')) : ?>
         <div id="page-sub-header" <?php if (has_header_image()) { ?>style="background-image: url('<?php header_image(); ?>');" <?php } ?>>
           <div class="container">

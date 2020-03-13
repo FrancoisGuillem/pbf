@@ -63,7 +63,7 @@ $card-spacing: $gutter / 2;
 
   .card {
     border-radius: 8px;
-    box-shadow: 4px 5px 24px rgba( 24, 35, 70, 0.24 );
+    box-shadow: $box-shadow;
     color: white;
     display: block;
     margin: $gutter 0;
