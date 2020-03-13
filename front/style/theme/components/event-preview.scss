@@ -1,12 +1,5 @@
-
-.event-preview {
-  &:nth-of-type(even) .event-preview-date {
-    background-color: $yellow;
-  }
-}
-
 .event-preview-date {
-  background: $yellow-dark;
+  background: $purple;
   color: white;
   text-align: center;
   padding: 15px 0;

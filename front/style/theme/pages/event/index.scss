@@ -1,93 +1,90 @@
-.archive-event {
-  .date-selector {
-    margin-bottom: rem( 60 );
-    margin-top: rem( 60 );
-    justify-content: center;
-    color: black;
+.dates-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: rem( 40 ) 0;
+  margin-left: 1px;
 
-    li {
-      width: (100% / 3);
-    }
+  li {
+    flex: 1 1 auto;
+    width: (100% / 3);
+    margin: -1px 0 0 -1px;
 
-    .date-selector-final {
-      width: calc( #{( 100% / 3 * 2 )} - 8px );
+    &:nth-last-child(-n+2) {
+      a {
+        border-color: $yellow-dark;
+        color: $yellow-dark;
 
-      li {
-        width: ( 100% / 2 );
+        @include interact() {
+          background-color: $yellow-dark;
+          color: white;
+        }
       }
     }
   }
 
-  .date-selector a {
-    border: solid 4px white;
-    height: 100px;
-    background-color: $yellow-light;
-    text-align: center;
-    font-size: rem( 14 );
-    // padding: 15px 0 0 0;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
+  a {
     align-items: center;
-    justify-content: center;
-    text-decoration: none;
-  }
-
-  .date-selector .selected a {
-    background-color: $yellow;
-    color: $blue;
-  }
-
-  .date-selector a:hover {
-    border-color: $yellow-dark;
-  }
-
-  .date-selector span {
-    font-size: rem( 18 );
-    font-weight: 700;
-  }
-
-
-  .date-selector-final {
-    background-color: $blue;
-    color: white;
-    font-size: 18px;
-    margin: 4px;
+    border-collapse: collapse;
+    border: 1px solid $purple;
+    color: $purple;
     display: flex;
-    align-items: stretch;
+    height: 100%;
+    padding: rem( 20 ) rem( 10 );
+    text-align: center;
+    text-decoration: none;
+    justify-content: center;
+    transition: color $anim-duration $anim-easing, background-color $anim-duration $anim-easing;
 
-    div {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
+    &[aria-current="true"] {
+      background-color: $purple;
+      color: white;
     }
 
-    ul {
-      display: flex;
-      flex-grow: 1;
+    @include interact() {
+      background-color: $purple;
+      color: white;
     }
 
-    p {
-      margin: 0;
-      text-align: center;
+    time::first-letter {
       text-transform: uppercase;
-      font-weight: 700;
+    }
+  }
+
+  span {
+    @extend %title-level3;
+  }
+}
+
+@media ( min-width: $medium ) {
+  .dates-list {
+    li {
+      width: (100% / 4);
+    }
+  }
+}
+
+@media ( min-width: $large ) {
+  .dates-list {
+    padding-left: $gutter;
+    padding-right: $gutter;
+    max-width: ( rem( 1110 ) + ($gutter * 2));
+    margin-left: auto;
+    margin-right: auto;
+
+    li {
+      width: (100% / 5);
     }
 
     a {
-      height: 100%;
-      border: 0;
-      background-color: $blue;
+      min-height: rem( 130 );
     }
   }
+}
 
-  .date-selector-final li + li {
-    border-left: solid 1px white;
-    font-size: 16px;
-    font-weight: normal;
-  }
-
-  .small-date-btn {
-    height: 58px;
+@media ( min-width: $xlarge ) {
+  .dates-list {
+    li {
+      width: (100% / 9);
+    }
   }
 }

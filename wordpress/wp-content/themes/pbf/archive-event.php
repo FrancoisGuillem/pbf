@@ -8,39 +8,42 @@
  * @package WP_Bootstrap_Starter
  */
 
-// $date = date( "Y-m-d" );
+add_filter('body_class', function ($classes) {
+  $classes['events'];
+  return $classes;
+});
 
-function pbf_get_formatted_date($date, $class = "")
+$dates = array(
+  "2020-04-25",
+  "2020-04-26",
+  "2020-04-27",
+  "2020-04-28",
+  "2020-04-29",
+  "2020-04-30",
+  "2020-05-01",
+  "2020-05-02",
+  "2020-05-03",
+);
+
+function pbf_get_formatted_date($date, $index)
 {
-  $class = $_GET['date'] === $date ? " class='selected'" : "";
+  $currentDate = date("Y-m-d");
+  $class = $_GET['date'] === $date || (!isset($_GET['date']) && $index === 0) ? " aria-current='true'" : "";
 
-  return "<li" . $class . "><a href='?date=" . $date . "'>" . pbf_dow($date) . "<span>" . pbf_day($date) . " " . pbf_month($date) . "</span></a></li>";
+  return "<li><a href='?date=" . $date . "'" . $class . "><time datetime='" . $date . "'>" . pbf_dow($date) . "<br/><span>" . pbf_day($date) . " " . pbf_month($date) . "</span></time></a></li>";
 }
 
 get_header(); ?>
 
 <div class="page-header">
-  <h1 class="page-title"><?= __("[:en]Schedule[:][:fr]Le Programme[:]") ?></h1>
+  <h1 class="page-title"><?= __("[:en]Schedule[:][:fr]Évènements[:]") ?></h1>
 </div>
+<ul class="dates-list">
+  <?php foreach ($dates as $index => $date) {
+    echo pbf_get_formatted_date($date, $index);
+  } ?>
+</ul>
 <div class="container events">
-  <ul class="date-selector">
-    <?= pbf_get_formatted_date("2020-04-25") ?>
-    <?= pbf_get_formatted_date("2020-04-26") ?>
-    <?= pbf_get_formatted_date("2020-04-27") ?>
-    <?= pbf_get_formatted_date("2020-04-28") ?>
-    <?= pbf_get_formatted_date("2020-04-29") ?>
-    <?= pbf_get_formatted_date("2020-04-30") ?>
-    <?= pbf_get_formatted_date("2020-05-01") ?>
-    <li class="date-selector-final">
-      <div>
-        <p>Ground Control</p>
-        <ul>
-          <?= pbf_get_formatted_date("2020-05-02") ?>
-          <?= pbf_get_formatted_date("2020-05-03") ?>
-        </ul>
-      </div>
-    </li>
-  </ul>
   <?php if (have_posts()) : ?>
   <?php
     /* Start the Loop */

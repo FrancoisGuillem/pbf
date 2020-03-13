@@ -42,6 +42,40 @@ function pbf_event_organizers($event_metadata)
   echo implode(", ", $links);
 }
 
+// Template function qui renvoie la liste des organisateurs d'un évènements
+function get_pbf_event_organizers($event_metadata)
+{
+  $organizers = array();
+
+  if (array_key_exists("organizers", $event_metadata) && !empty($event_metadata["organizers"][0])) {
+    $organizers_ids = explode(",", $event_metadata["organizers"][0]);
+
+    foreach ($organizers_ids as $org_id) {
+
+      $post = get_post($org_id);
+
+      $terms = get_the_terms($post, 'participant_cat');
+      $categories = array();
+
+      foreach ($terms as $term) {
+        $categories[] = $term->name;
+      }
+
+      $organizer = array(
+        "title" => get_the_title($post),
+        "id" => get_the_ID($post),
+        "permalink" => get_permalink($post),
+        "thumbnail" => get_the_post_thumbnail_url($post),
+        "categories" => $categories,
+      );
+
+      array_push($organizers, $organizer);
+    }
+  }
+
+  return $organizers[0];
+}
+
 function pbf_participant_events($participant_metadata)
 {
   if (array_key_exists("events", $participant_metadata) && !empty($participant_metadata["events"][0])) {
