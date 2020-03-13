@@ -29,6 +29,14 @@
 
   color: $blue;
   margin-top: rem( 16 );
+
+  a {
+    text-decoration: none;
+
+    @include interact() {
+      text-decoration: underline;
+    }
+  }
 }
 
 .event-organizer-tags {

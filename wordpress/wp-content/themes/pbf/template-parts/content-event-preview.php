@@ -30,7 +30,9 @@ if (empty($end)) {
       </span>
     <?php } ?>
     <div>
-      <h3 class="event-organizer-title"><?= $organizer["title"]; ?></h3>
+      <h3 class="event-organizer-title">
+        <a href="<?= $organizer["permalink"]; ?>"><?= $organizer["title"]; ?></a>
+      </h3>
       <ul class="event-organizer-tags">
         <?php foreach ($organizer["categories"] as $tag) { ?>
           <li class="tag-solid variant-primary"><?= $tag; ?></li>
