@@ -57,8 +57,10 @@ function get_pbf_event_organizers($event_metadata)
       $terms = get_the_terms($post, 'participant_cat');
       $categories = array();
 
-      foreach ($terms as $term) {
-        $categories[] = $term->name;
+      if (!empty($terms)) {
+        foreach ($terms as $term) {
+          $categories[] = $term->name;
+        }
       }
 
       $organizer = array(

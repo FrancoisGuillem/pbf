@@ -27,8 +27,8 @@ $dates = array(
 
 function pbf_get_formatted_date($date, $index)
 {
-  $currentDate = date("Y-m-d");
-  $class = $_GET['date'] === $date || (!isset($_GET['date']) && $index === 0) ? " aria-current='true'" : "";
+  $selected_date = pbf_get_selected_date();
+  $class = $selected_date === $date ? " aria-current='true'" : "";
 
   return "<li><a href='?date=" . $date . "'" . $class . "><time datetime='" . $date . "'>" . pbf_dow($date) . "<br/><span>" . pbf_day($date) . " " . pbf_month($date) . "</span></time></a></li>";
 }
