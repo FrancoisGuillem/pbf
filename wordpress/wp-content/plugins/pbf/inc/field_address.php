@@ -1,6 +1,6 @@
 <?php
 
-function field_address( $post ) {
+function field_address( $post) {
   $metadata = get_post_meta($post->ID);
   $long = $metadata["long"][0] ?? 2.3522218999999955;
   $lat = $metadata["lat"][0] ?? 48.856670471898596;
@@ -16,6 +16,11 @@ function field_address( $post ) {
   wp_nonce_field('save_pbf_post', 'field_address' );
   echo '';
   ?>
+  <style media="screen">
+    label.error {
+      color: red;
+    }
+  </style>
   <p>
     Adresse
     <input type="text" id="address" name="address" value="<?= $address ?>" placeholder="Adresse" style="width:100%;"/>

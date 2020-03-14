@@ -21,11 +21,11 @@ if( ! empty( $organizers) )
     echo '<li data-id="' . $c . '"><span class="erase">x</span> ' . get_the_title($c) . '</li>';
 echo '</ul>';
 echo "<p>Utiliser le champ ci-dessous pour rechercher et ajouter des organisateurs.</p>";
-echo '<label for="nom"></label><input id="title_organizer" type="text" placeholder="Rechercher un organisateur."/>';
+echo '<label for="nom"></label><input id="title_organizer" name="title_organizer" " type="text" placeholder="Rechercher un organisateur."/>';
 
 // mon champ caché, que je mettrai à jour et sauvegarderai
 // il contient déjà les valeurs de la meta
-echo'<input id="organizers" type="hidden" name="organizers" value="'. implode(',',$organizers) .'" />';
+echo'<input id="organizers" type="hidden" name="organizers" value="'. implode(',',$organizers) .'" required/>';
 
 //fin du widget
 echo '</div>';
