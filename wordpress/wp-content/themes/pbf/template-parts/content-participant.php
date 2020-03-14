@@ -35,8 +35,8 @@ $content =get_the_content();
 $metadata = get_post_meta(get_the_ID());
 
 $address = $metadata["address"][0];
-$facebook = $metadata["facebook"][0];
-$instagram = $metadata["instagram"][0];
+$facebook = $metadata["facebook"][0] ?? "";
+$instagram = $metadata["instagram"][0] ?? "";
 
 $terms = get_the_terms( $post->ID , 'participant_cat' );
 if (!empty($terms)) {
