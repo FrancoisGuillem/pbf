@@ -20,10 +20,8 @@ if (empty($end)) {
   $end = $start;
 }
 ?>
-
 <article class="event-preview">
   <div class="event-organizer">
-
     <?php if ($organizer["thumbnail"]) { ?>
       <span class="event-organizer-img">
         <img src="<?= $organizer["thumbnail"]; ?>" alt="" />

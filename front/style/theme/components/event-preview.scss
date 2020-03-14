@@ -134,32 +134,60 @@
   }
 }
 
-@media ( min-width: #{$medium} ) {
-  .event-preview-date {
-    padding: 30px 0;
-    position: relative;
-    flex: 0 0 100%;
+@media ( min-width: $medium ) {
+  .event-preview {
     display: flex;
-    text-align: center;
-    align-items: center;
-  }
 
-  .event-preview-date-container {
-    time {
-      display: block;
-
-      span {
-        display: block;
-      }
+    .event-preview-details {
+      flex: 1 0 auto;
+      width: (100% / 4 * 3);
+      max-width: rem( 730 );
     }
   }
 
-  .event-preview-day {
-    font-size: 48px;
+  .event-organizer {
+    flex: 1 0 auto;
+    width: (100% / 4);
+
+    div {
+      padding: 0 rem( 32 );
+    }
+
+    .event-organizer-img + div {
+      margin-right: auto;
+    }
   }
 
-  .event-preview-month,
-  .event-preview-daymonth {
-    font-size: 24px;
+  .event-organizer-img {
+    height: auto;
+    width: rem( 112 );
+
+    img {
+      height: auto;
+    }
+  }
+
+  .event-preview-details {
+    display: flex;
+  }
+
+  .event-preview-info {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: rem( 160 );
+  }
+
+  .event-preview-date {
+    margin: 0;
+  }
+
+  @media ( max-width: $max-large ) {
+    .event-organizer {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }

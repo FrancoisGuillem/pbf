@@ -1,0 +1,50 @@
+.event-filters {
+  legend,
+  input[type=checkbox] {
+    @include hide();
+  }
+
+  ul {
+    $spacing: rem( 8 );
+
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: $spacing * -1;
+    justify-content: center;
+    width: calc( 100% - #{$spacing} );
+
+    li {
+      margin: $spacing;
+    }
+  }
+
+  input[type=checkbox] {
+    &:checked {
+      + label {
+        color: white;
+        background-color: $yellow-dark;
+      }
+
+      @include interact() {
+        & + label {
+          background: $blue;
+          color: white;
+        }
+      }
+    }
+
+    @include interact() {
+      & + label {
+        border-color: $blue;
+        color: $blue;
+      }
+    }
+  }
+
+  label {
+    border: 1px solid $yellow-dark;
+    color: $yellow-dark;
+    transition: color $anim-duration $anim-easing, border-color $anim-duration $anim-easing, background-color $anim-duration $anim-easing;
+    cursor: pointer;
+  }
+}

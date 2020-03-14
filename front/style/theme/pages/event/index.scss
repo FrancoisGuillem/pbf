@@ -14,6 +14,11 @@
         border-color: $yellow-dark;
         color: $yellow-dark;
 
+        &[aria-current="true"] {
+          background-color: $yellow-dark;
+          color: white;
+        }
+
         @include interact() {
           background-color: $yellow-dark;
           color: white;
@@ -53,6 +58,13 @@
   span {
     @extend %title-level3;
   }
+}
+
+.event-empty {
+  @extend %title-level1;
+
+  text-align: center;
+  color: $blue;
 }
 
 @media ( min-width: $medium ) {
