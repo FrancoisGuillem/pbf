@@ -8,59 +8,72 @@
  * @package WP_Bootstrap_Starter
  */
 
-// $date = date( "Y-m-d" );
+add_filter('body_class', function ($classes) {
+  $classes['events'];
+  return $classes;
+});
 
-function pbf_get_formatted_date($date, $class = "")
+$dates = array(
+  "2020-04-25",
+  "2020-04-26",
+  "2020-04-27",
+  "2020-04-28",
+  "2020-04-29",
+  "2020-04-30",
+  "2020-05-01",
+  "2020-05-02",
+  "2020-05-03",
+);
+
+function pbf_get_formatted_date($date, $index)
 {
-  $class = $_GET['date'] === $date ? " class='selected'" : "";
+  $selected_date = pbf_get_selected_date();
+  $class = $selected_date === $date ? " aria-current='true'" : "";
 
-  return "<li" . $class . "><a href='?date=" . $date . "'>" . pbf_dow($date) . "<span>" . pbf_day($date) . " " . pbf_month($date) . "</span></a></li>";
+  return "<li><a href='?date=" . $date . "'" . $class . "><time datetime='" . $date . "'>" . pbf_dow($date) . "<br/><span>" . pbf_day($date) . " " . pbf_month($date) . "</span></time></a></li>";
 }
 
 get_header(); ?>
 
 <div class="page-header">
-  <h1 class="page-title"><?= __("[:en]Schedule[:][:fr]Le Programme[:]") ?></h1>
+  <h1 class="page-title"><?= __("[:en]Schedule[:][:fr]Évènements[:]") ?></h1>
 </div>
-<div class="container events">
-  <ul class="date-selector">
-    <?= pbf_get_formatted_date("2020-04-25") ?>
-    <?= pbf_get_formatted_date("2020-04-26") ?>
-    <?= pbf_get_formatted_date("2020-04-27") ?>
-    <?= pbf_get_formatted_date("2020-04-28") ?>
-    <?= pbf_get_formatted_date("2020-04-29") ?>
-    <?= pbf_get_formatted_date("2020-04-30") ?>
-    <?= pbf_get_formatted_date("2020-05-01") ?>
-    <li class="date-selector-final">
-      <div>
-        <p>Ground Control</p>
-        <ul>
-          <?= pbf_get_formatted_date("2020-05-02") ?>
-          <?= pbf_get_formatted_date("2020-05-03") ?>
-        </ul>
-      </div>
-    </li>
+<form class="event-filters container">
+  <legend>Categories</legend>
+  <ul>
+    <li><input type="checkbox" name="category" id="cat-association" value="association" checked><label for="cat-association" class="tag-solid">Association</label></li>
+    <li><input type="checkbox" name="category" id="cat-bar" value="bar" checked><label for="cat-bar" class="tag-solid">Bar</label></li>
+    <li><input type="checkbox" name="category" id="cat-brasserie" value="brasserie" checked><label for="cat-brasserie" class="tag-solid">Brasserie</label></li>
+    <li><input type="checkbox" name="category" id="cat-cave" value="cave"><label for="cat-cave" class="tag-solid">Cave</label></li>
   </ul>
-  <?php if (have_posts()) : ?>
-  <?php
-    /* Start the Loop */
-    while (have_posts()) : the_post();
+</form>
+<ul class="dates-list">
+  <?php foreach ($dates as $index => $date) {
+    echo pbf_get_formatted_date($date, $index);
+  } ?>
+</ul>
+<div class="container">
+  <?php if (have_posts()) { ?>
+    <ul>
+      <?php
+      /* Start the Loop */
+      while (have_posts()) : the_post();
 
-      /*
+        /*
       * Include the Post-Format-specific template for the content.
       * If you want to override this in a child theme, then include a file
       * called content-___.php (where ___ is the Post Format name) and that will be used instead.
       */
-      get_template_part('template-parts/content-event-preview');
+      ?><li><?php get_template_part('template-parts/content-event-preview'); ?></li>
+      <?php
+      endwhile;
 
-    endwhile;
-
-    the_posts_navigation();
-
-  else :
-    _e("[:en]No event for this date for now[:][:fr]Pas d'évènement pour cette date[:]");
-
-  endif; ?>
+      the_posts_navigation();
+      ?>
+    </ul>
+  <?php } else { ?>
+    <p class="event-empty"><?= _e("[:en]No event for this date for now[:][:fr]Pas d'évènement pour cette date[:]") ?></p>
+  <?php } ?>
 </div>
 
 <?php

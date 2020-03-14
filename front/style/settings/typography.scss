@@ -1,6 +1,5 @@
 $font-stack-body: "Open Sans", "Segoe UI", "Tahoma", sans-serif;
-// $font-stack-title: "Roboto", "Franklin Gothic Medium", "Tahoma", sans-serif;
-$font-stack-title: "Roboto Slab", serif;
+$font-stack-title: "Roboto Slab", "Source Sans Pro", "Calibri", "Droid Sans",  "Avenir",  helvetica, arial, sans-serif;
 
 $tt1: 52, 64, 0.2;
 $tt2: 44, 54;
@@ -12,7 +11,7 @@ $tt3: 26, 32, 0.2;
   font-weight: 700;
 }
 
-%title-leve1 {
+%title-level1 {
   @extend %title-style;
 
   @include title-level($tt2...);
@@ -22,7 +21,7 @@ $tt3: 26, 32, 0.2;
   }
 }
 
-%title-leve2 {
+%title-level2 {
   @extend %title-style;
 
   @include title-level($tt3...);
@@ -32,12 +31,12 @@ $tt3: 26, 32, 0.2;
   }
 }
 
-%title-leve3 {
+%title-level3 {
   @extend %title-style;
 
-  @include title-level(18, 24);
+  // @include title-level(18, 24);
 
-  @media ( min-width: $xsmall ) {
-    @include title-level($tt3...);
-  }
+  // @media ( min-width: $xsmall ) {
+  @include title-level($tt3...);
+  // }
 }

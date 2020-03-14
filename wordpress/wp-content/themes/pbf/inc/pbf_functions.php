@@ -42,6 +42,56 @@ function pbf_event_organizers($event_metadata)
   echo implode(", ", $links);
 }
 
+// Template function qui renvoie la liste des organisateurs d'un évènements
+function get_pbf_event_organizers($event_metadata)
+{
+  $organizers = array();
+
+  if (array_key_exists("organizers", $event_metadata) && !empty($event_metadata["organizers"][0])) {
+    $organizers_ids = explode(",", $event_metadata["organizers"][0]);
+
+    foreach ($organizers_ids as $org_id) {
+
+      $post = get_post($org_id);
+
+      $terms = get_the_terms($post, 'participant_cat');
+      $categories = array();
+
+      if (!empty($terms)) {
+        foreach ($terms as $term) {
+          $categories[] = $term->name;
+        }
+      }
+
+      $organizer = array(
+        "title" => get_the_title($post),
+        "id" => get_the_ID($post),
+        "permalink" => get_permalink($post),
+        "thumbnail" => get_the_post_thumbnail_url($post),
+        "categories" => $categories,
+      );
+
+      array_push($organizers, $organizer);
+    }
+  }
+
+  return $organizers[0];
+}
+
+function pbf_participant_events($participant_metadata)
+{
+  if (array_key_exists("events", $participant_metadata) && !empty($participant_metadata["events"][0])) {
+    $events = explode(",", $participant_metadata["events"][0]);
+    $links = array();
+    foreach ($events as $evt_id) {
+      $post = get_post($evt_id);
+      $link = get_permalink($post);
+      array_push($links, '<a href="' . $link . '">' . get_the_title($post) . '</a>');
+    }
+  }
+  echo implode("<br/>", $links);
+}
+
 function get_pbf_participant_events($participant_metadata)
 {
   $events = array();
@@ -119,5 +169,5 @@ function pbf_time($event)
     if (empty($event['start_time'][0])) return "";
     return __("[:en]At[:][:fr]À[:]") . " " . $event["start_time"][0];
   }
-  return $event["start_time"][0] . " / " . $event["end_time"][0];
+  return $event["start_time"][0] . "-" . $event["end_time"][0];
 }

@@ -110,8 +110,6 @@
   }
 }
 
-$max-small: ($medium - em( 1 / 16 ));
-
 @media ( max-width: $max-small ) {
   .site-navigation {
     position: absolute;

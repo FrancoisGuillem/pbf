@@ -7,7 +7,7 @@ $card-spacing: $gutter / 2;
   text-align: center;
 
   .festival-title {
-    @extend %title-leve2;
+    @extend %title-level2;
 
     @include title-separator( center, $purple);
 
@@ -105,7 +105,7 @@ $card-spacing: $gutter / 2;
     }
 
     .label {
-      @extend %title-leve3;
+      @extend %title-level3;
 
       position: absolute;
       width: 100%;
