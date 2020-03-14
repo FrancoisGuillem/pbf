@@ -39,7 +39,7 @@ while (have_posts()) : the_post();
     "title" => get_the_title(),
     "id" => get_the_ID(),
     "permalink" => get_permalink(),
-    "thumbnail" => get_the_post_thumbnail()
+    "thumbnail" => get_the_post_thumbnail_url()
   );
   array_push($categories[$category], $participant);
 endwhile;
@@ -53,10 +53,20 @@ endwhile;
 <?php get_header(); ?>
 
 <div class="page-header">
-  <h1 class="page-title"><?= _e("[:fr]Les Participants du[:en]The Participants of the[:] Paris Beer Festival", "pbf") ?></h1>
+  <h1 class="page-title"><?= _e("[:fr]Participants[:en]Participants[:]") ?></h1>
 </div>
 
-<div class="container participants">
+<div class="container">
+  <form class="category-filters">
+    <legend>Categories</legend>
+    <ul>
+      <li><input type="checkbox" name="category" id="cat-association" value="association" checked><label for="cat-association" class="tag-solid">Association</label></li>
+      <li><input type="checkbox" name="category" id="cat-bar" value="bar" checked><label for="cat-bar" class="tag-solid">Bar</label></li>
+      <li><input type="checkbox" name="category" id="cat-brasserie" value="brasserie" checked><label for="cat-brasserie" class="tag-solid">Brasserie</label></li>
+      <li><input type="checkbox" name="category" id="cat-cave" value="cave"><label for="cat-cave" class="tag-solid">Cave</label></li>
+    </ul>
+  </form>
+
   <?php
   /* ---------------------------------------------------------------------
   * Boucle sur les catégories de participants
@@ -64,18 +74,28 @@ endwhile;
   */
   foreach ($categories as $category => $participants) :
   ?>
-    <h2 class='category-title'><?= $category; ?></h2>
-  <?php
-    /*
+    <section class="participant-category">
+      <h2 class='participant-category-title'><?= $category; ?></h2>
+      <ul>
+        <?php
+        /*
     * Boucle sur les participants d'une catégorie
     * Ne pas modifier les lignes ci-dessous. Modifier plutôt le Template
     * template-parts/content-participant-preview.php
     */
-    foreach ($participants as $participant) {
-      // On rend disponible la variable $participant pour le template
-      set_query_var('participant', $participant);
-      get_template_part('template-parts/content-participant-preview');
-    }
+        foreach ($participants as $participant) { ?>
+          <li>
+            <?php
+            // On rend disponible la variable $participant pour le template
+            set_query_var('participant', $participant);
+            get_template_part('template-parts/content-participant-preview');
+            ?>
+          </li>
+        <?php
+        } ?>
+      </ul>
+    </section>
+  <?php
 
   endforeach;
   /* ---------------------------------------------------------------------

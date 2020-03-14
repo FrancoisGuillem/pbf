@@ -16,8 +16,9 @@
 @import "./theme/components/container";
 @import "./theme/components/header";
 @import "./theme/components/comments";
-@import "./theme/components/event-filters";
+@import "./theme/components/category-filters";
 @import "./theme/components/event-preview";
+@import "./theme/components/participant-category";
 @import "./theme/components/footer";
 @import "./theme/components/media/captions";
 @import "./theme/components/media/galleries";
@@ -29,6 +30,7 @@
 @import "./theme/components/widgets";
 @import "./theme/components/festival-intro";
 @import "./theme/pages/event";
+@import "./theme/pages/participants";
 @import "./theme/plugins/visual-composer";
 @import "./theme/plugins/woocommerce";
 @import "./theme/custom";

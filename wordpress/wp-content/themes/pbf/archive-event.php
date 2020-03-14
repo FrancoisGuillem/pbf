@@ -38,7 +38,7 @@ get_header(); ?>
 <div class="page-header">
   <h1 class="page-title"><?= __("[:en]Schedule[:][:fr]Évènements[:]") ?></h1>
 </div>
-<form class="event-filters container">
+<form class="category-filters container">
   <legend>Categories</legend>
   <ul>
     <li><input type="checkbox" name="category" id="cat-association" value="association" checked><label for="cat-association" class="tag-solid">Association</label></li>
