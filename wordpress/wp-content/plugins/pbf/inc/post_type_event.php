@@ -171,3 +171,24 @@ function pbf_get_event_address($event_metadata) {
 
   return array();
 }
+
+/* Récupère les noms et liens des organisateurs.
+ *
+ * @param $event_metadata
+ */
+function pbf_get_event_organizers($event_metadata) {
+  $organizers = [];
+  $organizer_ids = explode(",", $event_metadata["organizers"][0]);
+
+  foreach ($organizer_ids as $org_id) {
+    $post = get_post($org_id);
+    $organizer = array(
+      "id" => $org_id,
+      "title" => get_the_title($post),
+      "link" => get_permalink($post)
+    );
+    array_push($organizers, $organizer);
+  }
+
+  return $organizers;
+}

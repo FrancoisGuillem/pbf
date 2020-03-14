@@ -132,11 +132,26 @@ $events = get_pbf_participant_events($metadata);
 				<a href="<?= $evt["link"]?>">
 					<h1><?= $evt["title"] ?></h1>
 				</a>
+				<div class="coorganisers">
+					<?php // Affichage des coorganisateurs de la soirée
+						$organizers = pbf_get_event_organizers($evt["metadata"]);
+						$count = 0;
+					  foreach ($organizers as $coorganizer) :
+							if ($coorganizer["id"] != get_the_ID() && $count == 0):
+								_e("[:fr]Avec[:en]With[:] ");
+								$count = $count + 1;
+					?>
+					<a href="<?= $coorganizer["link"] ?>"><?= $coorganizer["title"] ?></a>
+					<?php
+							endif;
+						endforeach;
+					?>
+				</div>
 				<div class="">
 					<?= $evt["content"] ?>
 				</div>
 				<div class="event-preview-address">
-					<?= $evt["address"]["address"] ?>
+					<?= $evt["geo"]["address"] ?>
 				</div>
 			</div>
 		</div>
