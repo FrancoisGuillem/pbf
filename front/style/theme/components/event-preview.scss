@@ -27,7 +27,6 @@
 .event-organizer-title {
   @extend %title-level3;
 
-  color: $blue;
   margin-top: rem( 16 );
 
   a {
@@ -113,7 +112,6 @@
   @extend %title-level3;
 
   margin-bottom: rem( 8 );
-  color: $blue;
 
   a {
     text-decoration: none;

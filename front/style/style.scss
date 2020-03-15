@@ -13,6 +13,7 @@
 @import "./theme/infinite-scroll";
 @import "./theme/components/cta";
 @import "./theme/components/tag";
+@import "./theme/components/back-link-page";
 @import "./theme/components/container";
 @import "./theme/components/header";
 @import "./theme/components/comments";
@@ -27,10 +28,13 @@
 @import "./theme/components/navigation";
 @import "./theme/components/page-header";
 @import "./theme/components/posts-pages";
+@import "./theme/components/participant-description";
+@import "./theme/components/participant-events";
 @import "./theme/components/widgets";
 @import "./theme/components/festival-intro";
 @import "./theme/pages/event";
 @import "./theme/pages/participants";
+@import "./theme/pages/participant";
 @import "./theme/plugins/visual-composer";
 @import "./theme/plugins/woocommerce";
 @import "./theme/custom";

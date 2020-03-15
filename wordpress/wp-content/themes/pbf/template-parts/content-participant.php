@@ -30,8 +30,7 @@
  * On récupère tous les participants et on les organise par catégorie.
  */
 $title = get_the_title();
-$thumbnail = get_the_post_thumbnail();
-$content = get_the_content();
+$thumbnail = get_the_post_thumbnail_url();
 
 $metadata = get_post_meta(get_the_ID());
 
@@ -57,36 +56,36 @@ $events = get_pbf_participant_events($metadata);
   <h1 class="page-title"><?= $title ?></h1>
 </div>
 
+<p class="back-link-page container">
+  <a href="<?= qtranxf_get_url_for_language('/participant', qtranxf_getLanguage()) ?>">
+    <?php get_template_part("inc/assets/arrow-left.svg"); ?>
+    <span><?= __("[:en]Participants list[:][:fr]Liste des participants[:]") ?></span>
+  </a>
+</p>
 <div class="container">
-  <div class="col-md-4">
-    <div class="participant-description">
-      <div class="post-thumbnail">
-        <?= $thumbnail; ?>
-      </div>
-      <h1><?= $title ?></h1>
-      <div class="participant-cat">
-        <?= $category; ?>
-      </div>
-      <div class="custom-separator">
-        <img src="<?php echo get_template_directory_uri(); ?>/inc/assets/img/funfact_wave.png">
-      </div>
-      <div class='address'><?= $address; ?></div>
-      <?= $content; ?>
-      <div class="social">
-        <?php
-        if (!empty($facebook)) {
-          echo "<a href='" . $facebook . "'><i class='fab fa-facebook'></i></a>";
-        }
-        if (!empty($instagram)) {
-          echo "<a href='" . $instagram . "'><i class='fab fa-instagram'></i></a>";
-        }
-        ?>
-      </div>
-      <?php edit_post_link(); ?>
+  <div class="participant-description">
+    <span class="participant-img">
+      <img src="<?= $thumbnail; ?>" alt="" />
+    </span>
+    <p class="participant-title"><?= $title ?></p>
+    <p class="tag-solid variant-primary"><?= $category; ?></p>
+    <div class="content">
+      <?= the_content() ?>
     </div>
+    <ul class="participant-links">
+      <?php
+      if (!empty($facebook)) { ?>
+        <li><a href="<?= $facebook ?>"><?php get_template_part("inc/assets/facebook.svg"); ?><span>Facebook</span></a></li>
+      <?php }
+      if (!empty($instagram)) { ?>
+        <li><a href="<?= $instagram ?>"><?php get_template_part("inc/assets/instagram.svg"); ?><span>Instagram</span></a></li>
+      <?php }
+      ?>
+    </ul>
   </div>
 
-  <div class="col-md-8">
+  <section class="participant-events">
+    <h2 class="participant-events-title"><?= __("[:en]Schedule[:][:fr]Évènements[:]") ?></h2>
     <ul>
       <?php
       /*
@@ -109,6 +108,7 @@ $events = get_pbf_participant_events($metadata);
                   <?= $evt["title"] ?>
                 </a>
               </h2>
+              <p class='event-preview-address'><?= $address; ?></p>
               <?php if (!empty($evt["address"])) { ?>
                 <p class="event-preview-address"><?= $evt["address"]["address"] ?></p>
               <?php } ?>
@@ -124,6 +124,6 @@ $events = get_pbf_participant_events($metadata);
 		 */
       ?>
     </ul>
-  </div>
+  </section>
 
 </div>

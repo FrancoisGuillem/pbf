@@ -7,7 +7,6 @@ $participants-spacing: rem( 30 / 2 );
     box-shadow: $box-shadow-small;
     border-right: 8px;
     padding: rem( 32 ) rem( 30 );
-    color: $blue;
     text-align: center;
 
     a {
@@ -58,7 +57,6 @@ $participants-spacing: rem( 30 / 2 );
 
   @include title-separator(center, $purple);
 
-  color: $blue;
   text-align: center;
 }
 

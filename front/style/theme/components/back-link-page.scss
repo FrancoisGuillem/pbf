@@ -1,0 +1,25 @@
+.back-link-page {
+  $icon-size: rem( 24 );
+
+  font-weight: bold;
+
+  a {
+    align-items: center;
+    display: inline-flex;
+    text-decoration: none;
+    vertical-align: top;
+
+    @include interact() {
+      svg {
+        transform: translateX( rem( -4 ) );
+      }
+    }
+  }
+
+  svg {
+    height: $icon-size;
+    margin-left: rem( -4 );
+    transition: transform $anim-duration $anim-easing;
+    width: $icon-size;
+  }
+}
