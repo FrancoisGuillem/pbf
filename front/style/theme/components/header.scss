@@ -41,7 +41,6 @@ $shadow-transition: box-shadow $anim-duration $anim-easing;
 }
 
 .site-header-logo {
-  color: $blue;
   transition: color $anim-duration $anim-easing;
 
   @include interact() {

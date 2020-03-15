@@ -1,0 +1,33 @@
+.single-participant {
+  main .container {
+    display: flex;
+    align-items: stretch;
+  }
+
+  .back-link-page {
+    margin-bottom: rem( 32 );
+  }
+
+  @media ( max-width: $max-medium ) {
+    main .container {
+      flex-wrap: wrap;
+    }
+
+    .participant-description {
+      order: 2;
+    }
+  }
+
+  @media ( min-width: $large ) {
+    .participant-description {
+      width: (100%/3);
+      flex: 1 0 auto;
+      max-width: rem( 350 );
+      margin-bottom: rem( 40 );
+    }
+
+    .participant-events {
+      margin-left: $gutter;
+    }
+  }
+}
