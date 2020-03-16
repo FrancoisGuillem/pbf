@@ -27,6 +27,10 @@ if (empty($end)) {
     set_query_var('evt', $metadata);
     get_template_part('template-parts/content-schedule');
     ?>
+    <?php if ($facebook) { ?>
+      <a href=" <?= $facebook ?>" class="event-detail-link"><?php get_template_part("inc/assets/facebook.svg"); ?><span><?= __("[:en]View the event on Facebook[:][:fr]Voir l'évènement sur Facebook[:]") ?></span></a>
+
+    <?php } ?>
   </div>
   <div class="event-detail-content">
     <h2 class="event-detail-title">
