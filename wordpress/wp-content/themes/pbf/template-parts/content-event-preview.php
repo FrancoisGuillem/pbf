@@ -14,6 +14,7 @@ $start = $metadata["start_date"][0] ?? "";
 $end = $metadata["end_date"][0] ?? "";
 $organizers = get_pbf_event_organizers($metadata);
 $tags = array();
+$facebook = $metadata["facebook"][0] ?? "";
 // print_r($organizers);
 
 if (empty($end)) {

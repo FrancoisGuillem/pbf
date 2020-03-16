@@ -12,6 +12,7 @@
  * $address : adresse du participant
  * $facebook : lien facebook (chaine vide si pas renseigné)
  * $instagram : lien instagram (chaine vide si pas renseigné)
+ * $website : lien du site web du participant (chaine vide si non renseigné)
  *
  * Variables boucle événements
  * ---------------------------
@@ -19,6 +20,7 @@
  * $evt["link"] : lien de l'évènement
  * $evt["content"]: description de l'événement
  * $evt["geo"]["address"]: addresse de l'évènement
+ * $evt["facebook"]: lien facebook de l'événement
  *
  * @package pbf
  */
@@ -37,6 +39,7 @@ $metadata = get_post_meta(get_the_ID());
 $address = $metadata["address"][0];
 $facebook = $metadata["facebook"][0] ?? "";
 $instagram = $metadata["instagram"][0] ?? "";
+$website = $metadata["website"][0] ?? "";
 
 $terms = get_the_terms($post->ID, 'participant_cat');
 if (!empty($terms)) {
@@ -123,11 +126,6 @@ $events = get_pbf_participant_events($metadata);
                       </a>
                     </li>
                   <?php
-                    foreach ($organizer["categories"] as $tag) {
-                      if (!in_array($tags, $tag)) {
-                        $tags[] = $tag;
-                      }
-                    }
                   } ?>
                 </ul>
               </footer>
