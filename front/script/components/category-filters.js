@@ -1,7 +1,7 @@
 class Filter {
   constructor(el) {
     this.el = el;
-    console.log(`#${el.getAttribute('data-controls')} [data-category]`);
+
     this.refs = {
       list: Array.from(
         document.querySelectorAll(

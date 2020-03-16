@@ -118,6 +118,7 @@ function get_pbf_participant_events($participant_metadata)
         "end_time" => $metadata["end_time"][0],
         "metadata" => $metadata,
         "organizers" => get_pbf_event_organizers($metadata),
+        "facebook" => $metadata["facebook"][0] ?? ""
       );
       array_push($events, $new_event);
     }

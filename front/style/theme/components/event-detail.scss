@@ -84,6 +84,7 @@ $organizers-spacing: rem( 16 );
   background: $purple;
   color: white;
   display: flex;
+  align-items: center;
   padding: rem( 16 ) rem( 30 );
 }
 
@@ -93,6 +94,37 @@ $organizers-spacing: rem( 16 );
 
   span {
     display: block;
+  }
+}
+
+.event-detail-link {
+  $icon-size: rem( 24 );
+
+  flex-grow: 0;
+  padding: rem( 10 );
+  border-radius: 50%;
+  background-color: white;
+  color: $purple;
+  transition: background-color $anim-duration $anim-easing, transform $anim-duration $anim-easing;
+
+  @include interact() {
+    background-color: $blue;
+    color: white;
+  }
+
+  [data-input=keyboard] &:focus,
+  [data-input=touch] &:active {
+    transform: scale( $anim-scale );
+  }
+
+  svg {
+    height: $icon-size;
+    width: $icon-size;
+    display: block;
+  }
+
+  span {
+    @include hide();
   }
 }
 
@@ -183,15 +215,19 @@ $organizers-spacing: rem( 16 );
   }
 
   .event-detail-info {
-    flex-shrink: 0;
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
     justify-content: center;
     width: rem( 160 );
   }
 
   .event-detail-date {
     margin: 0;
+  }
+
+  .event-detail-link {
+    margin-top: rem( 32 );
   }
 
   @media ( max-width: $max-large ) {

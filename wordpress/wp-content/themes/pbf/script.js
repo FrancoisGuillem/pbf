@@ -377,7 +377,6 @@
       _classCallCheck(this, Filter);
 
       this.el = el;
-      console.log("#".concat(el.getAttribute('data-controls'), " [data-category]"));
       this.refs = {
         list: Array.from(document.querySelectorAll("#".concat(el.getAttribute('data-controls'), " [data-category]")))
       };
