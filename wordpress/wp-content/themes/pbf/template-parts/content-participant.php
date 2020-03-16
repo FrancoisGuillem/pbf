@@ -95,24 +95,42 @@ $events = get_pbf_participant_events($metadata);
     */
       foreach ($events as $evt) {
       ?><li>
-          <article class="event-preview-details">
-            <div class="event-preview-info">
+          <article class="event-detail">
+            <div class="event-detail-info">
               <?php
               set_query_var('evt', $evt["metadata"]);
               get_template_part('template-parts/content-schedule');
               ?>
             </div>
-            <div class="event-preview-content">
-              <h2 class="event-preview-title">
-                <a href="<?= $evt["link"] ?>">
-                  <?= $evt["title"] ?>
-                </a>
-              </h2>
-              <p class='event-preview-address'><?= $address; ?></p>
+            <div class="event-detail-content">
+              <h2 class="event-detail-title"><?= $evt["title"] ?></h2>
+              <p class='event-detail-address'><?= $address; ?></p>
               <?php if (!empty($evt["address"])) { ?>
-                <p class="event-preview-address"><?= $evt["address"]["address"] ?></p>
+                <p class="event-detail-address"><?= $evt["address"]["address"] ?></p>
               <?php } ?>
               <?= $evt["content"] ?>
+              <footer class="event-detail-footer">
+                <ul class="event-detail-organizers">
+                  <?php foreach ($evt["organizers"] as $organizer) { ?>
+                    <li>
+                      <a class="event-detail-organizer" href="<?= $organizer["permalink"]; ?>">
+                        <?php if ($organizer["thumbnail"]) { ?>
+                          <span class="event-organizer-img">
+                            <img src="<?= $organizer["thumbnail"] ?>" alt="" />
+                          </span>
+                        <?php } ?>
+                        <span class="event-organizer-title"><?= $organizer["title"] ?></span>
+                      </a>
+                    </li>
+                  <?php
+                    foreach ($organizer["categories"] as $tag) {
+                      if (!in_array($tags, $tag)) {
+                        $tags[] = $tag;
+                      }
+                    }
+                  } ?>
+                </ul>
+              </footer>
             </div>
           </article>
         </li>

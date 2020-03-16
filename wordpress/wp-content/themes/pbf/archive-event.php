@@ -38,7 +38,7 @@ get_header(); ?>
 <div class="page-header">
   <h1 class="page-title"><?= __("[:en]Schedule[:][:fr]Évènements[:]") ?></h1>
 </div>
-<form class="category-filters container">
+<!-- <form class="category-filters container">
   <legend>Categories</legend>
   <ul>
     <li><input type="checkbox" name="category" id="cat-association" value="association" checked><label for="cat-association" class="tag-solid">Association</label></li>
@@ -46,7 +46,7 @@ get_header(); ?>
     <li><input type="checkbox" name="category" id="cat-brasserie" value="brasserie" checked><label for="cat-brasserie" class="tag-solid">Brasserie</label></li>
     <li><input type="checkbox" name="category" id="cat-cave" value="cave"><label for="cat-cave" class="tag-solid">Cave</label></li>
   </ul>
-</form>
+</form> -->
 <ul class="dates-list">
   <?php foreach ($dates as $index => $date) {
     echo pbf_get_formatted_date($date, $index);

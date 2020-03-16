@@ -64,6 +64,7 @@ function get_pbf_event_organizers($event_metadata)
       }
 
       $organizer = array(
+        "slug" => get_post_field('post_name', $post),
         "title" => get_the_title($post),
         "id" => get_the_ID($post),
         "permalink" => get_permalink($post),
@@ -75,7 +76,7 @@ function get_pbf_event_organizers($event_metadata)
     }
   }
 
-  return $organizers[0];
+  return $organizers;
 }
 
 function pbf_participant_events($participant_metadata)
@@ -115,12 +116,13 @@ function get_pbf_participant_events($participant_metadata)
         "start_time" => $metadata["start_time"][0],
         "end_date" => $metadata["end_date"][0],
         "end_time" => $metadata["end_time"][0],
-        "metadata" => $metadata
+        "metadata" => $metadata,
+        "organizers" => get_pbf_event_organizers($metadata),
       );
       array_push($events, $new_event);
     }
   }
-  usort($events, function($a, $b) {
+  usort($events, function ($a, $b) {
     return strcmp($a["start_date"], $b["start_date"]);
   });
   return $events;
