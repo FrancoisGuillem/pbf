@@ -28,11 +28,15 @@ while (have_posts()) : the_post();
   if (empty($terms)) {
     $category = "No Category";
   } else {
-    $category = $terms[0]->name;
+    $category = array(
+      "name" => $terms[0]->name,
+      "slug" => $terms[0]->slug,
+    );
   }
 
-  if (!array_key_exists($category, $categories)) {
-    $categories[$category] = array();
+  if (!array_key_exists($category["slug"], $categories)) {
+    $categories[$category["slug"]] = $category;
+    $categories[$category["slug"]]["participants"] = array();
   }
 
   $participant = array(
@@ -41,7 +45,7 @@ while (have_posts()) : the_post();
     "permalink" => get_permalink(),
     "thumbnail" => get_the_post_thumbnail_url()
   );
-  array_push($categories[$category], $participant);
+  array_push($categories[$category["slug"]]["participants"], $participant);
 endwhile;
 
 /* ----------------------------------------------------------------------------
@@ -57,54 +61,55 @@ endwhile;
 </div>
 
 <div class="container">
-  <form class="category-filters">
+  <form class="category-filters" data-controls="categories-listing">
     <legend>Categories</legend>
     <ul>
-      <li><input type="checkbox" name="category" id="cat-association" value="association" checked><label for="cat-association" class="tag-solid">Association</label></li>
-      <li><input type="checkbox" name="category" id="cat-bar" value="bar" checked><label for="cat-bar" class="tag-solid">Bar</label></li>
-      <li><input type="checkbox" name="category" id="cat-brasserie" value="brasserie" checked><label for="cat-brasserie" class="tag-solid">Brasserie</label></li>
-      <li><input type="checkbox" name="category" id="cat-cave" value="cave"><label for="cat-cave" class="tag-solid">Cave</label></li>
+      <?php foreach ($categories as $category) { ?>
+        <li><input type="checkbox" name="category" id="cat-<?= $category["slug"]; ?>" value="<?= $category["slug"]; ?>" checked><label for="cat-<?= $category["slug"]; ?>" class="tag-solid"><?= $category["name"]; ?></label></li>
+      <?php } ?>
     </ul>
   </form>
-
-  <?php
-  /* ---------------------------------------------------------------------
+  <div id="categories-listing">
+    <?php
+    /* ---------------------------------------------------------------------
   * Boucle sur les catégories de participants
   * ---------------------------------------------------------------------
   */
-  foreach ($categories as $category => $participants) :
-  ?>
-    <section class="participant-category">
-      <h2 class='participant-category-title'><?= $category; ?></h2>
-      <ul>
-        <?php
-        /*
+    foreach ($categories as $category) :
+    ?>
+      <section class="participant-category" data-category="<?= $category["slug"]; ?>">
+        <h2 class='participant-category-title'><?= $category["name"]; ?></h2>
+        <ul>
+          <?php
+          /*
     * Boucle sur les participants d'une catégorie
     * Ne pas modifier les lignes ci-dessous. Modifier plutôt le Template
     * template-parts/content-participant-preview.php
     */
-        foreach ($participants as $participant) { ?>
-          <li>
-            <?php
-            // On rend disponible la variable $participant pour le template
-            set_query_var('participant', $participant);
-            get_template_part('template-parts/content-participant-preview');
-            ?>
-          </li>
-        <?php
-        } ?>
-      </ul>
-    </section>
-  <?php
+          foreach ($category["participants"] as $participant) { ?>
+            <li>
+              <?php
+              // On rend disponible la variable $participant pour le template
+              set_query_var('participant', $participant);
+              get_template_part('template-parts/content-participant-preview');
+              ?>
+            </li>
+          <?php
+          } ?>
+        </ul>
+      </section>
+    <?php
 
-  endforeach;
-  /* ---------------------------------------------------------------------
+    endforeach;
+    /* ---------------------------------------------------------------------
   * Boucle sur les catégories de participants
   * ---------------------------------------------------------------------
   */
+    ?>
+  </div>
+  <?php
+  //the_posts_navigation();
   ?>
-
-  <?php the_posts_navigation(); ?>
 </div>
 
 <?php

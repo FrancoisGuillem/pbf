@@ -12,51 +12,58 @@ $metadata = get_post_meta(get_the_ID());
 $geo = pbf_get_event_address($metadata);
 $start = $metadata["start_date"][0] ?? "";
 $end = $metadata["end_date"][0] ?? "";
-$organizer = get_pbf_event_organizers($metadata);
-
-// echo print_r($organizer);
+$organizers = get_pbf_event_organizers($metadata);
+$tags = array();
+// print_r($organizers);
 
 if (empty($end)) {
   $end = $start;
 }
 ?>
-<article class="event-preview">
-  <div class="event-organizer">
-    <?php if ($organizer["thumbnail"]) { ?>
-      <span class="event-organizer-img">
-        <img src="<?= $organizer["thumbnail"]; ?>" alt="" />
-      </span>
+<article class="event-detail">
+  <div class="event-detail-info">
+    <?php
+    set_query_var('evt', $metadata);
+    get_template_part('template-parts/content-schedule');
+    ?>
+  </div>
+  <div class="event-detail-content">
+    <h2 class="event-detail-title">
+      <!-- <a href="<?= esc_url(get_permalink()) ?>">
+          <?= the_title() ?>
+        </a> -->
+      <?= the_title(); ?>
+    </h2>
+    <?php if (!empty($geo["address"])) { ?>
+      <p class="event-detail-address"><?= $geo["address"] ?></p>
     <?php } ?>
-    <div>
-      <h3 class="event-organizer-title">
-        <a href="<?= $organizer["permalink"]; ?>"><?= $organizer["title"]; ?></a>
-      </h3>
+    <?= the_content() ?>
+    <footer class="event-detail-footer">
+      <ul class="event-detail-organizers">
+        <?php foreach ($organizers as $organizer) { ?>
+          <li>
+            <a class="event-detail-organizer" href="<?= $organizer["permalink"]; ?>">
+              <?php if ($organizer["thumbnail"]) { ?>
+                <span class="event-organizer-img">
+                  <img src="<?= $organizer["thumbnail"] ?>" alt="" />
+                </span>
+              <?php } ?>
+              <span class="event-organizer-title"><?= $organizer["title"] ?></span>
+            </a>
+          </li>
+        <?php
+          foreach ($organizer["categories"] as $tag) {
+            if (!in_array($tags, $tag)) {
+              $tags[] = $tag;
+            }
+          }
+        } ?>
+      </ul>
       <ul class="event-organizer-tags">
-        <?php foreach ($organizer["categories"] as $tag) { ?>
+        <?php foreach ($tags as $tag) { ?>
           <li class="tag-solid variant-primary"><?= $tag; ?></li>
         <?php } ?>
       </ul>
-
-    </div>
-  </div>
-  <div class="event-preview-details">
-    <div class="event-preview-info">
-      <?php
-      set_query_var('evt', $metadata);
-      get_template_part('template-parts/content-schedule');
-      ?>
-    </div>
-    <div class="event-preview-content">
-      <h2 class="event-preview-title">
-        <!-- <a href="<?= esc_url(get_permalink()) ?>">
-          <?= the_title() ?>
-        </a> -->
-        <?= the_title(); ?>
-      </h2>
-      <?php if (!empty($geo["address"])) { ?>
-        <p class="event-preview-address"><?= $geo["address"] ?></p>
-      <?php } ?>
-      <?= the_content() ?>
-    </div>
+    </footer>
   </div>
 </article>

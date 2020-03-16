@@ -372,4 +372,109 @@
     }
   }
 
+  var Filter = /*#__PURE__*/function () {
+    function Filter(el) {
+      _classCallCheck(this, Filter);
+
+      this.el = el;
+      console.log("#".concat(el.getAttribute('data-controls'), " [data-category]"));
+      this.refs = {
+        list: Array.from(document.querySelectorAll("#".concat(el.getAttribute('data-controls'), " [data-category]")))
+      };
+      this.data = {
+        categories: []
+      };
+      this.bind();
+    }
+
+    _createClass(Filter, [{
+      key: "bind",
+      value: function bind() {
+        var _this = this;
+
+        this.el.addEventListener('input', function (event) {
+          _this.setFilterState();
+        });
+      }
+    }, {
+      key: "filter",
+      value: function filter() {
+        var _this2 = this;
+
+        this.refs.list.forEach(function (el) {
+          var category = el.getAttribute('data-category');
+          el[_this2.categories.includes(category) ? 'removeAttribute' : 'setAttribute']('hidden', true);
+        });
+      }
+    }, {
+      key: "setFilterState",
+      value: function setFilterState() {
+        var categories = [];
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+          for (var _iterator = this.el.elements[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var el = _step.value;
+
+            if (el.checked) {
+              categories.push(el.value);
+            }
+          }
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator.return != null) {
+              _iterator.return();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
+        }
+
+        this.categories = categories;
+      }
+    }, {
+      key: "categories",
+      set: function set(value) {
+        this.data.categories = value;
+        this.filter();
+      },
+      get: function get() {
+        return this.data.categories;
+      }
+    }]);
+
+    return Filter;
+  }();
+
+  var _iteratorNormalCompletion2 = true;
+  var _didIteratorError2 = false;
+  var _iteratorError2 = undefined;
+
+  try {
+    for (var _iterator2 = document.querySelectorAll('form.category-filters[data-controls]')[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+      var el$1 = _step2.value;
+      new Filter(el$1);
+    }
+  } catch (err) {
+    _didIteratorError2 = true;
+    _iteratorError2 = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+        _iterator2.return();
+      }
+    } finally {
+      if (_didIteratorError2) {
+        throw _iteratorError2;
+      }
+    }
+  }
+
 })));
