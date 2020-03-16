@@ -35,7 +35,7 @@ function pbf_save_custom_fields( $post_id ) {
 
   // Save social
   if (pbf_check_nonce("field_social")) {
-    $valid_keys = ['facebook', 'instagram'];
+    $valid_keys = ['facebook', 'instagram', 'website'];
     foreach ($valid_keys as $key) {
       if (array_key_exists($key, $_POST)) {
             update_post_meta(
