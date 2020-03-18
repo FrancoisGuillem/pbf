@@ -58,7 +58,7 @@ if (empty($end)) {
           </li>
         <?php
           foreach ($organizer["categories"] as $tag) {
-            if (!in_array($tags, $tag)) {
+            if (!in_array($tag, $tags)) {
               $tags[] = $tag;
             }
           }
