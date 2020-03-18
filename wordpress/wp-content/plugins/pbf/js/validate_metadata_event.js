@@ -1,5 +1,4 @@
 jQuery().ready(function($) {
-  console.log("event");
   $.validator.addMethod(
     "regex",
     function(value, element, regexp) {

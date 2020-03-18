@@ -27,7 +27,7 @@ while (have_posts()) : the_post();
   $terms = get_the_terms($post->ID, 'participant_cat');
   if (empty($terms)) {
     $category = array(
-			"name" => _e("[:fr]Non Classé[:en]No Category[:]"),
+			"name" => __("[:fr]Non Classé[:en]No Category[:]"),
 			"slug" => "no-category"
 		);
   } else {

@@ -45,7 +45,7 @@ $terms = get_the_terms($post->ID, 'participant_cat');
 if (!empty($terms)) {
   $category = $terms[0]->name;
 } else {
-  $category = "";
+  $category = __("[:fr]Non Classé[:en]No Category[:]");
 }
 
 $events = get_pbf_participant_events($metadata);
