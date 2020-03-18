@@ -36,7 +36,7 @@ function pbf_get_formatted_date($date, $index)
 get_header(); ?>
 
 <div class="page-header">
-  <h1 class="page-title"><?= __("[:en]Schedule[:][:fr]Évènements[:]") ?></h1>
+  <h1 class="page-title"><?= __("[:en]Schedule[:][:fr]Événements[:]") ?></h1>
 </div>
 <!-- <form class="category-filters container">
   <legend>Categories</legend>

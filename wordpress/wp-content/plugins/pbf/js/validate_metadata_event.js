@@ -19,8 +19,9 @@ jQuery().ready(function($) {
 
   $("#post").validate({rules: {
     start_date: "required",
-    start_time: { required: true, regex: "^\\d\\d:\\d\\d$" },
+    start_time: {regex: "^\\d\\d:\\d\\d$" },
     end_time: { regex: "^\\d\\d:\\d\\d$" },
-    title_organizer: {at_least_one_organizer: true}
+    title_organizer: {at_least_one_organizer: true},
+    facebook: "url"
   }});
 });
