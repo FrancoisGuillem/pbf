@@ -1,0 +1,64 @@
+.participant-description {
+  background-color: rgba( $blue, 0.04 );
+  border-radius: 4px;
+  padding: rem( 32 );
+  text-align: center;
+
+  .content {
+    text-align: left;
+
+    p {
+      margin: em( 24 / 16 ) 0;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.participant-title {
+  @extend %title-level3;
+
+  margin: rem( 32 ) 0 rem( 16 );
+}
+
+.participant-links {
+  $icon-size: rem( 24 );
+
+  display: flex;
+  margin: rem( 16 ) rem( -16 ) rem( -16 );
+  justify-content: center;
+
+  li {
+    margin: rem( 16 );
+  }
+
+  a {
+    display: block;
+    padding: rem( 10 );
+    border-radius: 50%;
+    background-color: $blue;
+    color: white;
+    transition: background-color $anim-duration $anim-easing, transform $anim-duration $anim-easing;
+
+    @include interact() {
+      background-color: $purple;
+    }
+
+    [data-input=keyboard] &:focus,
+    [data-input=touch] &:active {
+      transform: scale( $anim-scale );
+    }
+  }
+
+  svg {
+    height: $icon-size;
+    width: $icon-size;
+    display: block;
+  }
+
+  span {
+    @include hide();
+  }
+}

@@ -85,6 +85,19 @@ function register_type_events() {
      );
  }
 
+ // Lien facebook
+  add_action("add_meta_boxes", "event_social");
+  function event_social() {
+    add_meta_box(
+      "event_social",
+      __("Facebook", "pbf"),
+      "field_social",
+      "event",
+      "normal",
+      "high"
+    );
+  }
+  
  // Add address metabox
  add_action( 'add_meta_boxes', 'event_address' );
  function event_address() {

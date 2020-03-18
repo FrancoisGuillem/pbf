@@ -17,13 +17,13 @@
 
 <article class="participant" id="post-<?= $participant["id"]; ?>">
   <a href="<?= esc_url($participant["permalink"]) ?>">
-    <div class="thumbnail-container">
-      <div class="post-thumbnail participant-thumbnail">
-        <?= $participant["thumbnail"]; ?>
-      </div>
-    </div>
+    <?php if ($participant["thumbnail"]) { ?>
+      <span class="participant-img">
+        <img src="<?= $participant["thumbnail"] ?>" alt="" />
+      </span>
+    <?php } ?>
+    <h3 class="participant-title">
+      <?= $participant["title"] ?>
+    </h3>
   </a>
-  <h3 class="participant-preview-title">
-    <?php _e('<a href="' . esc_url($participant["permalink"]) . '" rel="bookmark">' . $participant["title"] . '</a>'); ?>
-  </h3>
 </article>

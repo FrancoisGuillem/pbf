@@ -12,6 +12,7 @@
  * $address : adresse du participant
  * $facebook : lien facebook (chaine vide si pas renseigné)
  * $instagram : lien instagram (chaine vide si pas renseigné)
+ * $website : lien du site web du participant (chaine vide si non renseigné)
  *
  * Variables boucle événements
  * ---------------------------
@@ -19,6 +20,7 @@
  * $evt["link"] : lien de l'évènement
  * $evt["content"]: description de l'événement
  * $evt["geo"]["address"]: addresse de l'évènement
+ * $evt["facebook"]: lien facebook de l'événement
  *
  * @package pbf
  */
@@ -30,14 +32,14 @@
  * On récupère tous les participants et on les organise par catégorie.
  */
 $title = get_the_title();
-$thumbnail = get_the_post_thumbnail();
-$content = get_the_content();
+$thumbnail = get_the_post_thumbnail_url();
 
 $metadata = get_post_meta(get_the_ID());
 
 $address = $metadata["address"][0];
 $facebook = $metadata["facebook"][0] ?? "";
 $instagram = $metadata["instagram"][0] ?? "";
+$website = $metadata["website"][0] ?? "";
 
 $terms = get_the_terms($post->ID, 'participant_cat');
 if (!empty($terms)) {
@@ -57,36 +59,36 @@ $events = get_pbf_participant_events($metadata);
   <h1 class="page-title"><?= $title ?></h1>
 </div>
 
+<p class="back-link-page container">
+  <a href="<?= qtranxf_get_url_for_language('/participant', qtranxf_getLanguage()) ?>">
+    <?php get_template_part("inc/assets/arrow-left.svg"); ?>
+    <span><?= __("[:en]Participants list[:][:fr]Liste des participants[:]") ?></span>
+  </a>
+</p>
 <div class="container">
-  <div class="col-md-4">
-    <div class="participant-description">
-      <div class="post-thumbnail">
-        <?= $thumbnail; ?>
-      </div>
-      <h1><?= $title ?></h1>
-      <div class="participant-cat">
-        <?= $category; ?>
-      </div>
-      <div class="custom-separator">
-        <img src="<?php echo get_template_directory_uri(); ?>/inc/assets/img/funfact_wave.png">
-      </div>
-      <div class='address'><?= $address; ?></div>
-      <?= $content; ?>
-      <div class="social">
-        <?php
-        if (!empty($facebook)) {
-          echo "<a href='" . $facebook . "'><i class='fab fa-facebook'></i></a>";
-        }
-        if (!empty($instagram)) {
-          echo "<a href='" . $instagram . "'><i class='fab fa-instagram'></i></a>";
-        }
-        ?>
-      </div>
-      <?php edit_post_link(); ?>
+  <div class="participant-description">
+    <span class="participant-img">
+      <img src="<?= $thumbnail; ?>" alt="" />
+    </span>
+    <p class="participant-title"><?= $title ?></p>
+    <p class="tag-solid variant-primary"><?= $category; ?></p>
+    <div class="content">
+      <?= the_content() ?>
     </div>
+    <ul class="participant-links">
+      <?php
+      if (!empty($facebook)) { ?>
+        <li><a href="<?= $facebook ?>"><?php get_template_part("inc/assets/facebook.svg"); ?><span>Facebook</span></a></li>
+      <?php }
+      if (!empty($instagram)) { ?>
+        <li><a href="<?= $instagram ?>"><?php get_template_part("inc/assets/instagram.svg"); ?><span>Instagram</span></a></li>
+      <?php }
+      ?>
+    </ul>
   </div>
 
-  <div class="col-md-8">
+  <section class="participant-events">
+    <h2 class="participant-events-title"><?= __("[:en]Schedule[:][:fr]Évènements[:]") ?></h2>
     <ul>
       <?php
       /*
@@ -96,23 +98,41 @@ $events = get_pbf_participant_events($metadata);
     */
       foreach ($events as $evt) {
       ?><li>
-          <article class="event-preview-details">
-            <div class="event-preview-info">
+          <article class="event-detail">
+            <div class="event-detail-info">
               <?php
               set_query_var('evt', $evt["metadata"]);
               get_template_part('template-parts/content-schedule');
               ?>
+              <?php if ($evt["facebook"]) { ?>
+                <a href=" <?= $evt["facebook"] ?>" class="event-detail-link"><?php get_template_part("inc/assets/facebook.svg"); ?><span><?= __("[:en]View the event on Facebook[:][:fr]Voir l'évènement sur Facebook[:]") ?></span></a>
+
+              <?php } ?>
             </div>
-            <div class="event-preview-content">
-              <h2 class="event-preview-title">
-                <a href="<?= $evt["link"] ?>">
-                  <?= $evt["title"] ?>
-                </a>
-              </h2>
+            <div class="event-detail-content">
+              <h2 class="event-detail-title"><?= $evt["title"] ?></h2>
+              <p class='event-detail-address'><?= $address; ?></p>
               <?php if (!empty($evt["address"])) { ?>
-                <p class="event-preview-address"><?= $evt["address"]["address"] ?></p>
+                <p class="event-detail-address"><?= $evt["address"]["address"] ?></p>
               <?php } ?>
               <?= $evt["content"] ?>
+              <footer class="event-detail-footer">
+                <ul class="event-detail-organizers">
+                  <?php foreach ($evt["organizers"] as $organizer) { ?>
+                    <li>
+                      <a class="event-detail-organizer" href="<?= $organizer["permalink"]; ?>">
+                        <?php if ($organizer["thumbnail"]) { ?>
+                          <span class="event-organizer-img">
+                            <img src="<?= $organizer["thumbnail"] ?>" alt="" />
+                          </span>
+                        <?php } ?>
+                        <span class="event-organizer-title"><?= $organizer["title"] ?></span>
+                      </a>
+                    </li>
+                  <?php
+                  } ?>
+                </ul>
+              </footer>
             </div>
           </article>
         </li>
@@ -124,6 +144,6 @@ $events = get_pbf_participant_events($metadata);
 		 */
       ?>
     </ul>
-  </div>
+  </section>
 
 </div>

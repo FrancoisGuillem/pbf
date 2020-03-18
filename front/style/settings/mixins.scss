@@ -58,7 +58,7 @@
 @mixin title-separator( $align, $color: currentColor ) {
   $separator-height: 4;
   $separator-width: 64;
-  $separator-spacing: 24;
+  $separator-spacing: 16;
   $title-spacing: 32;
   $pos: $align;
   $pct: 0;

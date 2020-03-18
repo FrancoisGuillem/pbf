@@ -1,0 +1,11 @@
+.participant-events {
+  > ul > li {
+    margin: rem( 40 ) 0;
+  }
+}
+
+.participant-events-title {
+  @extend %title-level2;
+
+  @include title-separator(left, $purple);
+}

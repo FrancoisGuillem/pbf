@@ -10,8 +10,6 @@ $card-spacing: $gutter / 2;
     @extend %title-level2;
 
     @include title-separator( center, $purple);
-
-    color: $blue;
   }
 
   p {
