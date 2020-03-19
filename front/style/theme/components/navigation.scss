@@ -144,6 +144,7 @@
   }
 
   .site-navigation {
+    background-color: transparent;
     display: block;
     position: relative;
 
@@ -161,6 +162,25 @@
 
         &:nth-child(n+3) {
           text-align: right;
+        }
+      }
+    }
+
+
+    .home .site-header:not(.sticky) & {
+      a:not([class^=cta-]) {
+        @include interact() {
+          color: $yellow-dark;
+        }
+      }
+
+      .variant-primary {
+        background-color: white;
+        color: $blue;
+
+        @include interact() {
+          background-color: $blue;
+          color: white;
         }
       }
     }

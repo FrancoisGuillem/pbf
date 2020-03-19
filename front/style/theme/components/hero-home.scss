@@ -1,0 +1,135 @@
+.hero-home {
+  background: url( /wp-content/themes/pbf/inc/assets/background/hero-home-small.jpg ) no-repeat 50% 50%;
+  background-size: cover;
+  color: white;
+  margin-top: rem( -80 );
+  padding-top: rem( 80 );
+  overflow: hidden;
+
+  .hero-home-image {
+    margin: rem( 76 ) 0;
+    margin-left: auto;
+    flex-shrink: 0;
+
+    .image-wrapper {
+      display: block;
+      height: rem( 250 );
+      border-radius: 8px;
+      overflow: hidden;
+
+      img {
+        height: 100%;
+        max-width: inherit;
+        width: auto;
+      }
+    }
+  }
+
+  .container {
+    display: flex;
+    position: relative;
+  }
+
+  @media ( max-width: $max-xsmall ) {
+    .container {
+      padding-right: 0;
+    }
+  }
+
+  @media ( max-width: $max-small ) {
+    .container {
+      padding-left: calc( env( safe-area-inset-left ) + #{( $gutter + rem( 76 ) )} );
+    }
+  }
+
+  @media ( min-width: $medium ) {
+    background-image: url( /wp-content/themes/pbf/inc/assets/background/hero-home.jpg );
+
+    .hero-home-image {
+      width: (920% / 1110 * 100);
+      margin-bottom: ( 160% / 1110 * 100 );
+
+
+      .image-wrapper {
+        padding-top: ( 518% / 920 / 100 );
+        height: auto;
+        display: block;
+        position: relative;
+
+        img {
+          left: 0;
+          top: 0;
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  @media ( min-width: $xlarge ) {
+    .image-wrapper {
+      height: rem( 518 );
+    }
+  }
+}
+
+.hero-home-heading {
+  position: absolute;
+  z-index: 1;
+  top: rem( 36 );
+  left: calc( env( safe-area-inset-left ) + #{$gutter} );
+  width: 100%;
+}
+
+.hero-home-title {
+  svg {
+    height: rem( 162 );
+    width: rem( 188 );
+  }
+
+  span:not(.hero-home-logo) {
+    @include hide();
+  }
+}
+
+.hero-home-logo {
+  svg {
+    height: rem( 162 );
+    width: rem( 188 );
+  }
+
+  @media ( min-width: $medium ) {
+    padding-top: ( 320%/1170*100 );
+    width: ( 370%/1170*100 );
+    display: block;
+    position: relative;
+
+    svg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+    }
+  }
+}
+
+.hero-home-subtitle {
+  @extend %title-style;
+
+  @include title-level(18, 24);
+
+  background-color: white;
+  border-radius: 4px;
+  color: $blue;
+  padding: rem( 8 ) rem( 16 );
+  display: inline-flex;
+  margin-top: rem( 32 );
+
+
+  @media ( min-width: $medium ) {
+    @include title-level($tt3...);
+
+    margin-top: ( 64% / 1170 * 100 );
+  }
+}
