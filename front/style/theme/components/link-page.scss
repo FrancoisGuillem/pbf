@@ -1,0 +1,23 @@
+
+.link-page {
+  font-weight: bold;
+  align-items: center;
+  display: inline-flex;
+  text-decoration: none;
+  vertical-align: top;
+
+  @include interact() {
+    .arrow-left {
+      transform: translateX( rem( -4 ) );
+    }
+
+    .arrow-right {
+      transform: translateX( rem( 4 ) );
+    }
+  }
+
+  svg {
+    margin-left: rem( -4 );
+    transition: transform $anim-duration $anim-easing;
+  }
+}

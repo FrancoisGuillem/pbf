@@ -1,0 +1,49 @@
+.sponsors {
+  background: url( /wp-content/themes/pbf/inc/assets/background/sponsors.jpg ) no-repeat 50% 50%;
+  background-size: cover;
+  color: $blue;
+  padding: rem( 80 ) 0;
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-left: rem( -16 );
+    margin-right: rem( -16 );
+  }
+
+  li {
+    margin: rem( 16 ) 0;
+    flex: 1 0 auto;
+  }
+
+  a[class^=sponsor-] {
+    display: block;
+    margin: 0 rem( 16 );
+
+    span {
+      @include hide();
+    }
+
+    img {
+      display: block;
+      margin: 0 auto;
+      transition: transform $anim-duration $anim-easing;
+    }
+
+    @include interact() {
+      img {
+        transform: scale( $anim-scale );
+      }
+    }
+  }
+}
+
+.sponsors-title {
+  @extend %title-level2;
+
+  @include title-separator(center, $purple);
+
+  text-align: center;
+}

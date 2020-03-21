@@ -1,0 +1,73 @@
+.association {
+  background-color: $yellow-dark;
+  color: white;
+  overflow: hidden;
+  padding: rem( 80 ) 0;
+
+  .image-wrapper {
+    display: block;
+    overflow: hidden;
+    border-radius: 8px;
+    padding-top: (576% / 540 * 100 );
+    position: relative;
+
+    img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  @media ( max-width: $max-small ) {
+    .container {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+.association-image {
+  @media ( max-width: $max-small ) {
+    & {
+      order: 1;
+      margin-top: rem( 40 );
+    }
+  }
+
+  @media ( min-width: $medium ) {
+    & {
+      float: right;
+      margin-left: rem( 30 );
+      width: (540% / 1110 * 100);
+    }
+  }
+
+  @media ( min-width: em( 1300 / 16 ) ) {
+    margin-left: rem( 70 );
+    margin-right: rem( -52 );
+  }
+}
+
+.association-title {
+  @extend %title-level2;
+
+  @include title-separator(left);
+}
+
+.association-content {
+  p {
+    margin: rem( 16 * $line-height ) 0;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .link-page {
+    &:last-child {
+      margin-top: rem( 8 );
+    }
+  }
+}

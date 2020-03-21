@@ -59,8 +59,8 @@ $events = get_pbf_participant_events($metadata);
   <h1 class="page-title"><?= $title ?></h1>
 </div>
 
-<p class="back-link-page container">
-  <a href="<?= qtranxf_get_url_for_language('/participant', qtranxf_getLanguage()) ?>">
+<p class="container">
+  <a class="link-page" href="<?= qtranxf_get_url_for_language('/participant', qtranxf_getLanguage()) ?>">
     <?php get_template_part("inc/assets/arrow-left.svg"); ?>
     <span><?= __("[:en]Participants list[:][:fr]Liste des participants[:]") ?></span>
   </a>

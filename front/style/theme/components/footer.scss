@@ -1,5 +1,6 @@
 footer#colophon {
   font-size: 85%;
+  padding-bottom: env( safe-area-inset-bottom );
 }
 
 body:not(.theme-preset-active) footer#colophon {

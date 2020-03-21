@@ -17,6 +17,7 @@ $shadow-transition: box-shadow $anim-duration $anim-easing;
   .home & {
     background-color: transparent;
     transition: $shadow-transition, background-color $anim-duration $anim-easing;
+    color: white;
 
     &.t-play {
       transition-delay: $navFadeDuration;
@@ -25,11 +26,20 @@ $shadow-transition: box-shadow $anim-duration $anim-easing;
     &.sticky,
     &.opened {
       background-color: white;
+      color: inherit;
     }
 
     &.opened {
       transition-duration: 0s;
       transition-delay: 0s;
+    }
+
+    &:not(.sticky):not(.opened) {
+      .site-header-logo {
+        @include interact() {
+          color: $yellow;
+        }
+      }
     }
   }
 

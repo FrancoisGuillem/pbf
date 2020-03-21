@@ -1,6 +1,6 @@
 .container {
-  padding-left: $gutter;
-  padding-right: $gutter;
+  padding-left: calc( env( safe-area-inset-left ) + #{$gutter} );
+  padding-right: calc( env( safe-area-inset-right ) + #{$gutter} );
   max-width: ( rem( 1110 ) + ($gutter * 2));
   margin-left: auto;
   margin-right: auto;
