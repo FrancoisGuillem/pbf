@@ -1,26 +1,51 @@
-footer#colophon {
-  font-size: 85%;
-  padding-bottom: env( safe-area-inset-bottom );
-}
-
-body:not(.theme-preset-active) footer#colophon {
-  color: #99979c;
-  background-color: #f7f7f7;
-}
-
-.navbar-dark .site-info {
+footer.site-footer {
   color: #fff;
-}
+  background-color: $blue-dark;
+  padding: $gutter 0 env( safe-area-inset-bottom );
+  a { text-decoration: none; }
+  img { display: block; }
 
-.copyright {
-  font-size: 0.875rem;
-  margin-bottom: 0;
-  text-align: center;
-}
+  .container {
+    display: flex;
+    flex-direction: column;
 
-.copyright a,
-footer#colophon a {
-  color: inherit;
+    @media screen and ( min-width: $medium ) {
+      flex-direction: row;
+    }
+  }
+
+  .footer-content {
+    > * + * { margin-top: $gutter; }
+  }
+
+  .footer-desc {
+    p { max-width: 75%; }
+  }
+
+  .footer-menu {
+    li + li { margin-top: $gutter / 2; }
+  }
+  .footer-asso { align-items: flex-end; }
+
+  .colophon {
+    margin-top: $gutter;
+    padding: $gutter / 2 0;
+    text-align: center;
+    background-color: $blue;
+
+    .container {
+      > * + * { margin-top: $gutter / 2; }
+
+      @media screen and ( min-width: $medium ) {
+        flex-direction: row-reverse;
+      }
+    }
+  }
+
+  .reseaux-sociaux {
+    display: flex;
+    justify-content: space-around;
+  }
 }
 
 // @media screen and ( max-width: 767px ) {
