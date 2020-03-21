@@ -93,6 +93,17 @@ get_header(); ?>
 
   </div>
 </section>
+<section class="sponsors">
+  <div class="container">
+    <h2 class="sponsors-title">Sponsors</h2>
+    <ul>
+      <li><a href="https://www.groundcontrolparis.com/" class="sponsor-groundcontrol"><img src="<?php echo get_template_directory_uri(); ?>/inc/assets/sponsors/ground-control.png" width="247" height="98" alt="" /><span>Ground Control</span></a></li>
+      <li><a href="https://fermentis.com/" class="sponsor-fermentis"><img src="<?php echo get_template_directory_uri(); ?>/inc/assets/sponsors/fermentis.png" width="240" height="187" alt="" /><span>Fermentis</span></a></li>
+      <li><a href="https://grainfather.com/" class="sponsor-grainfather"><img src="<?php echo get_template_directory_uri(); ?>/inc/assets/sponsors/the-grainfather.png" width="232" height="103" alt="" /><span>The Graindfather</span></a></li>
+      <li><a href="http://www.dbi-biere.com/" class="sponsor-dbi"><img src="<?php echo get_template_directory_uri(); ?>/inc/assets/sponsors/dbi.png" width="150" height="146" alt="" /><span>DBI</span></a></li>
+    </ul>
+  </div>
+</section>
 
 <?php
 
