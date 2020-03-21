@@ -67,6 +67,33 @@ get_header(); ?>
   </div>
 </section>
 
+<section class="association">
+  <div class="container">
+    <div class="association-image">
+      <span class="image-wrapper">
+
+        <img src="<?php echo get_template_directory_uri(); ?>/inc/assets/asso/asso@0.5x.jpg" srcset="<?php echo get_template_directory_uri(); ?>/inc/assets/asso/asso@0.33x.jpg 356w,
+                <?php echo get_template_directory_uri(); ?>/inc/assets/asso/asso@0.5x.jpg 540w,
+                <?php echo get_template_directory_uri(); ?>/inc/assets/asso/asso.jpg 1080w" sizes="(min-width: 992px) 540px, 356px" alt="" />
+      </span>
+    </div>
+
+    <div class="association-content">
+      <h2 class="association-title">Organisé par l’association Paris Beer Club</h2>
+
+      <p>Paris Beer Club est une association loi 1901, créée en 2010 par une poignée de passionnés qui se sont donnés pour objectif de valoriser l’artisanat brassicole et de faire connaître ses déclinaisons gastronomiques et culturelles. Dès 2013, l’association a accepté de porter l’organisation de la Paris Beer Week. Nous sommes un collectif de bénévoles regroupant professionnels indépendants, particuliers mordus de craft beer et associations de passionnés. Il ne s’agit pas d’un salon professionnel, nous ne proposons donc pas de stands loués au mètre carré et ne revendiquons pas le soutien de l’industrie agro-alimentaire.</p>
+
+      <p>Notre but n’est pas de faire de la promotion commerciale mais de développer l’intérêt du public pour les produits brassicoles non standardisés, et de transmettre notre enthousiasme pour le partage et la convivialité qu’ils dégagent.</p>
+
+      <a class="link-page" href="https://www.parisbeerclub.fr">
+        <?php get_template_part("inc/assets/arrow-right.svg"); ?>
+        <span><?= __("[:en]Read more[:][:fr]En savoir plus[:]") ?></span>
+      </a>
+    </div>
+
+  </div>
+</section>
+
 <?php
 
 get_footer(); ?>
