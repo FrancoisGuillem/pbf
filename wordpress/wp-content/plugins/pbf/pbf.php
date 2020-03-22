@@ -7,6 +7,7 @@
   */
 include( plugin_dir_path( __FILE__ ) . 'inc/post_type_participant.php');
 include( plugin_dir_path( __FILE__ ) . 'inc/post_type_event.php');
+include( plugin_dir_path( __FILE__ ) . 'inc/post_type_partner.php');
 include( plugin_dir_path( __FILE__ ) . 'inc/save_post.php');
 include( plugin_dir_path( __FILE__ ) . 'inc/delete_post.php');
 include( plugin_dir_path( __FILE__ ) . 'inc/filter_events_by_date.php');
@@ -28,6 +29,9 @@ function my_admin_scripts_method() {
     }
     if ($typenow == "participant") {
       wp_enqueue_script('validate_metadata_participant', plugins_url('js/validate_metadata_participant.js', __FILE__));
+    }
+    if ($typenow == "partner") {
+      wp_enqueue_script('validate_metadata_partner', plugins_url('js/validate_metadata_partner.js', __FILE__));
     }
   }
 }
