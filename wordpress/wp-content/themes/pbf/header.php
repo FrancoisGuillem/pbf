@@ -26,6 +26,16 @@ function getUrlInTargetLanguage($targetLang)
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="profile" href="http://gmpg.org/xfn/11">
   <?php wp_head(); ?>
+  <link rel="icon" type="image/svg+xml" href="<?php echo get_template_directory_uri(); ?>/inc/assets/icons/favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="<?php echo get_template_directory_uri(); ?>/inc/assets/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="<?php echo get_template_directory_uri(); ?>/inc/assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="<?php echo get_template_directory_uri(); ?>/inc/assets/icons/favicon-16x16.png">
+  <link rel="manifest" href="<?php echo get_template_directory_uri(); ?>/inc/assets/icons/site.webmanifest">
+  <link rel="mask-icon" href="<?php echo get_template_directory_uri(); ?>/inc/assets/icons/safari-pinned-tab.svg" color="#2a2150">
+  <!-- <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/inc/assets/icons/favicon.ico"> -->
+  <meta name="msapplication-TileColor" content="#2a2150">
+  <meta name="msapplication-config" content="<?php echo get_template_directory_uri(); ?>/inc/assets/icons/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
 </head>
 
 <body <?php body_class(); ?>>
