@@ -34,19 +34,19 @@ get_header(); ?>
     <div class="festival-links-wrapper">
       <ul>
         <li>
-          <a name="festival-link-1" class="card" href="/participant">
-            <span class="card-image">
-              <img src="<?php echo get_template_directory_uri(); ?>/inc/assets/festival-cards/participant.jpg" alt="" />
-            </span>
-            <span class="label">Partenaires</span>
-          </a>
-        </li>
-        <li>
           <a name="festival-link-2" class="card" href="/event">
             <span class="card-image">
               <img src="<?php echo get_template_directory_uri(); ?>/inc/assets/festival-cards/event.jpg" alt="" />
             </span>
-            <span class="label">Événements</span>
+            <span class="label"><?php _e("[:fr]Événements[:en]Events[:]"); ?></span>
+          </a>
+        </li>
+        <li>
+          <a name="festival-link-1" class="card" href="/participant">
+            <span class="card-image">
+              <img src="<?php echo get_template_directory_uri(); ?>/inc/assets/festival-cards/participant.jpg" alt="" />
+            </span>
+            <span class="label"><?php _e("[:fr]Participants[:en]Participants[:]"); ?></span>
           </a>
         </li>
         <li>
@@ -54,7 +54,7 @@ get_header(); ?>
             <span class="card-image">
               <img src="<?php echo get_template_directory_uri(); ?>/inc/assets/festival-cards/final.jpg" alt="" />
             </span>
-            <span class="label">Grand final</span>
+            <span class="label"><?php _e("[:fr]Grand Final[:en]Grand Finale[:]"); ?></span>
           </a>
         </li>
       </ul>
@@ -95,7 +95,7 @@ get_header(); ?>
 </section>
 <section class="sponsors">
   <div class="container">
-    <h2 class="sponsors-title">Sponsors</h2>
+    <h2 class="sponsors-title"><?php _e("[:fr]Partenaires[:en]Partners[:]"); ?></h2>
     <ul>
       <li><a href="https://www.groundcontrolparis.com/" class="sponsor-groundcontrol"><img src="<?php echo get_template_directory_uri(); ?>/inc/assets/sponsors/ground-control.png" width="247" height="98" alt="" /><span>Ground Control</span></a></li>
       <li><a href="https://fermentis.com/" class="sponsor-fermentis"><img src="<?php echo get_template_directory_uri(); ?>/inc/assets/sponsors/fermentis.png" width="240" height="187" alt="" /><span>Fermentis</span></a></li>
