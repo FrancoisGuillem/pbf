@@ -111,9 +111,8 @@ $events = get_pbf_participant_events($metadata);
             </div>
             <div class="event-detail-content">
               <h2 class="event-detail-title"><?= $evt["title"] ?></h2>
-              <p class='event-detail-address'><?= $address; ?></p>
-              <?php if (!empty($evt["address"])) { ?>
-                <p class="event-detail-address"><?= $evt["address"]["address"] ?></p>
+              <?php if (!empty($evt["geo"])) { ?>
+                <p class="event-detail-address"><?= $evt["geo"]["address"] ?></p>
               <?php } ?>
               <?= $evt["content"] ?>
               <footer class="event-detail-footer">
