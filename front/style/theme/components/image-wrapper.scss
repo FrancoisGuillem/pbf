@@ -1,0 +1,21 @@
+.image-wrapper {
+  &[class*=scrim-] {
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &.scrim-light-left {
+    &::after {
+      background-image: linear-gradient( -90deg, rgba( white, 0 ) 50%, rgba( white, 0.5 ) 100% );
+    }
+  }
+}
