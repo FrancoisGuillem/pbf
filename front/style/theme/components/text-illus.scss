@@ -1,4 +1,4 @@
-.association {
+.text-illus {
   background-color: $yellow-dark;
   color: white;
   overflow: hidden;
@@ -28,7 +28,7 @@
   }
 }
 
-.association-image {
+.text-illus-image {
   @media ( max-width: $max-small ) {
     & {
       order: 1;
@@ -50,13 +50,13 @@
   }
 }
 
-.association-title {
+.text-illus-title {
   @extend %title-level2;
 
   @include title-separator(left);
 }
 
-.association-content {
+.text-illus-content {
   p {
     margin: rem( 16 * $line-height ) 0;
 
