@@ -3,22 +3,23 @@
 Template Name: Homepage
 */
 add_filter('body_class', function ($classes) {
-  $classes['home'];
+  array_push($classes, 'home');
+
   return $classes;
 });
 
 get_header(); ?>
-<div class="hero-home">
+<div class="hero variant-primary">
   <div class="container">
-    <div class="hero-home-heading">
-      <h1 class="hero-home-title">
-        <span class="hero-home-logo"><?php get_template_part("inc/assets/logo.svg"); ?></span>
+    <div class="hero-heading logo">
+      <h1 class="hero-title">
+        <span class="hero-logo"><?php get_template_part("inc/assets/logo.svg"); ?></span>
         <span><?php echo esc_attr(get_bloginfo('name')); ?></span>
       </h1>
-      <p role="doc-subtitle" class="hero-home-subtitle">Du 25 avril au 3 mai 2020</p>
+      <p role="doc-subtitle" class="hero-subtitle"><span>Du 25 avril au 3 mai 2020</span></p>
     </div>
 
-    <div class="hero-home-image">
+    <div class="hero-image">
       <span class="image-wrapper">
         <img src="<?php echo get_template_directory_uri(); ?>/inc/assets/hero-home/hero@0.5x.jpg" srcset="<?php echo get_template_directory_uri(); ?>/inc/assets/hero-home/hero@0.33x.jpg 607w,
                   <?php echo get_template_directory_uri(); ?>/inc/assets/hero-home/hero@0.5x.jpg 920w,
