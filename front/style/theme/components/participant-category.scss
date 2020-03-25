@@ -7,12 +7,13 @@ $participants-spacing: rem( 30 / 2 );
     box-shadow: $box-shadow-small;
     border-right: 8px;
     padding: rem( 32 ) rem( 30 );
+    height: 100%;
     text-align: center;
 
     a {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      height: 100%;
       min-height: rem( 270 );
       text-decoration: none;
       transition: transform $anim-duration $anim-easing;
@@ -23,11 +24,20 @@ $participants-spacing: rem( 30 / 2 );
     }
   }
 
+  .participant-title-wrapper {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    margin: rem( 32 ) 0 rem( 16 );
+  }
+
   .participant-title {
     @extend %title-level3;
   }
 
   ul {
+    align-items: stretch;
     display: flex;
     flex-wrap: wrap;
     margin: $participants-spacing * -1;
