@@ -28,8 +28,10 @@ get_header(); ?>
   </div>
 </div>
 <section class="festival-intro container">
-  <h2 class="festival-title">Le festival de la bière pour tou•te•s</h2>
-  <p>Rendez-vous du 25 avril au 1er mai 2020 pour une semaine d'événements en Ile-de-France ! Et le 2 et 3 mai, direction le Ground Control, pour un week-end de clôture avec 52 brasseries presentes.</p>
+  <?php while (have_posts()) : the_post(); ?>
+  <h2 class="festival-title"><?php the_title(); ?></h2>
+  <?php the_content(); ?>
+<?php endwhile; ?>
   <div class="festival-links" data-bind="scroll-slider">
     <div class="festival-links-wrapper">
       <ul>
