@@ -2,6 +2,16 @@
 /*
 Template Name: Homepage
 */
+
+$subtitle = "[:fr]" . get_theme_mod("pbf_subtitle") . "[:en]" . get_theme_mod("pbf_subtitle_en") . "[:]";
+$subtitle = __($subtitle);
+
+$asso_title  = "[:fr]" . get_theme_mod("pbf_asso_title") . "[:en]" . get_theme_mod("pbf_asso_title_en") . "[:]";
+$asso_title = __($asso_title);
+
+$asso_desc  = "[:fr]" . get_theme_mod("pbf_asso_desc") . "[:en]" . get_theme_mod("pbf_asso_desc_en") . "[:]";
+$asso_desc = __($asso_desc);
+
 add_filter('body_class', function ($classes) {
   $classes['home'];
   return $classes;
@@ -15,7 +25,7 @@ get_header(); ?>
         <span class="hero-home-logo"><?php get_template_part("inc/assets/logo.svg"); ?></span>
         <span><?php echo esc_attr(get_bloginfo('name')); ?></span>
       </h1>
-      <p role="doc-subtitle" class="hero-home-subtitle">Du 25 avril au 3 mai 2020</p>
+      <p role="doc-subtitle" class="hero-home-subtitle"><?= $subtitle; ?></p>
     </div>
 
     <div class="hero-home-image">
@@ -81,12 +91,9 @@ get_header(); ?>
     </div>
 
     <div class="association-content">
-      <h2 class="association-title">Organisé par l’association Paris Beer Club</h2>
+      <h2 class="association-title"><?= $asso_title; ?></h2>
 
-      <p>Paris Beer Club est une association loi 1901, créée en 2010 par une poignée de passionnés qui se sont donnés pour objectif de valoriser l’artisanat brassicole et de faire connaître ses déclinaisons gastronomiques et culturelles. Dès 2013, l’association a accepté de porter l’organisation de la Paris Beer Week. Nous sommes un collectif de bénévoles regroupant professionnels indépendants, particuliers mordus de craft beer et associations de passionnés. Il ne s’agit pas d’un salon professionnel, nous ne proposons donc pas de stands loués au mètre carré et ne revendiquons pas le soutien de l’industrie agro-alimentaire.</p>
-
-      <p>Notre but n’est pas de faire de la promotion commerciale mais de développer l’intérêt du public pour les produits brassicoles non standardisés, et de transmettre notre enthousiasme pour le partage et la convivialité qu’ils dégagent.</p>
-
+      <?= $asso_desc; ?>
       <a class="link-page" href="https://www.parisbeerclub.fr">
         <?php get_template_part("inc/assets/arrow-right.svg"); ?>
         <span><?= __("[:en]Read more[:][:fr]En savoir plus[:]") ?></span>
