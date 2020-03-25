@@ -83,6 +83,9 @@ $events = get_pbf_participant_events($metadata);
       if (!empty($instagram)) { ?>
         <li><a href="<?= $instagram ?>"><?php get_template_part("inc/assets/instagram.svg"); ?><span>Instagram</span></a></li>
       <?php }
+      if (!empty($website)) { ?>
+        <li><a href="<?= $website ?>"><?php get_template_part("inc/assets/globe.svg"); ?><span><?= _e("[:fr]Site web[:en]Website[:]"); ?></span></a></li>
+      <?php }
       ?>
     </ul>
   </div>
@@ -138,7 +141,7 @@ $events = get_pbf_participant_events($metadata);
         </li>
       <?php
       }
-    /* -------------------------------------------------------------------------
+      /* -------------------------------------------------------------------------
 		 * Fin boucle des événements
      * -------------------------------------------------------------------------
 		 */
