@@ -51,9 +51,11 @@
     display: block;
   }
 
-  &[aria-hidden=false] {
-    display: block;
-    box-shadow: 4px 24px 24px rgba( 24, 35, 70, 0.24 );
+  @media ( max-width: $max-small ) {
+    &[aria-hidden=false] {
+      display: block;
+      box-shadow: 4px 24px 24px rgba( 24, 35, 70, 0.24 );
+    }
   }
 
   .dropdown-menu {
