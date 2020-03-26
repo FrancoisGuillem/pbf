@@ -2,42 +2,118 @@ footer.site-footer {
   color: #fff;
   background-color: $blue-dark;
   padding: $gutter 0 env( safe-area-inset-bottom );
-  a { text-decoration: none; }
-  img { display: block; }
 
-  .container {
+  a {
+    text-decoration: none;
+
+    @include interact() {
+      text-decoration: underline;
+    }
+  }
+
+  > .container {
     display: flex;
     flex-direction: column;
 
     @media screen and ( min-width: $medium ) {
+      align-items: flex-end;
       flex-direction: row;
+      justify-content: space-between;
+      padding: 0;
+
+      > * {
+        // flex: 1 1 auto;
+        flex-basis: auto;
+        padding: 0 rem( 32 );
+      }
+    }
+  }
+
+  .footer-logo {
+    svg {
+      height: rem( 64 );
+      width: rem( 74 );
+    }
+
+    span {
+      @include hide();
+    }
+  }
+
+  .footer-asso-logo {
+    display: block;
+    margin-top: rem( 8 );
+
+    svg {
+      height: rem( 56 );
+      width: rem( 124 );
+    }
+
+    span {
+      @include hide();
     }
   }
 
   .footer-content {
-    > * + * { margin-top: $gutter; }
+    @media ( max-width: $max-small ) {
+      > * + * { margin-top: $gutter; }
+    }
   }
 
   .footer-desc {
-    p { max-width: 75%; }
+    p {
+      // max-width: 75%;
+
+      & + p {
+        margin-top: 1em;
+      }
+    }
+
+    @media ( min-width: $medium ) {
+      width: (100% / 3);
+      // flex-grow: 0;
+    }
   }
 
   .footer-menu {
     li + li { margin-top: $gutter / 2; }
   }
-  .footer-asso { align-items: flex-end; }
+
+  .footer-asso {
+    @media ( min-width: $medium ) {
+      display: flex;
+
+      p {
+        margin-left: auto;
+        text-align: center;
+      }
+    }
+  }
 
   .colophon {
-    margin-top: $gutter;
-    padding: $gutter / 2 0;
+    margin-top: rem( 32 );
+    padding: rem( 16 ) 0;
     text-align: center;
     background-color: $blue;
+    font-size: rem( 13 );
+
+    @media ( min-width: $medium ) {
+      padding: rem( 12 ) 0;
+    }
 
     .container {
-      > * + * { margin-top: $gutter / 2; }
+      @media ( max-width: $max-small ) {
+        > * + * { margin-top: rem( 16 ); }
+      }
 
       @media screen and ( min-width: $medium ) {
+        display: flex;
         flex-direction: row-reverse;
+        align-items: center;
+
+        .footer-copyright {
+          margin-right: auto;
+        }
       }
     }
   }
@@ -45,6 +121,25 @@ footer.site-footer {
   .reseaux-sociaux {
     display: flex;
     justify-content: space-around;
+    margin: rem( -6 );
+
+    a {
+      display: block;
+      padding: rem( 6 );
+      transition: color $anim-duration $anim-easing;
+
+      @include interact() {
+        color: $yellow;
+      }
+
+      svg {
+        display: block;
+      }
+
+      span {
+        @include hide();
+      }
+    }
   }
 }
 
