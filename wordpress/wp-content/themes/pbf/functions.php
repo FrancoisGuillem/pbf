@@ -47,6 +47,8 @@ if (!function_exists('wp_bootstrap_starter_setup')) :
     // This theme uses wp_nav_menu() in one location.
     register_nav_menus(array(
       'primary' => esc_html__('Primary', 'pbf'),
+      'reseaux-sociaux' => esc_html__('Réseaux Sociaux', 'pbf'),
+      'footer-menu' => esc_html__('Footer', 'pbf'),
     ));
 
     /*
@@ -327,13 +329,13 @@ function filter_wp_nav_menu($nav_menu, $args)
   // }
 
   //parse the <nav> nodes
-  foreach ($x->query("//nav") as $node) {
+  foreach ($x->query("//nav[@id='main-navigation']") as $node) {
     $node->setAttribute("role", "navigation");
-    $node->setAttribute("aria-hidden", 'true');
+    $node->setAttribute("aria-hidden", 'false');
+    //regenerate the html
+    $nav_menu = $node->c14n();
   }
 
-  //regenerate the html
-  $nav_menu = $node->c14n();
 
   return $nav_menu;
 }
@@ -371,6 +373,8 @@ require get_template_directory() . '/inc/plugin-compatibility/plugin-compatibili
 if (!class_exists('wp_bootstrap_navwalker')) {
   require_once(get_template_directory() . '/inc/wp_bootstrap_navwalker.php');
 }
+
+require_once(get_template_directory() . '/inc/social-navwalker.php');
 
 // Custom functions
 include_once(get_template_directory() . '/inc/pbf_functions.php');

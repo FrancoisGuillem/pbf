@@ -3,22 +3,23 @@
 Template Name: Homepage
 */
 add_filter('body_class', function ($classes) {
-  $classes['home'];
+  array_push($classes, 'home');
+
   return $classes;
 });
 
 get_header(); ?>
-<div class="hero-home">
+<div class="hero variant-primary">
   <div class="container">
-    <div class="hero-home-heading">
-      <h1 class="hero-home-title">
-        <span class="hero-home-logo"><?php get_template_part("inc/assets/logo.svg"); ?></span>
+    <div class="hero-heading logo">
+      <h1 class="hero-title">
+        <span class="hero-logo"><?php get_template_part("inc/assets/logo.svg"); ?></span>
         <span><?php echo esc_attr(get_bloginfo('name')); ?></span>
       </h1>
-      <p role="doc-subtitle" class="hero-home-subtitle">Du 25 avril au 3 mai 2020</p>
+      <p role="doc-subtitle" class="hero-subtitle"><span>Du 25 avril au 3 mai 2020</span></p>
     </div>
 
-    <div class="hero-home-image">
+    <div class="hero-image">
       <span class="image-wrapper">
         <img src="<?php echo get_template_directory_uri(); ?>/inc/assets/hero-home/hero@0.5x.jpg" srcset="<?php echo get_template_directory_uri(); ?>/inc/assets/hero-home/hero@0.33x.jpg 607w,
                   <?php echo get_template_directory_uri(); ?>/inc/assets/hero-home/hero@0.5x.jpg 920w,
@@ -67,9 +68,9 @@ get_header(); ?>
   </div>
 </section>
 
-<section class="association">
+<section class="text-illus">
   <div class="container">
-    <div class="association-image">
+    <div class="text-illus-image">
       <span class="image-wrapper">
 
         <img src="<?php echo get_template_directory_uri(); ?>/inc/assets/asso/asso@0.5x.jpg" srcset="<?php echo get_template_directory_uri(); ?>/inc/assets/asso/asso@0.33x.jpg 356w,
@@ -78,8 +79,8 @@ get_header(); ?>
       </span>
     </div>
 
-    <div class="association-content">
-      <h2 class="association-title">Organisé par l’association Paris Beer Club</h2>
+    <div class="text-illus-content">
+      <h2 class="text-illus-title">Organisé par l’association Paris Beer Club</h2>
 
       <p>Paris Beer Club est une association loi 1901, créée en 2010 par une poignée de passionnés qui se sont donnés pour objectif de valoriser l’artisanat brassicole et de faire connaître ses déclinaisons gastronomiques et culturelles. Dès 2013, l’association a accepté de porter l’organisation de la Paris Beer Week. Nous sommes un collectif de bénévoles regroupant professionnels indépendants, particuliers mordus de craft beer et associations de passionnés. Il ne s’agit pas d’un salon professionnel, nous ne proposons donc pas de stands loués au mètre carré et ne revendiquons pas le soutien de l’industrie agro-alimentaire.</p>
 
