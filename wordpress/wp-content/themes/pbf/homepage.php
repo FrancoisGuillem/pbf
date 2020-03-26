@@ -14,7 +14,7 @@ get_header(); ?>
         <span class="hero-logo"><?php get_template_part("inc/assets/logo.svg"); ?></span>
         <span><?php echo esc_attr(get_bloginfo('name')); ?></span>
       </h1>
-      <p role="doc-subtitle" class="hero-home-subtitle"><?= $subtitle; ?></p>
+      <p role="doc-subtitle" class="hero-subtitle"><span><?= $subtitle; ?></span></p>
     </div>
 
     <div class="hero-image">
