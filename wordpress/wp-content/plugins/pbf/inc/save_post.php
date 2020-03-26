@@ -47,6 +47,17 @@ function pbf_save_custom_fields( $post_id ) {
     }
   }
 
+  // Save partner level
+  if (pbf_check_nonce("field_partner_level")) {
+    if (array_key_exists('partner_level', $_POST)) {
+        update_post_meta(
+            $post_id,
+            'partner_level',
+            $_POST['partner_level']
+        );
+    }
+  }
+
   // Save or update organizers for a given event
   if ( pbf_check_nonce("field_organizers")) {
     if (array_key_exists("organizers", $_POST)) {

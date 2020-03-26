@@ -62,6 +62,8 @@
       window.addEventListener('keydown', function (event) {
         return _this.handleKeys(event);
       });
+      this.resized();
+      this.scrolled();
     }
 
     _createClass(Ui, [{
@@ -84,6 +86,8 @@
       value: function observe(property, callback) {
         var _this2 = this;
 
+        var immediate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
         if (!this.observers[property]) {
           this.observers[property] = [];
         }
@@ -93,6 +97,10 @@
         var unobserver = function unobserver() {
           _this2.observers[property].splice(length - 1, 1);
         };
+
+        if (immediate && this.data[property]) {
+          callback(this.data[property]);
+        }
 
         return unobserver;
       }
@@ -207,6 +215,9 @@
         UI.observe('scrollY', function (position) {
           _this.top = position <= 0;
         });
+        UI.observe('width', function (width) {
+          _this.layout = width < 768 ? 'mobile' : 'tablet';
+        });
       }
     }, {
       key: "animate",
@@ -232,6 +243,29 @@
         });
       }
     }, {
+      key: "updateNaveState",
+      value: function updateNaveState() {
+        if (this.layout === 'mobile') {
+          this.opened = false;
+          return;
+        }
+
+        this.opened = true;
+      }
+    }, {
+      key: "layout",
+      get: function get() {
+        return this.data.layout;
+      },
+      set: function set(value) {
+        if (this.data.layout === value) {
+          return;
+        }
+
+        this.data.layout = value;
+        this.updateNaveState();
+      }
+    }, {
       key: "navigationHeight",
       get: function get() {
         return this.data.navigationHeight;
@@ -245,10 +279,21 @@
         return this.data.opened;
       },
       set: function set(value) {
-        this.data.opened = value;
-        this.el.classList.toggle('opened');
         this.refs.opener.setAttribute('aria-expanded', value);
         this.refs.navigation.setAttribute('aria-hidden', !value);
+
+        if (this.data.opened === value || this.layout !== 'mobile') {
+          return;
+        }
+
+        this.data.opened = value;
+
+        if (this.data.opened) {
+          this.el.classList.add('opened');
+        } else {
+          this.el.classList.remove('opened');
+        }
+
         this.animate();
       }
     }, {

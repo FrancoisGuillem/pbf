@@ -35,6 +35,9 @@ class Ui {
     }
 
     window.addEventListener('keydown', event => this.handleKeys(event));
+
+    this.resized();
+    this.scrolled();
   }
 
   detectInputType(event) {
@@ -49,7 +52,7 @@ class Ui {
     this.inputType = 'keyboard';
   }
 
-  observe(property, callback) {
+  observe(property, callback, immediate = false) {
     if (!this.observers[property]) {
       this.observers[property] = [];
     }
@@ -59,6 +62,10 @@ class Ui {
     const unobserver = () => {
       this.observers[property].splice(length - 1, 1);
     };
+
+    if (immediate && this.data[property]) {
+      callback(this.data[property]);
+    }
 
     return unobserver;
   }

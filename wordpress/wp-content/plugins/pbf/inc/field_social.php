@@ -6,12 +6,17 @@ function field_social( $post ) {
   wp_nonce_field('save_pbf_post', 'field_social' );
 
   ?>
+  <style media="screen">
+    label.error {
+      color: red;
+    }
+  </style>
   <p><span class='field-label'>Facebook</span>
     <input type="text" id="facebook" name="facebook" value="<?= $metadata["facebook"][0] ?? ""?>" style="width: 600px;">
   </p>
 <?php
 global $post_type;
-if ($post_type == "participant"):
+if ($post_type == "participant" || $post_type == "partner"):
 ?>
   <p><span class='field-label'>Instagram</span>
     <input type="text" id="instagram" name="instagram" value="<?= $metadata["instagram"][0] ?? ""?>" style="width: 600px;">

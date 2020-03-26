@@ -5,7 +5,7 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package WP_Bootstrap_Starter
+ * @package pbf
  */
 
 add_filter('body_class', function ($classes) {
