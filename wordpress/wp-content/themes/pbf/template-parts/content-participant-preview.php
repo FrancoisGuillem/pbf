@@ -22,8 +22,10 @@
         <img src="<?= $participant["thumbnail"] ?>" alt="" />
       </span>
     <?php } ?>
-    <h3 class="participant-title">
-      <?= $participant["title"] ?>
-    </h3>
+    <div class="participant-title-wrapper">
+      <h3 class="participant-title">
+        <?= $participant["title"] ?>
+      </h3>
+    </div>
   </a>
 </article>

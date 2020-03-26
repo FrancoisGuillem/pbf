@@ -7,17 +7,17 @@ $subtitle = "[:fr]" . get_theme_mod("pbf_subtitle") . "[:en]" . get_theme_mod("p
 $subtitle = __($subtitle);
 
 get_header(); ?>
-<div class="hero-home">
+<div class="hero variant-primary">
   <div class="container">
-    <div class="hero-home-heading">
-      <h1 class="hero-home-title">
-        <span class="hero-home-logo"><?php get_template_part("inc/assets/logo.svg"); ?></span>
+    <div class="hero-heading logo">
+      <h1 class="hero-title">
+        <span class="hero-logo"><?php get_template_part("inc/assets/logo.svg"); ?></span>
         <span><?php echo esc_attr(get_bloginfo('name')); ?></span>
       </h1>
       <p role="doc-subtitle" class="hero-home-subtitle"><?= $subtitle; ?></p>
     </div>
 
-    <div class="hero-home-image">
+    <div class="hero-image">
       <span class="image-wrapper">
         <img src="<?php echo get_template_directory_uri(); ?>/inc/assets/hero-home/hero@0.5x.jpg" srcset="<?php echo get_template_directory_uri(); ?>/inc/assets/hero-home/hero@0.33x.jpg 607w,
                   <?php echo get_template_directory_uri(); ?>/inc/assets/hero-home/hero@0.5x.jpg 920w,
@@ -68,9 +68,9 @@ get_header(); ?>
   </div>
 </section>
 
-<section class="association">
+<section class="text-illus">
   <div class="container">
-    <div class="association-image">
+    <div class="text-illus-image">
       <span class="image-wrapper">
 
         <img src="<?php echo get_template_directory_uri(); ?>/inc/assets/asso/asso@0.5x.jpg" srcset="<?php echo get_template_directory_uri(); ?>/inc/assets/asso/asso@0.33x.jpg 356w,
@@ -79,12 +79,12 @@ get_header(); ?>
       </span>
     </div>
 
-    <div class="association-content">
+    <div class="text-illus-content">
       <?php
       $id = url_to_postid("/association");
       $asso_desc = get_post($id);
       if ($asso_desc) {
-        echo '<h2 class="association-title">' . get_the_title($asso_desc) . '</h2>';
+        echo '<h2 class="text-illus-title">' . get_the_title($asso_desc) . '</h2>';
         echo apply_filters( 'the_content', $asso_desc->post_content );
       }
        ?>

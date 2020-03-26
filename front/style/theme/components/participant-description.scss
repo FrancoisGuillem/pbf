@@ -15,13 +15,14 @@
       }
     }
   }
+
+  .participant-title {
+    @extend %title-level3;
+
+    margin: rem( 32 ) 0 rem( 16 );
+  }
 }
 
-.participant-title {
-  @extend %title-level3;
-
-  margin: rem( 32 ) 0 rem( 16 );
-}
 
 .participant-links {
   $icon-size: rem( 24 );

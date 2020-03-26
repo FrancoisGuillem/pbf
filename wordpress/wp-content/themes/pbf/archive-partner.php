@@ -6,6 +6,13 @@
  * @package pbf
  */
 
+add_filter('body_class', function ($classes) {
+  array_push($classes, 'partners');
+
+  return $classes;
+});
+
+
 get_header(); ?>
 
 <div class="page-header">
@@ -21,11 +28,11 @@ get_header(); ?>
        */
       while (have_posts()) : the_post();
       ?>
-      <li><?php get_template_part('template-parts/content-partner'); ?></li>
+        <li><?php get_template_part('template-parts/content-partner'); ?></li>
       <?php
       endwhile;
 
-      the_posts_navigation();
+      // the_posts_navigation();
       ?>
     </ul>
   <?php } ?>

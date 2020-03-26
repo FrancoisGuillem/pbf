@@ -33,6 +33,10 @@ class Header {
     UI.observe('scrollY', position => {
       this.top = position <= 0;
     });
+
+    UI.observe('width', width => {
+      this.layout = width < 768 ? 'mobile' : 'tablet';
+    });
   }
 
   animate() {
@@ -56,6 +60,30 @@ class Header {
     });
   }
 
+  updateNaveState() {
+    if (this.layout === 'mobile') {
+      this.opened = false;
+
+      return;
+    }
+
+    this.opened = true;
+  }
+
+  get layout() {
+    return this.data.layout;
+  }
+
+  set layout(value) {
+    if (this.data.layout === value) {
+      return;
+    }
+
+    this.data.layout = value;
+
+    this.updateNaveState();
+  }
+
   get navigationHeight() {
     return this.data.navigationHeight;
   }
@@ -69,12 +97,20 @@ class Header {
   }
 
   set opened(value) {
-    this.data.opened = value;
-
-    this.el.classList.toggle('opened');
-
     this.refs.opener.setAttribute('aria-expanded', value);
     this.refs.navigation.setAttribute('aria-hidden', !value);
+
+    if (this.data.opened === value || this.layout !== 'mobile') {
+      return;
+    }
+
+    this.data.opened = value;
+
+    if (this.data.opened) {
+      this.el.classList.add('opened');
+    } else {
+      this.el.classList.remove('opened');
+    }
 
     this.animate();
   }
