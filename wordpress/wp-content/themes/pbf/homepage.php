@@ -6,12 +6,6 @@ Template Name: Homepage
 $subtitle = "[:fr]" . get_theme_mod("pbf_subtitle") . "[:en]" . get_theme_mod("pbf_subtitle_en") . "[:]";
 $subtitle = __($subtitle);
 
-$asso_title  = "[:fr]" . get_theme_mod("pbf_asso_title") . "[:en]" . get_theme_mod("pbf_asso_title_en") . "[:]";
-$asso_title = __($asso_title);
-
-$asso_desc  = "[:fr]" . get_theme_mod("pbf_asso_desc") . "[:en]" . get_theme_mod("pbf_asso_desc_en") . "[:]";
-$asso_desc = __($asso_desc);
-
 get_header(); ?>
 <div class="hero-home">
   <div class="container">
@@ -86,13 +80,18 @@ get_header(); ?>
     </div>
 
     <div class="association-content">
-      <h2 class="association-title"><?= $asso_title; ?></h2>
-
-      <?= $asso_desc; ?>
-      <a class="link-page" href="https://www.parisbeerclub.fr">
+      <?php
+      $id = url_to_postid("/association");
+      $asso_desc = get_post($id);
+      if ($asso_desc) {
+        echo '<h2 class="association-title">' . get_the_title($asso_desc) . '</h2>';
+        echo apply_filters( 'the_content', $asso_desc->post_content );
+      }
+       ?>
+      <p><a class="link-page" href="https://www.parisbeerclub.fr">
         <?php get_template_part("inc/assets/arrow-right.svg"); ?>
         <span><?= __("[:en]Read more[:][:fr]En savoir plus[:]") ?></span>
-      </a>
+      </a></p>
     </div>
 
   </div>
