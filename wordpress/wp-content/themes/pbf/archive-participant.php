@@ -46,7 +46,7 @@ while (have_posts()) : the_post();
     "title" => get_the_title(),
     "id" => get_the_ID(),
     "permalink" => get_permalink(),
-    "thumbnail" => get_the_post_thumbnail_url()
+    "thumbnail" => get_the_post_thumbnail_url(null, "medium")
   );
   array_push($categories[$category["slug"]]["participants"], $participant);
 endwhile;

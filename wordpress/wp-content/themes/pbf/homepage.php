@@ -12,11 +12,6 @@ $asso_title = __($asso_title);
 $asso_desc  = "[:fr]" . get_theme_mod("pbf_asso_desc") . "[:en]" . get_theme_mod("pbf_asso_desc_en") . "[:]";
 $asso_desc = __($asso_desc);
 
-add_filter('body_class', function ($classes) {
-  $classes['home'];
-  return $classes;
-});
-
 get_header(); ?>
 <div class="hero-home">
   <div class="container">
@@ -106,10 +101,25 @@ get_header(); ?>
   <div class="container">
     <h2 class="sponsors-title"><?php _e("[:fr]Partenaires[:en]Partners[:]"); ?></h2>
     <ul>
-      <li><a href="https://www.groundcontrolparis.com/" class="sponsor-groundcontrol"><img src="<?php echo get_template_directory_uri(); ?>/inc/assets/sponsors/ground-control.png" width="247" height="98" alt="" /><span>Ground Control</span></a></li>
-      <li><a href="https://fermentis.com/" class="sponsor-fermentis"><img src="<?php echo get_template_directory_uri(); ?>/inc/assets/sponsors/fermentis.png" width="240" height="187" alt="" /><span>Fermentis</span></a></li>
-      <li><a href="https://grainfather.com/" class="sponsor-grainfather"><img src="<?php echo get_template_directory_uri(); ?>/inc/assets/sponsors/the-grainfather.png" width="232" height="103" alt="" /><span>The Graindfather</span></a></li>
-      <li><a href="http://www.dbi-biere.com/" class="sponsor-dbi"><img src="<?php echo get_template_directory_uri(); ?>/inc/assets/sponsors/dbi.png" width="150" height="146" alt="" /><span>DBI</span></a></li>
+      <?php
+       query_posts(array(
+         'post_type' => 'partner',
+         'showposts' => 100
+       ) );
+       $current_level = 1;
+
+       while (have_posts()) : the_post();
+          $level = get_post_meta(get_the_ID())["partner_level"][0];
+          if ($level > $current_level) {
+            $current_level = $level;
+            echo '</ul><ul>';
+          }
+       ?>
+        <li><a href="/partner#<?php echo $post->post_name; ?>" class="sponsor-level-<?= $level ?>"><?php the_post_thumbnail([247, 247]); ?><span><?php the_title(); ?></span></a></li>
+
+      <?php
+      endwhile;
+      ?>
     </ul>
   </div>
 </section>
