@@ -9,18 +9,16 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin-left: rem( -16 );
-    margin-right: rem( -16 );
+    margin: 0 rem( -16 );
   }
 
   li {
-    margin: rem( 16 ) 0;
-    flex: 1 0 auto;
+    margin: rem( 16 );
+    flex: 0 1 auto;
   }
 
   a[class^=sponsor-] {
     display: block;
-    margin: 0 rem( 16 );
 
     span {
       @include hide();
@@ -36,6 +34,12 @@
       img {
         transform: scale( $anim-scale );
       }
+    }
+  }
+
+  @media ( min-width: $medium ) {
+    li {
+      width: calc( #{( 100% / 4 )} - #{rem( 32 )} );
     }
   }
 }

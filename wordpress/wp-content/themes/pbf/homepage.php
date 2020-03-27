@@ -28,9 +28,9 @@ get_header(); ?>
 </div>
 <section class="festival-intro container">
   <?php while (have_posts()) : the_post(); ?>
-  <h2 class="festival-title"><?php the_title(); ?></h2>
-  <?php the_content(); ?>
-<?php endwhile; ?>
+    <h2 class="festival-title"><?php the_title(); ?></h2>
+    <?php the_content(); ?>
+  <?php endwhile; ?>
   <div class="festival-links" data-bind="scroll-slider">
     <div class="festival-links-wrapper">
       <ul>
@@ -85,13 +85,13 @@ get_header(); ?>
       $asso_desc = get_post($id);
       if ($asso_desc) {
         echo '<h2 class="text-illus-title">' . get_the_title($asso_desc) . '</h2>';
-        echo apply_filters( 'the_content', $asso_desc->post_content );
+        echo apply_filters('the_content', $asso_desc->post_content);
       }
-       ?>
+      ?>
       <p><a class="link-page" href="https://www.parisbeerclub.fr">
-        <?php get_template_part("inc/assets/arrow-right.svg"); ?>
-        <span><?= __("[:en]Read more[:][:fr]En savoir plus[:]") ?></span>
-      </a></p>
+          <?php get_template_part("inc/assets/arrow-right.svg"); ?>
+          <span><?= __("[:en]Read more[:][:fr]En savoir plus[:]") ?></span>
+        </a></p>
     </div>
 
   </div>
@@ -101,20 +101,20 @@ get_header(); ?>
     <h2 class="sponsors-title"><?php _e("[:fr]Partenaires[:en]Partners[:]"); ?></h2>
     <ul>
       <?php
-       query_posts(array(
-         'post_type' => 'partner',
-         'showposts' => 100
-       ) );
-       $current_level = 1;
+      query_posts(array(
+        'post_type' => 'partner',
+        'showposts' => 100
+      ));
+      $current_level = 1;
 
-       while (have_posts()) : the_post();
-          $level = get_post_meta(get_the_ID())["partner_level"][0];
-          if ($level > $current_level) {
-            $current_level = $level;
-            echo '</ul><ul>';
-          }
-       ?>
-        <li><a href="/partner#<?php echo $post->post_name; ?>" class="sponsor-level-<?= $level ?>"><?php the_post_thumbnail([247, 247]); ?><span><?php the_title(); ?></span></a></li>
+      while (have_posts()) : the_post();
+        $level = get_post_meta(get_the_ID())["partner_level"][0];
+        if ($level > $current_level) {
+          $current_level = $level;
+          echo '</ul><ul>';
+        }
+      ?>
+        <li><a href="/partner#<?php echo $post->post_name; ?>" class="sponsor-level-<?= $level ?>"><?php the_post_thumbnail([210, 420]); ?><span><?php the_title(); ?></span></a></li>
 
       <?php
       endwhile;

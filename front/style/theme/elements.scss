@@ -5,6 +5,11 @@ body {
   line-height: $line-height;
 }
 
+html,
+body {
+  scroll-padding: rem( 80 + 16 );
+}
+
 h1,
 h2,
 h3,
