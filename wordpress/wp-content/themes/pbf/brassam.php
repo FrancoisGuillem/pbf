@@ -30,29 +30,28 @@ get_header(); ?>
     </div>
   </div>
 </div>
-<section class="festival-intro container">
-  <h2 class="festival-title">Les grandes étapes</h2>
-</section>
+<?php
+$getchilds = array(
+  'parent'        => $post->ID,
+  'child_of'      => $post->ID,
+  'sort_column'   => 'menu_order',
+  'sort_order'    => 'ASC'
+);
 
-<section class="text-illus">
-  <div class="container">
-    <div class="text-illus-image">
-      <span class="image-wrapper">
+$postlist = get_pages($getchilds);
 
-        <img src="<?php echo get_template_directory_uri(); ?>/inc/assets/brassam/winner@0.5x.jpg" srcset="<?php echo get_template_directory_uri(); ?>/inc/assets/brassam/winner@0.33x.jpg 356w,
-                <?php echo get_template_directory_uri(); ?>/inc/assets/brassam/winner@0.5x.jpg 540w,
-                <?php echo get_template_directory_uri(); ?>/inc/assets/brassam/winner.jpg 1080w" sizes="(min-width: 992px) 540px, 356px" alt="" />
-      </span>
-    </div>
+foreach ($postlist as $post) {
 
-    <div class="text-illus-content">
-      <h2 class="text-illus-title">Andrew, gagnant de la dernière édition</h2>
+  // setup post data, so page template will use it as a "master" post
+  setup_postdata($post);
 
-      <p>En collaboration avec la Brasserie de l'Être, Andrew, gagnant du concours de brassage amateur de la Paris Beer Week 2019 a pu brasser une Rouge des Flandes.</p>
-    </div>
+  // we get page template name for the post and remove ".php" at the end to make it work
+  $template = preg_replace("/\.php$/", "", get_page_template_slug($post));
 
-  </div>
-</section>
+  // now let WordPress fetch that page for you
+  echo get_template_part($template);
+}
+?>
 <?php
 
 get_footer(); ?>
