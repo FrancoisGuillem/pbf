@@ -2,11 +2,9 @@
 /*
 Template Name: Homepage
 */
-add_filter('body_class', function ($classes) {
-  array_push($classes, 'home');
 
-  return $classes;
-});
+$subtitle = "[:fr]" . get_theme_mod("pbf_subtitle") . "[:en]" . get_theme_mod("pbf_subtitle_en") . "[:]";
+$subtitle = __($subtitle);
 
 get_header(); ?>
 <div class="hero variant-primary">
@@ -16,7 +14,7 @@ get_header(); ?>
         <span class="hero-logo"><?php get_template_part("inc/assets/logo.svg"); ?></span>
         <span><?php echo esc_attr(get_bloginfo('name')); ?></span>
       </h1>
-      <p role="doc-subtitle" class="hero-subtitle"><span>Du 25 avril au 3 mai 2020</span></p>
+      <p role="doc-subtitle" class="hero-subtitle"><span><?= $subtitle; ?></span></p>
     </div>
 
     <div class="hero-image">
@@ -29,8 +27,10 @@ get_header(); ?>
   </div>
 </div>
 <section class="festival-intro container">
-  <h2 class="festival-title">Le festival de la bière pour tou•te•s</h2>
-  <p>Rendez-vous du 25 avril au 1er mai 2020 pour une semaine d'événements en Ile-de-France ! Et le 2 et 3 mai, direction le Ground Control, pour un week-end de clôture avec 52 brasseries presentes.</p>
+  <?php while (have_posts()) : the_post(); ?>
+    <h2 class="festival-title"><?php the_title(); ?></h2>
+    <?php the_content(); ?>
+  <?php endwhile; ?>
   <div class="festival-links" data-bind="scroll-slider">
     <div class="festival-links-wrapper">
       <ul>
@@ -80,16 +80,18 @@ get_header(); ?>
     </div>
 
     <div class="text-illus-content">
-      <h2 class="text-illus-title">Organisé par l’association Paris Beer Club</h2>
-
-      <p>Paris Beer Club est une association loi 1901, créée en 2010 par une poignée de passionnés qui se sont donnés pour objectif de valoriser l’artisanat brassicole et de faire connaître ses déclinaisons gastronomiques et culturelles. Dès 2013, l’association a accepté de porter l’organisation de la Paris Beer Week. Nous sommes un collectif de bénévoles regroupant professionnels indépendants, particuliers mordus de craft beer et associations de passionnés. Il ne s’agit pas d’un salon professionnel, nous ne proposons donc pas de stands loués au mètre carré et ne revendiquons pas le soutien de l’industrie agro-alimentaire.</p>
-
-      <p>Notre but n’est pas de faire de la promotion commerciale mais de développer l’intérêt du public pour les produits brassicoles non standardisés, et de transmettre notre enthousiasme pour le partage et la convivialité qu’ils dégagent.</p>
-
-      <a class="link-page" href="https://www.parisbeerclub.fr">
-        <?php get_template_part("inc/assets/arrow-right.svg"); ?>
-        <span><?= __("[:en]Read more[:][:fr]En savoir plus[:]") ?></span>
-      </a>
+      <?php
+      $id = url_to_postid("/association");
+      $asso_desc = get_post($id);
+      if ($asso_desc) {
+        echo '<h2 class="text-illus-title">' . get_the_title($asso_desc) . '</h2>';
+        echo apply_filters('the_content', $asso_desc->post_content);
+      }
+      ?>
+      <p><a class="link-page" href="https://www.parisbeerclub.fr">
+          <?php get_template_part("inc/assets/arrow-right.svg"); ?>
+          <span><?= __("[:en]Read more[:][:fr]En savoir plus[:]") ?></span>
+        </a></p>
     </div>
 
   </div>
@@ -98,10 +100,25 @@ get_header(); ?>
   <div class="container">
     <h2 class="sponsors-title"><?php _e("[:fr]Partenaires[:en]Partners[:]"); ?></h2>
     <ul>
-      <li><a href="https://www.groundcontrolparis.com/" class="sponsor-groundcontrol"><img src="<?php echo get_template_directory_uri(); ?>/inc/assets/sponsors/ground-control.png" width="247" height="98" alt="" /><span>Ground Control</span></a></li>
-      <li><a href="https://fermentis.com/" class="sponsor-fermentis"><img src="<?php echo get_template_directory_uri(); ?>/inc/assets/sponsors/fermentis.png" width="240" height="187" alt="" /><span>Fermentis</span></a></li>
-      <li><a href="https://grainfather.com/" class="sponsor-grainfather"><img src="<?php echo get_template_directory_uri(); ?>/inc/assets/sponsors/the-grainfather.png" width="232" height="103" alt="" /><span>The Graindfather</span></a></li>
-      <li><a href="http://www.dbi-biere.com/" class="sponsor-dbi"><img src="<?php echo get_template_directory_uri(); ?>/inc/assets/sponsors/dbi.png" width="150" height="146" alt="" /><span>DBI</span></a></li>
+      <?php
+      query_posts(array(
+        'post_type' => 'partner',
+        'showposts' => 100
+      ));
+      $current_level = 1;
+
+      while (have_posts()) : the_post();
+        $level = get_post_meta(get_the_ID())["partner_level"][0];
+        if ($level > $current_level) {
+          $current_level = $level;
+          echo '</ul><ul>';
+        }
+      ?>
+        <li><a href="/partner#<?php echo $post->post_name; ?>" class="sponsor-level-<?= $level ?>"><?php the_post_thumbnail([210, 420]); ?><span><?php the_title(); ?></span></a></li>
+
+      <?php
+      endwhile;
+      ?>
     </ul>
   </div>
 </section>

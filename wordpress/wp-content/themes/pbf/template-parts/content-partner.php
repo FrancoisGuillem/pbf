@@ -15,7 +15,6 @@
 
 $title = get_the_title();
 $thumbnail = get_the_post_thumbnail_url();
-
 $metadata = get_post_meta(get_the_ID());
 $facebook = $metadata["facebook"][0] ?? "";
 $instagram = $metadata["instagram"][0] ?? "";
@@ -23,14 +22,14 @@ $website = $metadata["website"][0] ?? "";
 
 ?>
 
-<article class="partner-detail">
+<article id="<?= $post->post_name; ?>" class="partner-detail">
   <div class="partner-detail-info">
-    <span class="partner-img">
-      <img src="<?= $thumbnail; ?>" alt="" />
-    </span>
-    <h2 class="partner-detail-title">
-      <?= $title; ?>
-    </h2>
+    <div class="partner-img-wrapper">
+      <span class="partner-img">
+        <img src="<?= $thumbnail; ?>" alt="" />
+      </span>
+    </div>
+    <h2 class="partner-detail-title"><?= $title; ?></h2>
     <ul class="partner-links">
       <?php
       if (!empty($facebook)) { ?>

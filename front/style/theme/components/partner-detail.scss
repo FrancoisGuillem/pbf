@@ -25,12 +25,24 @@
 .partner-detail-info {
   background-color: rgba( $blue, 0.1 );
   padding: rem( 32 );
+}
+
+.partner-img-wrapper {
+  max-width: rem( 200 );
+  margin: 0 auto;
 
   .partner-img {
-    max-width: rem( 202 );
     display: block;
-    margin: 0 auto;
-    text-align: center;
+    position: relative;
+    padding-top: 100%;
+
+    img {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 100%;
+      transform: translateY( -50% );
+    }
   }
 }
 

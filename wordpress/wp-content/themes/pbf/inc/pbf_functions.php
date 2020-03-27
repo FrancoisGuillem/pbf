@@ -68,7 +68,7 @@ function get_pbf_event_organizers($event_metadata)
         "title" => get_the_title($post),
         "id" => get_the_ID($post),
         "permalink" => get_permalink($post),
-        "thumbnail" => get_the_post_thumbnail_url($post),
+        "thumbnail" => get_the_post_thumbnail_url($post, [44, 44]),
         "categories" => $categories,
       );
 
