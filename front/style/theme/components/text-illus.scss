@@ -4,6 +4,10 @@
   overflow: hidden;
   padding: rem( 80 ) 0;
 
+  .hero + & {
+    background-color: $purple;
+  }
+
   .image-wrapper {
     display: block;
     overflow: hidden;

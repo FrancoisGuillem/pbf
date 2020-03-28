@@ -3,7 +3,6 @@
 /**
  * Template Name: Text + illustration
  */
-
 ?>
 <section class="text-illus">
   <div class="container">
@@ -16,7 +15,7 @@
     <div class="text-illus-content">
       <h2 class="text-illus-title"><?= get_the_title() ?></h2>
 
-      <?= the_content(); ?>
+      <?= get_the_content_pbf(); ?>
     </div>
 
   </div>

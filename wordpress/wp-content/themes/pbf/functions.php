@@ -233,6 +233,17 @@ function filter_wp_nav_menu($nav_menu, $args)
 
   return $nav_menu;
 }
+
+function get_the_content_pbf($more_link_text = '(more...)', $stripteaser = 0, $more_file = '')
+{
+  $content = get_the_content($more_link_text, $stripteaser, $more_file);
+  $content = apply_filters('the_content', $content);
+  $content = str_replace(']]>', ']]&gt;', $content);
+  $content = preg_replace('#<a(.*?)>(.*?)</a>#i', '<a class="link-page" \1>' . file_get_contents("inc/assets/arrow-right.svg.php", TRUE) . '<span>\2</span></a>', $content);
+
+  return $content;
+}
+
 add_filter('wp_nav_menu', 'filter_wp_nav_menu', 10, 2);
 
 

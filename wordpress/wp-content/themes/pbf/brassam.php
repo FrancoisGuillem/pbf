@@ -12,24 +12,6 @@ get_header(); ?>
 <div class="page-header">
   <h1 class="page-title"><?= get_the_title() ?></h1>
 </div>
-<div class="hero variant-secondary">
-  <div class="container">
-    <div class="hero-heading">
-      <h2 class="hero-title">Concours de<br />brassage amateur</h2>
-      <p role="doc-subtitle" class="hero-subtitle"><span>Résultats le 3 mai 2020</span></p>
-      <p class="hero-info"><span>Inscriptions cloturées</span></p>
-    </div>
-
-
-    <div class="hero-image">
-      <span class="image-wrapper scrim-light-left">
-        <img src="<?php echo get_template_directory_uri(); ?>/inc/assets/brassam/brassam@0.5x.jpg" srcset="<?php echo get_template_directory_uri(); ?>/inc/assets/brassam/brassam@0.33x.jpg 607w,
-                  <?php echo get_template_directory_uri(); ?>/inc/assets/brassam/brassam@0.5x.jpg 920w,
-                  <?php echo get_template_directory_uri(); ?>/inc/assets/brassam/brassam.jpg 1840w" sizes="(min-width: 992px) 920px, 607px" alt="" />
-      </span>
-    </div>
-  </div>
-</div>
 <?php
 $getchilds = array(
   'parent'        => $post->ID,
