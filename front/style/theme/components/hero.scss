@@ -179,6 +179,17 @@
 .hero-info {
   padding-top: rem( 16 );
 
+  &.cta-solid {
+    @extend %title-style;
+
+    padding: rem( 8 ) rem( 16 );
+    height: auto;
+
+    @media ( max-width: $max-small ) {
+      margin-top: rem( 16 );
+    }
+  }
+
   span {
     @extend %title-style;
 
@@ -197,6 +208,7 @@
     margin-top: ( -76% / 1110 * 100 );
     padding-top: 0;
 
+    &.cta-solid,
     span {
       @include title-level($tt3...);
     }

@@ -8,6 +8,20 @@
     margin-bottom: rem( 32 );
   }
 
+  .participant-description {
+    margin-bottom: rem( 40 );
+  }
+
+  .participant-events {
+    width: 100%;
+  }
+
+  .participant-no-events {
+    @extend %title-level3;
+
+    text-align: center;
+  }
+
   @media ( max-width: $max-medium ) {
     main .container {
       flex-wrap: wrap;
@@ -16,6 +30,10 @@
     .participant-description {
       order: 2;
     }
+
+    .participant-no-events {
+      margin-bottom: rem( 40 );
+    }
   }
 
   @media ( min-width: $large ) {
@@ -23,7 +41,6 @@
       width: ( 100% / 3 );
       flex: 1 0 auto;
       max-width: rem( 350 );
-      margin-bottom: rem( 40 );
     }
 
     .participant-events {
