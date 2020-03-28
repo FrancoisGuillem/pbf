@@ -6,6 +6,7 @@
 
 $custom = get_post_custom();
 $heroInfo = $custom['hero-info'][0]  ?? "";
+$heroInfoLink = $custom['hero-info-link'][0]  ?? "";
 $heroType = $custom['hero-type'][0]  ?? "primary";
 ?>
 <div class="hero variant-<?= $heroType ?>">
@@ -13,9 +14,13 @@ $heroType = $custom['hero-type'][0]  ?? "primary";
     <div class="hero-heading">
       <h2 class="hero-title"><?= get_the_title() ?></h2>
       <p role="doc-subtitle" class="hero-subtitle"><span><?php echo get_the_content(); ?></span></p>
-      <?php if ($heroInfo) { ?>
-        <p class="hero-info"><span><?= $heroInfo ?></span></p>
-      <?php } ?>
+      <?php if ($heroInfo) {
+        if ($heroInfoLink) { ?>
+          <a href="<?= $heroInfoLink ?>" class="cta-solid variant-primary hero-info"><?= $heroInfo ?></a>
+        <?php } else { ?>
+          <p class="hero-info"><span><?= $heroInfo ?></span></p>
+      <?php }
+      } ?>
     </div>
 
 
