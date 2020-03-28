@@ -19,7 +19,13 @@
   .participant-title {
     @extend %title-level3;
 
-    margin: rem( 32 ) 0 rem( 16 );
+    margin: 0 0 rem( 16 );
+  }
+
+  .participant-img {
+    & + .participant-title {
+      margin-top: rem( 32 );
+    }
   }
 }
 
