@@ -24,8 +24,6 @@ function getUrlInTargetLanguage($targetLang)
   <meta charset="<?php bloginfo('charset'); ?>">
   <meta name='viewport' content='width=device-width, initial-scale=1, viewport-fit=cover'>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="profile" href="http://gmpg.org/xfn/11">
-  <?php wp_head(); ?>
   <link rel="icon" type="image/svg+xml" href="<?php echo get_template_directory_uri(); ?>/inc/assets/icons/favicon.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="<?php echo get_template_directory_uri(); ?>/inc/assets/icons/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="<?php echo get_template_directory_uri(); ?>/inc/assets/icons/favicon-32x32.png">
@@ -36,6 +34,14 @@ function getUrlInTargetLanguage($targetLang)
   <meta name="msapplication-TileColor" content="#2a2150">
   <meta name="msapplication-config" content="<?php echo get_template_directory_uri(); ?>/inc/assets/icons/browserconfig.xml">
   <meta name="theme-color" content="#ffffff">
+  <meta property="og:site_name" content="<?php bloginfo('name'); ?>">
+  <meta property="og:image" content="<?= get_the_post_thumbnail_url() ?: get_template_directory_uri() . '/inc/assets/social.jpg' ?>" />
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="<?php bloginfo('url'); ?>">
+  <meta name="description" content="<?= get_the_excerpt() ?: bloginfo('description'); ?>" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="author" content="Paris Beer Club">
+  <?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
