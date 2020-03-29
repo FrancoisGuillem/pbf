@@ -10,11 +10,9 @@
  * @package pbf
  */
 
-function getUrlInTargetLanguage($targetLang)
-{
-  global $qtranslate_slug;
-  return $qtranslate_slug->get_permalink($targetLang);
-}
+global $wp;
+$current_url = home_url(add_query_arg(array(), $wp->request));
+$thumbnail = get_the_post_thumbnail_url();
 
 ?>
 <!DOCTYPE html>
@@ -35,11 +33,14 @@ function getUrlInTargetLanguage($targetLang)
   <meta name="msapplication-config" content="<?php echo get_template_directory_uri(); ?>/inc/assets/icons/browserconfig.xml">
   <meta name="theme-color" content="#ffffff">
   <meta property="og:site_name" content="<?php bloginfo('name'); ?>">
-  <meta property="og:image" content="<?= get_the_post_thumbnail_url() ?: get_template_directory_uri() . '/inc/assets/social.jpg' ?>" />
+  <meta property="og:image" content="<?= $thumbnail ?: get_template_directory_uri() . '/inc/assets/social.jpg' ?>" />
   <meta property="og:type" content="website">
-  <meta property="og:url" content="<?php bloginfo('url'); ?>">
+  <meta property="og:url" content="<?= $current_url; ?>">
+  <meta property="og:title" content="<?= wp_title('|', true, 'right') . bloginfo('name'); ?>">
   <meta name="description" content="<?= get_the_excerpt() ?: bloginfo('description'); ?>" />
-  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:description" content="<?= get_the_excerpt() ?: bloginfo('description'); ?>" />
+  <meta name="twitter:card" content="<?= $thumbnail ? 'summary' : 'summary_large_image' ?>">
+  <meta name="twitter:site" content="@ParisBeerClub">
   <meta name="author" content="Paris Beer Club">
   <?php wp_head(); ?>
 </head>
