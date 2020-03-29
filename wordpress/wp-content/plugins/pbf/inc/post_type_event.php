@@ -8,39 +8,33 @@ add_action( 'init', 'register_type_events', 0 );
 function register_type_events() {
 
  	$labels = array(
- 		'name'                  => _x( 'Evènements', 'Post Type General Name', 'pbf' ),
- 		'singular_name'         => _x( 'Evènement', 'Post Type Singular Name', 'pbf' ),
- 		'menu_name'             => __( 'Evènements', 'pbf' ),
- 		'name_admin_bar'        => __( 'Evènements', 'pbf' ),
- 		'archives'              => __( 'Evènements', 'pbf' ),
- 		'attributes'            => __( "Attribut de l'Evènement", 'pbf' ),
+ 		'name'                  => _x( 'Evénements', 'Post Type General Name', 'pbf' ),
+ 		'singular_name'         => _x( 'Evénement', 'Post Type Singular Name', 'pbf' ),
+ 		'menu_name'             => __( 'Evénements', 'pbf' ),
+ 		'name_admin_bar'        => __( 'Evénements', 'pbf' ),
+ 		'archives'              => __( 'Evénements', 'pbf' ),
+ 		'attributes'            => __( "Attribut de l'Evénement", 'pbf' ),
  		'parent_item_colon'     => __( 'Parent Item:', 'pbf' ),
- 		'all_items'             => __( 'Tous les Evènements', 'pbf' ),
- 		'add_new_item'          => __( 'Ajouter un Evènement', 'pbf' ),
+ 		'all_items'             => __( 'Tous les Evénements', 'pbf' ),
+ 		'add_new_item'          => __( 'Ajouter un Evénement', 'pbf' ),
  		'add_new'               => __( 'Ajouter', 'pbf' ),
- 		'new_item'              => __( 'Nouvel Evènement', 'pbf' ),
- 		'edit_item'             => __( "Editer l'Evènement", 'pbf' ),
- 		'update_item'           => __( "Actualiser l'Evènement", 'pbf' ),
- 		'view_item'             => __( 'Voir Evènement', 'pbf' ),
- 		'view_items'            => __( 'Voir Evènements', 'pbf' ),
- 		'search_items'          => __( 'Chercher Evènement', 'pbf' ),
- 		'not_found'             => __( 'Not found', 'pbf' ),
- 		'not_found_in_trash'    => __( 'Not found in Trash', 'pbf' ),
- 		'featured_image'        => __( 'Featured Image', 'pbf' ),
- 		'set_featured_image'    => __( 'Set featured image', 'pbf' ),
- 		'remove_featured_image' => __( 'Remove featured image', 'pbf' ),
- 		'use_featured_image'    => __( 'Use as featured image', 'pbf' ),
- 		'insert_into_item'      => __( 'Insert into item', 'pbf' ),
- 		'uploaded_to_this_item' => __( 'Uploaded to this item', 'pbf' ),
- 		'items_list'            => __( 'Items list', 'pbf' ),
- 		'items_list_navigation' => __( 'Items list navigation', 'pbf' ),
- 		'filter_items_list'     => __( 'Filter items list', 'pbf' ),
+ 		'new_item'              => __( 'Nouvel Evénement', 'pbf' ),
+ 		'edit_item'             => __( "Editer l'Evénement", 'pbf' ),
+ 		'update_item'           => __( "Actualiser l'Evénement", 'pbf' ),
+ 		'view_item'             => __( 'Voir Evénement', 'pbf' ),
+ 		'view_items'            => __( 'Voir Evénements', 'pbf' ),
+ 		'search_items'          => __( 'Chercher un Evénement', 'pbf' ),
+ 		'not_found'             => __( 'Introuvable', 'pbf' ),
+ 		'not_found_in_trash'    => __( 'Introuvable dans la corbeille', 'pbf' ),
+ 		'items_list'            => __( 'Liste des Evénements', 'pbf' ),
+ 		'items_list_navigation' => __( 'Navigation', 'pbf' ),
+ 		'filter_items_list'     => __( 'Filtrer la Liste des Evénements', 'pbf' ),
  	);
  	$args = array(
  		'label'                 => __( 'Evènements', 'pbf' ),
  		'description'           => __( 'Les Evènements du Paris Beer Festival', 'pbf' ),
  		'labels'                => $labels,
- 		'supports'              => array( 'title', 'editor', 'thumbnail' ),
+ 		'supports'              => array( 'title', 'editor'),
  		'hierarchical'          => false,
  		'public'                => true,
  		'show_ui'               => true,
@@ -97,7 +91,7 @@ function register_type_events() {
       "high"
     );
   }
-  
+
  // Add address metabox
  add_action( 'add_meta_boxes', 'event_address' );
  function event_address() {
