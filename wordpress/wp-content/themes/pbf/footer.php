@@ -21,8 +21,8 @@
           <?php get_template_part("inc/assets/logo.svg"); ?>
           <span>Paris Beer Festival</span>
         </p>
-        <p><?php _e("[:fr]Du 25 avril au 3 mai 2020, une semaine entière consacrée à la bière artisanale en Île-de-France.
-                      [:en]English description[:]"); ?></p>
+        <p><?php _e("[:fr]Du 3 au 11 octobre 2020, une semaine entière consacrée à la bière artisanale en Île-de-France.
+                      [:en]From October 3 to October 11 2020, an entire week devoted to craft beer in Île-de-France.[:]"); ?></p>
       </div>
       <?php
       wp_nav_menu(array(
