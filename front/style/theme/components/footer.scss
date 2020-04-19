@@ -1,7 +1,7 @@
 footer.site-footer {
   color: #fff;
   background-color: $blue-dark;
-  padding: $gutter 0 env( safe-area-inset-bottom );
+  padding: $gutter 0 0;
 
   a {
     text-decoration: none;
@@ -92,16 +92,18 @@ footer.site-footer {
 
   .colophon {
     margin-top: rem( 32 );
-    padding: rem( 16 ) 0;
+    padding: rem( 16 ) 0 env( safe-area-inset-bottom );
     text-align: center;
     background-color: $blue;
     font-size: rem( 13 );
 
     @media ( min-width: $medium ) {
-      padding: rem( 12 ) 0;
+      padding: rem( 12 ) 0 env( safe-area-inset-bottom );
     }
 
     .container {
+      padding-bottom: rem( 16 );
+
       @media ( max-width: $max-small ) {
         > * + * { margin-top: rem( 16 ); }
       }
@@ -110,6 +112,7 @@ footer.site-footer {
         display: flex;
         flex-direction: row-reverse;
         align-items: center;
+        padding-bottom: rem( 12 );
 
         .footer-copyright {
           margin-right: auto;
