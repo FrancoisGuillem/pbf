@@ -10,8 +10,16 @@ class Filter {
       ),
     };
 
+    const categories = [];
+
+    for (const el of this.el.elements) {
+      if (el.checked) {
+        categories.push(el.value);
+      }
+    }
+
     this.data = {
-      categories: [],
+      categories,
     };
 
     this.bind();
@@ -19,7 +27,7 @@ class Filter {
 
   bind() {
     this.el.addEventListener('input', event => {
-      this.setFilterState();
+      this.setFilterState(event.target);
     });
   }
 
@@ -32,11 +40,24 @@ class Filter {
     });
   }
 
-  setFilterState() {
+  setFilterState(target) {
+    const reverse = this.categories.length === this.refs.list.length;
     const categories = [];
-    for (const el of this.el.elements) {
-      if (el.checked) {
-        categories.push(el.value);
+
+    if (reverse) {
+      for (const el of this.el.elements) {
+        if (el.checked) {
+          el.checked = false;
+        } else {
+          el.checked = true;
+          categories.push(el.value);
+        }
+      }
+    } else {
+      for (const el of this.el.elements) {
+        if (el.checked) {
+          categories.push(el.value);
+        }
       }
     }
 

@@ -538,8 +538,36 @@
       this.refs = {
         list: Array.from(document.querySelectorAll("#".concat(el.getAttribute('data-controls'), " [data-category]")))
       };
+      var categories = [];
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = this.el.elements[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var _el = _step.value;
+
+          if (_el.checked) {
+            categories.push(_el.value);
+          }
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+
       this.data = {
-        categories: []
+        categories: categories
       };
       this.bind();
     }
@@ -550,7 +578,7 @@
         var _this = this;
 
         this.el.addEventListener('input', function (event) {
-          _this.setFilterState();
+          _this.setFilterState(event.target);
         });
       }
     }, {
@@ -565,31 +593,65 @@
       }
     }, {
       key: "setFilterState",
-      value: function setFilterState() {
+      value: function setFilterState(target) {
+        var reverse = this.categories.length === this.refs.list.length;
         var categories = [];
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
 
-        try {
-          for (var _iterator = this.el.elements[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var el = _step.value;
+        if (reverse) {
+          var _iteratorNormalCompletion2 = true;
+          var _didIteratorError2 = false;
+          var _iteratorError2 = undefined;
 
-            if (el.checked) {
-              categories.push(el.value);
+          try {
+            for (var _iterator2 = this.el.elements[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+              var el = _step2.value;
+
+              if (el.checked) {
+                el.checked = false;
+              } else {
+                el.checked = true;
+                categories.push(el.value);
+              }
+            }
+          } catch (err) {
+            _didIteratorError2 = true;
+            _iteratorError2 = err;
+          } finally {
+            try {
+              if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+                _iterator2.return();
+              }
+            } finally {
+              if (_didIteratorError2) {
+                throw _iteratorError2;
+              }
             }
           }
-        } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
-        } finally {
+        } else {
+          var _iteratorNormalCompletion3 = true;
+          var _didIteratorError3 = false;
+          var _iteratorError3 = undefined;
+
           try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-              _iterator.return();
+            for (var _iterator3 = this.el.elements[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+              var _el2 = _step3.value;
+
+              if (_el2.checked) {
+                categories.push(_el2.value);
+              }
             }
+          } catch (err) {
+            _didIteratorError3 = true;
+            _iteratorError3 = err;
           } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
+            try {
+              if (!_iteratorNormalCompletion3 && _iterator3.return != null) {
+                _iterator3.return();
+              }
+            } finally {
+              if (_didIteratorError3) {
+                throw _iteratorError3;
+              }
             }
           }
         }
@@ -610,26 +672,26 @@
     return Filter;
   }();
 
-  var _iteratorNormalCompletion2 = true;
-  var _didIteratorError2 = false;
-  var _iteratorError2 = undefined;
+  var _iteratorNormalCompletion4 = true;
+  var _didIteratorError4 = false;
+  var _iteratorError4 = undefined;
 
   try {
-    for (var _iterator2 = document.querySelectorAll('form.category-filters[data-controls]')[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-      var el$1 = _step2.value;
+    for (var _iterator4 = document.querySelectorAll('form.category-filters[data-controls]')[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+      var el$1 = _step4.value;
       new Filter(el$1);
     }
   } catch (err) {
-    _didIteratorError2 = true;
-    _iteratorError2 = err;
+    _didIteratorError4 = true;
+    _iteratorError4 = err;
   } finally {
     try {
-      if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-        _iterator2.return();
+      if (!_iteratorNormalCompletion4 && _iterator4.return != null) {
+        _iterator4.return();
       }
     } finally {
-      if (_didIteratorError2) {
-        throw _iteratorError2;
+      if (_didIteratorError4) {
+        throw _iteratorError4;
       }
     }
   }
