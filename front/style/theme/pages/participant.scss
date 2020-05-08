@@ -17,9 +17,19 @@
   }
 
   .participant-no-events {
-    @extend %title-level3;
 
-    text-align: center;
+    .illustration.toast {
+      display: block;
+      width: rem( 172 );
+      height: rem( 150 );
+      margin: 0 auto rem( 16 );
+    }
+
+    p{
+      @extend %title-level3;
+      text-align: center;
+    }
+
   }
 
   @media ( max-width: $max-medium ) {

@@ -151,7 +151,10 @@ $events = get_pbf_participant_events($metadata);
     </section>
   <?php } else { ?>
     <div class="participant-events">
-      <p class="participant-no-events"><?= _e('[:fr]Événements à venir[:en]Events to come[:]') ?></p>
+      <div class="participant-no-events">
+        <?php get_template_part("inc/assets/toast.svg"); ?>
+        <p><?= _e('[:fr]Événements à venir[:en]Events to come[:]') ?></p>
+      </div>
     </div>
   <?php } ?>
 </div>

@@ -100,3 +100,22 @@
     }
   }
 }
+
+.events-empty {
+  margin: rem( 80 ) auto;
+  max-width: rem( 540 );
+  width: 100%;
+  text-align: center;
+
+  .illustration.toast {
+    display: block;
+    height: rem( 150 );
+    width: rem( 172 );
+    margin: 0 auto rem( 16 );
+  }
+
+  h2 {
+    @extend %title-level3;
+    margin: rem( 16 ) 0;
+  }
+}

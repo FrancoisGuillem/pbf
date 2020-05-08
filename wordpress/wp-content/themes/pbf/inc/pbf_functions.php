@@ -134,12 +134,7 @@ function pbf_month($date)
   if (empty($date)) return "";
   $month = substr($date, 5, 2);
   $ref = array(
-    "01" => __("[:en]January[:][:fr]janvier[:]"),
-    "02" => __("[:en]February[:][:fr]février[:]"),
-    "03" => __("[:en]March[:][:fr]mars[:]"),
-    "04" => __("[:en]April[:][:fr]avril[:]"),
-    "05" => __("[:en]May[:][:fr]mai[:]"),
-    "06" => __("[:en]June[:][:fr]juin[:]")
+    "10" => __("[:en]October[:][:fr]Octobre[:]")
   );
   if (!array_key_exists($month, $ref)) return "";
   return $ref[$month];
