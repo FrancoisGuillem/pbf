@@ -53,6 +53,10 @@ $shadow-transition: box-shadow $anim-duration $anim-easing;
 .site-header-logo {
   transition: color $anim-duration $anim-easing;
 
+  .home .site-header.t-play:not(.opened) &{
+    transition-delay: $navFadeDuration;
+  }
+
   @include interact() {
     color: $purple;
   }
