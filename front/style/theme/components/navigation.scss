@@ -287,9 +287,16 @@
 
       li {
         a {
+          border-radius: 0;
+          color: $blue;
           display: block;
           margin-left: 0;
-          border-radius: 0;
+
+          .home & {
+            @include interact() {
+              background-color: rgba( $blue, 0.08);
+            }
+          }
         }
       }
     }
