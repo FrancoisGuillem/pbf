@@ -187,7 +187,10 @@
       this.el = document.querySelector('.site-header');
       this.refs = {
         navigation: this.el.querySelector('nav'),
-        opener: this.el.querySelector('[aria-controls]')
+        opener: this.el.querySelector('[aria-controls]'),
+        dropdowns: Array.prototype.slice.call(this.el.querySelectorAll('.dropdown')),
+        menus: Array.prototype.slice.call(this.el.querySelectorAll('.dropdown-menu')),
+        items: Array.prototype.slice.call(this.el.querySelectorAll('nav>ul>li'))
       };
       this.data = {
         opened: false
@@ -203,15 +206,28 @@
         this.refs.opener.addEventListener('click', function (event) {
           _this.opened = !_this.opened;
         });
-        this.refs.navigation.addEventListener('transitionend', function (event) {
-          if (event.target !== _this.refs.navigation) {
+        this.refs.navigation.addEventListener('click', function (event) {
+          _this.toggleSubmenu(event);
+        });
+        this.refs.navigation.addEventListener('keypress', function (event) {
+          if (event.keyCode !== 32) {
             return;
           }
 
-          _this.refs.navigation.removeAttribute('style');
-
-          _this.el.classList.remove('t-play');
+          _this.toggleSubmenu(event);
         });
+        this.refs.navigation.addEventListener('focusin', function (event) {
+          return _this.handleInteraction(event);
+        });
+        this.refs.navigation.addEventListener('focusout', function (event) {
+          return _this.handleInteraction(event);
+        });
+        this.refs.navigation.addEventListener('mouseleave', function (event) {
+          _this.handleInteraction(event);
+        }, true);
+        this.refs.navigation.addEventListener('mouseenter', function (event) {
+          _this.handleInteraction(event);
+        }, true);
         UI.observe('scrollY', function (position) {
           _this.top = position <= 0;
         });
@@ -221,26 +237,117 @@
       }
     }, {
       key: "animate",
-      value: function animate() {
+      value: function animate(el) {
         var _this2 = this;
 
+        el.classList.add('t-play');
         this.el.classList.add('t-play');
+
+        var callback = function callback(event) {
+          if (event.target !== el) {
+            return;
+          }
+
+          el.removeAttribute('style');
+          el.classList.remove('t-play');
+
+          _this2.el.classList.remove('t-play');
+
+          el.removeEventListener('transitionend', callback);
+        };
+
+        el.addEventListener('transitionend', callback);
         window.requestAnimationFrame(function () {
-          if (!_this2.opened) {
-            _this2.refs.navigation.style.height = "".concat(_this2.navigationHeight, "px");
+          if (el.getAttribute('aria-hidden') === 'true') {
+            el.style.height = "".concat(_this2.navigationHeight, "px");
             window.requestAnimationFrame(function () {
-              _this2.refs.navigation.style.height = '0';
+              el.style.height = '0';
             });
             return;
           }
 
-          _this2.refs.navigation.style.display = 'block';
-          _this2.navigationHeight = _this2.refs.navigation.clientHeight;
-          _this2.refs.navigation.style.height = '0';
+          el.style.display = 'block';
+          _this2.navigationHeight = el.clientHeight;
+          el.style.height = '0';
           window.requestAnimationFrame(function () {
-            _this2.refs.navigation.style.height = "".concat(_this2.navigationHeight, "px");
+            el.style.height = "".concat(_this2.navigationHeight, "px");
           });
         });
+      }
+    }, {
+      key: "handleInteraction",
+      value: function handleInteraction(event) {
+        if (this.layout === 'mobile') {
+          return;
+        }
+
+        if (event.type === 'focusin' || event.type === 'mouseenter') {
+          this.refs.items.forEach(function (item) {
+            if (item.contains(event.target) && item !== event.target) {
+              item.classList.add('interact-within');
+            } else if (item === event.target) {
+              item.classList.remove('interact-within');
+            }
+          });
+          return;
+        }
+
+        if (event.type === 'focusout' || event.type === 'mouseleave') {
+          this.refs.items.forEach(function (item) {
+            if (item.contains(event.target) && (event.target.tagName === 'A' || event.target.tagName === 'UL')) {
+              item.classList.remove('interact-within');
+            }
+          });
+        }
+      }
+    }, {
+      key: "removeAttributes",
+      value: function removeAttributes() {
+        this.refs.dropdowns.forEach(function (el) {
+          el.removeAttribute('role');
+          el.removeAttribute('aria-expanded');
+        });
+        this.refs.menus.forEach(function (el) {
+          el.removeAttribute('aria-hidden');
+        });
+      }
+    }, {
+      key: "setAttributes",
+      value: function setAttributes() {
+        this.refs.dropdowns.forEach(function (el) {
+          el.setAttribute('role', 'button');
+          el.setAttribute('aria-expanded', 'false');
+        });
+        this.refs.menus.forEach(function (el) {
+          el.setAttribute('aria-hidden', 'true');
+        });
+      }
+    }, {
+      key: "toggleSubmenu",
+      value: function toggleSubmenu(event) {
+        if (this.layout !== 'mobile') {
+          return;
+        }
+
+        var dropdownIndex;
+        this.refs.dropdowns.some(function (dropdown, index) {
+          if (dropdown.contains(event.target)) {
+            dropdownIndex = index;
+            return true;
+          }
+        });
+        var selectedDropdown = this.refs.dropdowns[dropdownIndex];
+        var selectedMenu = this.refs.menus[dropdownIndex];
+
+        if (!selectedDropdown) {
+          return;
+        }
+
+        event.preventDefault();
+        var opened = selectedDropdown.getAttribute('aria-expanded') === 'true';
+        selectedDropdown.setAttribute('aria-expanded', !opened);
+        selectedMenu.setAttribute('aria-hidden', opened);
+        this.animate(selectedMenu);
       }
     }, {
       key: "updateNaveState",
@@ -294,7 +401,13 @@
           this.el.classList.remove('opened');
         }
 
-        this.animate();
+        if (value) {
+          this.setAttributes();
+        } else {
+          this.removeAttributes();
+        }
+
+        this.animate(this.refs.navigation);
       }
     }, {
       key: "top",

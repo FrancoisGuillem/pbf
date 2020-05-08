@@ -54,8 +54,8 @@ if (!class_exists('WP_Bootstrap_Navwalker')) {
        */
       $class_names = join(' ', apply_filters('nav_menu_submenu_css_class', $classes, $args, $depth));
       $class_names = $class_names ? ' class="' . esc_attr($class_names) . '"' : '';
-      $id = 'id="dropdown-' . ($depth + 1) . '"';
-      $output .= "{$n}{$indent}<ul$class_names $id>{$n}";
+      // $id = 'id="dropdown-' . ($depth + 1) . '"';
+      $output .= "{$n}{$indent}<ul$class_names>{$n}";
     }
 
     /**
@@ -122,14 +122,15 @@ if (!class_exists('WP_Bootstrap_Navwalker')) {
       // If item has_children add atts to <a>.
       if (isset($args->has_children) && $args->has_children && 0 === $depth && $args->depth > 1) {
         $menuOpener = true;
-        $atts['aria-expanded'] = 'false';
-      } else {
-        if ($depth === 0 && (in_array('current-menu-item', $item->classes, true) || in_array('current-menu-parent', $item->classes, true))) {
-          $atts['aria-current'] = 'page';
-        } else {
-          $atts['href'] = !empty($item->url) ? $item->url : '';
-        }
+        //   $atts['aria-expanded'] = 'false';
       }
+      // } else {
+      // if ($depth === 0 && (in_array('current-menu-item', $item->classes, true) || in_array('current-menu-parent', $item->classes, true))) {
+      //   $atts['aria-current'] = 'page';
+      // } else {
+      $atts['href'] = !empty($item->url) ? $item->url : '';
+      // }
+      // }
 
       // Allow filtering of the $atts array before using it.
       $atts = apply_filters('nav_menu_link_attributes', $atts, $item, $args, $depth);
@@ -157,7 +158,7 @@ if (!class_exists('WP_Bootstrap_Navwalker')) {
        * kind of linkmod we have we may need different wrapper elements.
        */
       if (isset($menuOpener)) {
-        $item_output .= '<button aria-controls="dropdown-' . ($depth + 1) . '"' . $attributes . '>';
+        $item_output .= '<a' . $attributes . '><span>';
       } else {
         // With no link mod type set this must be a standard <a> tag.
         $item_output .= '<a' . $attributes . '>';
@@ -186,7 +187,7 @@ if (!class_exists('WP_Bootstrap_Navwalker')) {
        * correct element depending on the type of link or link mod.
        */
       if (isset($menuOpener)) {
-        $item_output .= '</button> ';
+        $item_output .= '</span>' . file_get_contents('assets/chevron.svg.php', TRUE) . '</a> ';
       } else {
         // With no link mod type set this must be a standard <a> tag.
         $item_output .= '</a>';

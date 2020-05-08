@@ -7,6 +7,13 @@ class Header {
     this.refs = {
       navigation: this.el.querySelector('nav'),
       opener: this.el.querySelector('[aria-controls]'),
+      dropdowns: Array.prototype.slice.call(
+        this.el.querySelectorAll('.dropdown'),
+      ),
+      menus: Array.prototype.slice.call(
+        this.el.querySelectorAll('.dropdown-menu'),
+      ),
+      items: Array.prototype.slice.call(this.el.querySelectorAll('nav>ul>li')),
     };
 
     this.data = {
@@ -21,14 +28,39 @@ class Header {
       this.opened = !this.opened;
     });
 
-    this.refs.navigation.addEventListener('transitionend', event => {
-      if (event.target !== this.refs.navigation) {
+    this.refs.navigation.addEventListener('click', event => {
+      this.toggleSubmenu(event);
+    });
+
+    this.refs.navigation.addEventListener('keypress', event => {
+      if (event.keyCode !== 32) {
         return;
       }
 
-      this.refs.navigation.removeAttribute('style');
-      this.el.classList.remove('t-play');
+      this.toggleSubmenu(event);
     });
+
+    this.refs.navigation.addEventListener('focusin', event =>
+      this.handleInteraction(event),
+    );
+    this.refs.navigation.addEventListener('focusout', event =>
+      this.handleInteraction(event),
+    );
+    this.refs.navigation.addEventListener(
+      'mouseleave',
+      event => {
+        this.handleInteraction(event);
+      },
+      true,
+    );
+
+    this.refs.navigation.addEventListener(
+      'mouseenter',
+      event => {
+        this.handleInteraction(event);
+      },
+      true,
+    );
 
     UI.observe('scrollY', position => {
       this.top = position <= 0;
@@ -39,25 +71,123 @@ class Header {
     });
   }
 
-  animate() {
+  animate(el) {
+    el.classList.add('t-play');
     this.el.classList.add('t-play');
+
+    const callback = event => {
+      if (event.target !== el) {
+        return;
+      }
+
+      el.removeAttribute('style');
+      el.classList.remove('t-play');
+      this.el.classList.remove('t-play');
+
+      el.removeEventListener('transitionend', callback);
+    };
+
+    el.addEventListener('transitionend', callback);
+
     window.requestAnimationFrame(() => {
-      if (!this.opened) {
-        this.refs.navigation.style.height = `${this.navigationHeight}px`;
+      if (el.getAttribute('aria-hidden') === 'true') {
+        el.style.height = `${this.navigationHeight}px`;
         window.requestAnimationFrame(() => {
-          this.refs.navigation.style.height = '0';
+          el.style.height = '0';
         });
         return;
       }
 
-      this.refs.navigation.style.display = 'block';
-      this.navigationHeight = this.refs.navigation.clientHeight;
-      this.refs.navigation.style.height = '0';
+      el.style.display = 'block';
+      this.navigationHeight = el.clientHeight;
+      el.style.height = '0';
 
       window.requestAnimationFrame(() => {
-        this.refs.navigation.style.height = `${this.navigationHeight}px`;
+        el.style.height = `${this.navigationHeight}px`;
       });
     });
+  }
+
+  handleInteraction(event) {
+    if (this.layout === 'mobile') {
+      return;
+    }
+
+    if (event.type === 'focusin' || event.type === 'mouseenter') {
+      this.refs.items.forEach(item => {
+        if (item.contains(event.target) && item !== event.target) {
+          item.classList.add('interact-within');
+        } else if (item === event.target) {
+          item.classList.remove('interact-within');
+        }
+      });
+      return;
+    }
+
+    if (event.type === 'focusout' || event.type === 'mouseleave') {
+      this.refs.items.forEach(item => {
+        if (
+          item.contains(event.target) &&
+          (event.target.tagName === 'A' || event.target.tagName === 'UL')
+        ) {
+          item.classList.remove('interact-within');
+        }
+      });
+    }
+  }
+
+  removeAttributes() {
+    this.refs.dropdowns.forEach(el => {
+      el.removeAttribute('role');
+      el.removeAttribute('aria-expanded');
+    });
+
+    this.refs.menus.forEach(el => {
+      el.removeAttribute('aria-hidden');
+    });
+  }
+
+  setAttributes() {
+    this.refs.dropdowns.forEach(el => {
+      el.setAttribute('role', 'button');
+      el.setAttribute('aria-expanded', 'false');
+    });
+
+    this.refs.menus.forEach(el => {
+      el.setAttribute('aria-hidden', 'true');
+    });
+  }
+
+  toggleSubmenu(event) {
+    if (this.layout !== 'mobile') {
+      return;
+    }
+
+    let dropdownIndex;
+
+    this.refs.dropdowns.some((dropdown, index) => {
+      if (dropdown.contains(event.target)) {
+        dropdownIndex = index;
+
+        return true;
+      }
+    });
+
+    const selectedDropdown = this.refs.dropdowns[dropdownIndex];
+    const selectedMenu = this.refs.menus[dropdownIndex];
+
+    if (!selectedDropdown) {
+      return;
+    }
+
+    event.preventDefault();
+
+    const opened = selectedDropdown.getAttribute('aria-expanded') === 'true';
+
+    selectedDropdown.setAttribute('aria-expanded', !opened);
+    selectedMenu.setAttribute('aria-hidden', opened);
+
+    this.animate(selectedMenu);
   }
 
   updateNaveState() {
@@ -112,7 +242,13 @@ class Header {
       this.el.classList.remove('opened');
     }
 
-    this.animate();
+    if (value) {
+      this.setAttributes();
+    } else {
+      this.removeAttributes();
+    }
+
+    this.animate(this.refs.navigation);
   }
 
   get top() {

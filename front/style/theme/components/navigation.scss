@@ -46,7 +46,7 @@
   transition: height $navFadeDuration $anim-easing, box-shadow $anim-duration $anim-easing;
   box-shadow: 0 0 0 rgba( black, 0 );
 
-  .t-play & {
+  &.t-play {
     overflow: hidden;
     display: block;
   }
@@ -90,6 +90,52 @@
 
     &[aria-current] {
       color: $purple;
+    }
+
+    @media ( max-width: $max-small ) {
+      &.dropdown{
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+
+        &[aria-expanded="true"]{
+          svg {
+            transform: scale( 1, -1 )
+          }
+        }
+
+        svg {
+          transition: transform $navFadeDuration $anim-easing;
+        }
+      }
+    }
+  }
+
+  .dropdown-menu{
+    transition: height $navFadeDuration $anim-easing;
+
+    li {
+      a {
+        text-transform: none;
+      }
+    }
+
+    &[aria-hidden="false"]{
+      display: block;
+    }
+
+    &.t-play {
+      overflow: hidden;
+      display: block;
+    }
+
+    @media ( max-width: $max-small ) {
+      & {
+        background-color: rgba($blue, 0.08);
+        padding: 0 rem( 16) 0 rem( 16*2 );
+        width: calc( 100% + #{rem( 16*2 )} );
+        margin-left: rem( -16 );
+      }
     }
   }
 
@@ -158,23 +204,97 @@
       height: rem( 64 );
 
       > li {
+        align-items: center;
+        display: flex;
+        height: 100%;
+        position: relative;
+
+        &.interact-within {
+
+          > a:not([class^=cta-]) {
+            background-color: rgba( $blue, 0.08 );
+            color: $blue;
+
+            .home & {
+              background-color: white;
+            }
+          }
+
+          .dropdown-menu {
+            height: auto;
+            opacity: 1;
+            overflow: visible;
+
+            &:before {
+              content: '';
+              position: absolute;
+              left: 0;
+              width: 100%;
+              height: rem( 16 );
+              bottom: 100%;
+            }
+          }
+        }
+
         &:nth-child(3) {
           grid-column-start: 4;
         }
 
         &:nth-child(n+3) {
-          text-align: right;
+          justify-content: flex-end;
         }
       }
     }
 
+    a:not([class^=cta-]) {
+      vertical-align: bottom;
+      display: inline-block;
+      padding: rem( 8 ) rem( 16 );
+      margin-left: rem( -16 );
+      border-radius: 4px;
+      transition: color $anim-duration $anim-easing, background-color $anim-duration $anim-easing;
 
-    .home .site-header:not(.sticky) & {
-      a:not([class^=cta-]) {
+      @include interact() {
+        background-color: rgba( $blue, 0.08 );
+        color: $blue;
+      }
+
+      .home & {
         @include interact() {
-          color: $yellow-dark;
+          background-color: white;
         }
       }
+
+      &.dropdown {
+        svg {
+          display: none;
+        }
+      }
+    }
+
+    .dropdown-menu{
+      position: absolute;
+      left: rem( -16 );
+      bottom: -100%;
+      display: block;
+      white-space: nowrap;
+      background-color: white;
+      box-shadow: $box-shadow;
+      height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: opacity $anim-duration $anim-easing;
+
+      li {
+        a {
+          display: block;
+          margin-left: 0;
+          border-radius: 0;
+        }
+      }
+    }
+
+    .home .site-header:not(.sticky) & {
 
       .variant-primary {
         background-color: white;
@@ -206,25 +326,21 @@
       }
     }
 
-    [aria-controls] {
-      padding: rem( 16 );
-    }
+    // .dropdown-menu {
+    //   display: block;
+    //   text-align: left;
+    //   position: absolute;
 
-    .dropdown-menu {
-      display: block;
-      text-align-last: left;
-      position: absolute;
+    //   a {
+    //     display: block;
+    //     padding: rem( 16 );
+    //     transition: color $anim-duration $anim-easing;
+    //     text-transform: none;
 
-      a {
-        display: block;
-        padding: rem( 16 );
-        transition: color $anim-duration $anim-easing;
-        text-transform: none;
-
-        @include interact() {
-          color: $purple;
-        }
-      }
-    }
+    //     @include interact() {
+    //       color: $purple;
+    //     }
+    //   }
+    // }
   }
 }
