@@ -30,7 +30,7 @@ function pbf_get_formatted_date($date, $index)
   $selected_date = pbf_get_selected_date();
   $class = $selected_date === $date ? " aria-current='true'" : "";
 
-  return "<li><a href='?date=" . $date . "'" . $class . "><time datetime='" . $date . "'>" . pbf_dow($date) . "<br/><span>" . pbf_day($date) . " " . pbf_month($date) . "</span></time></a></li>";
+  return "<li><a href='?date=" . $date . "'" . $class . "><time datetime='" . $date . "'>" . pbf_dow($date) . "<br/><span>" . pbf_day($date) . " " . pbf_month($date) . "</span></time></a></li>";
 }
 
 get_header(); ?>
