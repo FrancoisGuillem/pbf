@@ -23,14 +23,14 @@
   input[type=checkbox] {
     &:checked {
       + label {
+        background: $blue;
         color: white;
-        background-color: $yellow-dark;
+        border-color: $blue;
       }
 
       @include interact() {
         & + label {
-          background: $blue;
-          color: white;
+          border: 1px solid $yellow-dark;
         }
       }
     }
@@ -38,14 +38,16 @@
     @include interact() {
       & + label {
         border-color: $blue;
-        color: $blue;
+        background: $blue;
+        color: white;
       }
     }
   }
 
   label {
+    color: white;
     border: 1px solid $yellow-dark;
-    color: $yellow-dark;
+    background-color: $yellow-dark;
     transition: color $anim-duration $anim-easing, border-color $anim-duration $anim-easing, background-color $anim-duration $anim-easing;
     cursor: pointer;
   }

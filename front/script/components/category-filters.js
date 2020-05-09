@@ -41,23 +41,21 @@ class Filter {
   }
 
   setFilterState(target) {
-    const reverse = this.categories.length === this.refs.list.length;
+    // const reverse = this.categories.length === this.refs.list.length;
     const categories = [];
+    const showAll = !target.checked;
 
-    if (reverse) {
-      for (const el of this.el.elements) {
-        if (el.checked) {
-          el.checked = false;
-        } else {
-          el.checked = true;
-          categories.push(el.value);
-        }
+    for (const el of this.el.elements) {
+      if (showAll) {
+        el.checked = false;
+        categories.push(el.value);
+        continue;
       }
-    } else {
-      for (const el of this.el.elements) {
-        if (el.checked) {
-          categories.push(el.value);
-        }
+
+      el.checked = el === target ? target.checked : false;
+
+      if (el.checked) {
+        categories.push(el.value);
       }
     }
 

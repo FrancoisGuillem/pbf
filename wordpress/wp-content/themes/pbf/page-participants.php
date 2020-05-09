@@ -74,7 +74,7 @@ get_header(); ?>
     <legend>Categories</legend>
     <ul>
       <?php foreach ($categories as $category) { ?>
-        <li><input type="checkbox" name="category" id="cat-<?= $category["slug"]; ?>" value="<?= $category["slug"]; ?>" checked><label for="cat-<?= $category["slug"]; ?>" class="tag-solid"><?= $category["name"]; ?></label></li>
+        <li><input type="checkbox" name="category" id="cat-<?= $category["slug"]; ?>" value="<?= $category["slug"]; ?>"><label for="cat-<?= $category["slug"]; ?>" class="tag-solid"><?= $category["name"]; ?></label></li>
       <?php } ?>
     </ul>
   </form>
