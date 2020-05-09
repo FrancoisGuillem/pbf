@@ -1,20 +1,27 @@
 .brassam-steps {
   margin-bottom: rem( 80 );
   margin-top: rem( 80 );
-  text-align: center;
 
   p {
-    margin: rem( 16 * (24 / 16) ) rem( 16 );
+    margin: rem( 16 );
+
+    &:first-child {
+      margin-top: rem( 16 );
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
   ol {
+    counter-reset: brassamStep;
     display: flex;
     margin: rem( -16 );
     flex-wrap: wrap;
 
     @media ( min-width: $medium ) {
       & {
-        align-items: stretch;
         margin-top: rem( 64 - 16 );
       }
     }
@@ -25,12 +32,56 @@
   @extend %title-level2;
 
   @include title-separator( center, $purple);
+  text-align: center;
 }
 
 .brassam-step {
+  display: flex;
   margin: rem( 16 );
-  box-shadow: $box-shadow;
-  flex: 1 1 auto;
+  position: relative;
+  width: 100%;
+
+  &:before {
+    @extend %title-level3;
+    align-items: center;
+    background-color: $purple;
+    border-radius: 50%;
+    border: 2px solid $purple;
+    color: white;
+    content: counter(brassamStep);
+    counter-increment: brassamStep;
+    display: flex;
+    flex: 0 0 auto;
+    height: rem( 64 );
+    justify-content: center;
+    position: relative;
+    width: rem( 64 );
+    z-index: 1;
+  }
+
+  &:after{
+    background-color: $purple;
+    content: '';
+    height: 100%;
+    left: rem( 32 );
+    position: absolute;
+    top: rem( 32 );
+    transform: translateX(-50%);
+    width: 2px;
+  }
+
+  &:last-child {
+    &:after {
+      content: none;
+    }
+  }
+
+  &.current ~ & {
+    &:before {
+      background-color: white;
+      color: $purple;
+    }
+  }
 
   .image-wrapper {
     display: block;
@@ -40,9 +91,29 @@
     }
   }
 
+  a {
+    color: $purple;
+    text-decoration: none;
+    font-weight: bold;
+
+    @include interact() {
+      text-decoration: underline;
+    }
+  }
+
   @media ( min-width: $medium ) {
     & {
-      width: calc( #{( 100% / 2 )} - #{rem( 32 )} );
+      flex-direction: column;
+      align-items: center;
+      width: calc( #{( 100% / 4 )} - #{rem( 32 )} );
+      text-align: center;
+
+      &:after {
+        width: 100%;
+        height: 2px;
+        left: 50%;
+        transform: none;
+      }
     }
   }
 

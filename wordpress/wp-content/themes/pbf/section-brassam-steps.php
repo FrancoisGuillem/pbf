@@ -16,10 +16,11 @@
       'order' => 'ASC'
     ));
     while (have_posts()) : the_post(); ?>
-      <li class="brassam-step">
-        <span class="image-wrapper"><?php the_post_thumbnail([256, 400]); ?></span>
-        <p class="brassam-step-title"><?php the_title(); ?></p>
-        <?= the_content(); ?>
+      <li class="brassam-step <?= get_the_tags()[0]->name ?>">
+        <div>
+          <p class="brassam-step-title"><?php the_title(); ?></p>
+          <?= the_content(); ?>
+        </div>
       </li>
     <?php
     endwhile;
