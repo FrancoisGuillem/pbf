@@ -38,18 +38,12 @@ function pbf_get_formatted_date($date, $index)
   return "<li><a href='?date=" . $date . "'" . $class . "><time datetime='" . $date . "'>" . pbf_dow($date) . "<br/><span>" . pbf_day($date) . " " . pbf_month($date) . "</span></time></a></li>";
 }
 
-$args = array(
-  'post_type' => 'event',
-  'filter' => 'date',
-);
-
-$query = new WP_Query($args);
-
 get_header(); ?>
 
 <div class="page-header">
   <h1 class="page-title"><?= get_the_title() ?></h1>
 </div>
+
 <?php
 if (pbf_get_selected_date() >= "2020-09-03") { ?>
   <ul class="dates-list">
@@ -59,32 +53,9 @@ if (pbf_get_selected_date() >= "2020-09-03") { ?>
   </ul>
 <?php } ?>
 <div class="container">
-  <?php
-  if ($query->have_posts()) { ?>
-    <ul>
-      <?php
-      /* Start the Loop */
-      while ($query->have_posts()) : $query->the_post();
 
-        /*
-      * Include the Post-Format-specific template for the content.
-      * If you want to override this in a child theme, then include a file
-      * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-      */
-      ?><li><?php get_template_part('template-parts/content-event-preview'); ?></li>
-      <?php
-      endwhile;
+  <? get_template_part('template-parts/content-agenda'); ?>
 
-      the_posts_navigation();
-      ?>
-    </ul>
-  <?php } else {
-    the_post(); ?>
-    <div class="events-empty">
-      <?php get_template_part("inc/assets/toast.svg"); ?>
-      <?= the_content(); ?>
-    </div>
-  <?php } ?>
 </div>
 
 <?php

@@ -114,7 +114,7 @@
     margin: 0 auto rem( 16 );
   }
 
-  h2 {
+  .intro {
     @extend %title-level3;
     margin: rem( 16 ) 0;
   }

@@ -63,11 +63,16 @@ $participants-spacing: rem( 30 / 2 );
 }
 
 .participant-category-title {
-  @extend %title-level1;
+  @extend %title-level3;
 
   @include title-separator(center, $purple);
 
   text-align: center;
+}
+
+
+h2.participant-category-title {
+  @extend %title-level2;
 }
 
 @media ( min-width: $small ) {
