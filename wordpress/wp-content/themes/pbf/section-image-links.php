@@ -24,6 +24,10 @@
           while (have_posts()) : the_post();
             $cardMetadata = get_post_meta($post->ID);
             $link = $cardMetadata["card-link"][0] ?? "";
+
+            if (substr($link, 0, 4) !== "http") {
+              $link = get_permalink($link);
+            }
           ?>
             <li>
               <a class="card" href="<?= $link ?>">
