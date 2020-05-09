@@ -15,6 +15,7 @@
   li {
     margin: rem( 16 );
     flex: 0 1 auto;
+    width: calc( 50% - #{rem( 32 )} )
   }
 
   a[class^=sponsor-] {
@@ -39,7 +40,13 @@
 
   @media ( min-width: $medium ) {
     li {
-      width: calc( #{( 100% / 4 )} - #{rem( 32 )} );
+      width: calc( #{( 100% / 5 )} - #{rem( 32 )} );
+    }
+  }
+
+  @media ( min-width: $large ) {
+    li {
+      width: calc( #{( 100% / 6 )} - #{rem( 32 )} );
     }
   }
 }
