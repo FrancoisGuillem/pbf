@@ -8,6 +8,10 @@
     background-color: $purple;
   }
 
+  .page-header + & {
+    margin-top: rem( -64 );
+  }
+
   .image-wrapper {
     display: block;
     overflow: hidden;
@@ -33,6 +37,22 @@
 }
 
 .text-illus-image {
+  figcaption {
+    background-color: $purple;
+    border-radius: 8px;
+    font-size: rem( 14 );
+    padding: rem( 8 );
+    text-align: center;
+    margin: rem( -32 ) 0 0 rem( -16 );
+    width: 100%;
+    position: relative;
+
+    .hero + .text-illus & {
+      background-color: $yellow-dark;
+    }
+  }
+
+
   @media ( max-width: $max-small ) {
     & {
       order: 1;
@@ -45,6 +65,11 @@
       float: right;
       margin-left: rem( 30 );
       width: (540% / 1110 * 100);
+
+      figcaption {
+        padding: rem( 16 );
+        margin: rem( -32 ) 0 0 rem( -32 );
+      }
     }
   }
 
@@ -67,6 +92,11 @@
     &:last-child {
       margin-bottom: 0;
     }
+  }
+
+  ul {
+    list-style-type: disc;
+    list-style-position: inside;
   }
 
   .link-page {
