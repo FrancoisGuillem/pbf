@@ -61,7 +61,7 @@ $thumbnail = get_the_post_thumbnail_url();
 
           <?php
           $localized_page = get_localized_url();
-          $lang_switch = '<li><a href="' . $localized_page['path'] . '" hreflang="' . $localized_page['code'] . '" title="' . qtranxf_useCurrentLanguageIfNotFoundUseDefaultLanguage('[:fr]View the page in English[:en]Voir la page en français[:]') . '">' . $localized_page['code'] . '</a></li>';
+          $lang_switch = '<li class="lang-switch"><a href="' . $localized_page['path'] . '" hreflang="' . $localized_page['code'] . '" title="' . qtranxf_useCurrentLanguageIfNotFoundUseDefaultLanguage('[:fr]View the page in English[:en]Voir la page en français[:]') . '">' . $localized_page['code'] . '</a></li>';
 
           wp_nav_menu(array(
             'theme_location'  => 'primary',
