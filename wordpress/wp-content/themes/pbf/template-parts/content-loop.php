@@ -1,18 +1,11 @@
 <?php
-/*
-Template Name: Brassam
-*/
-add_filter('body_class', function ($classes) {
-  array_push($classes, 'brassam');
 
-  return $classes;
-});
+/**
+ * Template pour afficher la liste des partenaires.
+ *
+ * @package pbf
+ */
 
-get_header(); ?>
-<div class="page-header">
-  <h1 class="page-title"><?= get_the_title() ?></h1>
-</div>
-<?php
 $getchilds = array(
   'parent'        => $post->ID,
   'child_of'      => $post->ID,
@@ -33,7 +26,3 @@ foreach ($postlist as $post) {
   // now let WordPress fetch that page for you
   echo get_template_part($template);
 }
-?>
-<?php
-
-get_footer(); ?>

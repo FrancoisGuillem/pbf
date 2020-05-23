@@ -41,13 +41,33 @@ get_header(); ?>
   foreach ($postlist as $post) {
     // setup post data, so page template will use it as a "master" post
     setup_postdata($post);
-    $template = locate_template('template-parts/content-' . $post->post_name . '.php', false, false);
+
+    $getSubChilds = array(
+      'parent'        => $post->ID,
+      'child_of'      => $post->ID,
+      'sort_column'   => 'menu_order',
+      'sort_order'    => 'ASC'
+    );
+
+    $subPages = get_pages($getSubChilds);
+
+    if (count($subPages)) {
+    } else {
+      $template = locate_template('template-parts/content-' . $post->post_name . '.php', false, false);
+    }
 
     if ($template) {
   ?>
       <h2 class="list-all-sub-title"><?= get_the_title() ?></h2>
   <?php
       include($template);
+    } else {
+
+      // we get page template name for the post and remove ".php" at the end to make it work
+      $template = preg_replace("/\.php$/", "", get_page_template_slug($post));
+
+      // now let WordPress fetch that page for you
+      echo get_template_part($template);
     }
   }
   ?>

@@ -5,6 +5,10 @@
   margin-top: rem( -64 );
   overflow: hidden;
 
+  .list-all-sub-title + & {
+    margin-top: 0;
+  }
+
   &:first-child {
     margin-top: rem( -80 );
     padding-top: rem( 80 );
