@@ -245,8 +245,17 @@
           justify-content: flex-end;
           text-align: right;
 
+          a:not([class^=cta-]) {
+            margin-left: 0;
+            margin-right: rem( -16 );
+          }
+
           .dropdown-menu{
-            left: 0;
+            left: rem( 16 );
+
+            a {
+              margin-right: 0;
+            }
           }
         }
 
