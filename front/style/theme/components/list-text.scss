@@ -1,0 +1,93 @@
+.list-text {
+  background-color: $purple;
+  color: white;
+  overflow: hidden;
+  padding: rem( 80 ) 0;
+
+  .hero + & {
+    background-color: $purple;
+  }
+
+  .page-header + & {
+    margin-top: rem( -64 );
+  }
+
+  @media ( max-width: $max-small ) {
+    .container {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+.list-text-title {
+  @extend %title-level2;
+
+  @include title-separator(left);
+}
+
+.list-text-content {
+  p {
+    margin: rem( 16 * $line-height ) 0;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  ul, ol:not(.list-text-list) {
+    list-style-type: disc;
+    list-style-position: inside;
+  }
+
+  .link-page {
+    &:last-child {
+      margin-top: rem( 8 );
+    }
+  }
+}
+
+.list-text-list {
+
+  li {
+    margin: rem( 32 ) 0;
+    text-align: center;
+  }
+
+  .list-image {
+    border-radius: 8px;
+    display: block;
+    overflow: hidden;
+  }
+
+  .title {
+    @extend %title-level3;
+    margin: rem( 16 ) 0;
+  }
+
+  p {
+    margin: rem( 16 ) 0;
+  }
+
+  @media ( min-width: $small ) {
+    display: flex;
+    flex-wrap: wrap;
+    width: calc( 100% + #{rem( 32 )} );
+    margin-left: rem( -16 );
+
+    li {
+      width: calc( 50% - #{rem( 32 ) });
+      margin: rem( 16 );
+    }
+  }
+
+  @media ( min-width: $large ) {
+    margin-bottom: rem( 32 );
+    margin-top: rem( 32 );
+
+    li {
+      width: calc( 25% - #{rem( 32 ) });
+      margin-bottom: 0;
+      margin-top: 0;
+    }
+  }
+}

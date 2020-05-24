@@ -349,3 +349,5 @@ require_once(get_template_directory() . '/inc/social-navwalker.php');
 
 // Custom functions
 include_once(get_template_directory() . '/inc/pbf_functions.php');
+
+include_once(get_template_directory() . '/inc/shortcode-list-text.php');
