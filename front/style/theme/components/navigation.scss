@@ -251,7 +251,8 @@
           }
 
           .dropdown-menu{
-            left: rem( 16 );
+            right: rem(-16);
+            left: auto;
 
             a {
               margin-right: 0;
