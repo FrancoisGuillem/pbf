@@ -1,0 +1,106 @@
+.laureates-title{
+  @extend %title-level2;
+
+  @include title-separator( center, $purple);
+  text-align: center;
+}
+
+.laureates-list {
+  margin-bottom: rem( 80 );
+  position: relative;
+  padding: rem( 16 );
+
+  &:before {
+    content: '';
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: rem( 6 );
+    transform: translateX(-50%);
+    left: 50%;
+    background-color: rgba($blue, 0.2);
+    border-radius: 3px;
+  }
+}
+
+.laureate-entry {
+  box-shadow: $box-shadow;
+  padding: rem( 32 );
+  position: relative;
+  z-index: 1;
+  background-color: white;
+
+  + .laureate-entry{
+    margin-top: rem( 48 );
+  }
+
+  .header {
+    display: flex;
+    align-items: stretch;
+    margin-bottom: rem( 16 );
+  }
+
+  .title {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .laureate-entry-image {
+    border-radius: 4px;
+    flex: 0 0 auto;
+    margin-right: rem( 16 );
+    overflow: hidden;
+    height: rem( 80 );
+    width: rem( 80 );
+
+    &:empty {
+      background-color: #c4c4c4;
+    }
+  }
+
+  .laureate-entry-title {
+    @extend %title-level3;
+
+    color: $purple;
+    height: 100%;
+  }
+
+  .laureate-entry-year {
+    flex: 0 0 auto;
+    font-weight: bold;
+  }
+
+  @media ( min-width: $large ) {
+    width: calc( 50% - #{rem( 72 )} );
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      height: rem( 16 );
+      width: rem( 16 );
+      border-radius: 50%;
+      background-color: $purple;
+      box-shadow: 0 0 0 8px rgba($purple, 0.2);
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    &:nth-child(odd){
+      margin-left: auto;
+
+      &:before {
+        left: rem( -72 );
+        margin-left: rem( -8 );
+      }
+    }
+
+    &:nth-child(even){
+
+      &:before {
+        right: rem( -72 );
+        margin-right: rem( -8 );
+      }
+    }
+  }
+}
