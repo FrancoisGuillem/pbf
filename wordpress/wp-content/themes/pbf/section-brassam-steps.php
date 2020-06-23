@@ -4,9 +4,16 @@
  * Template Name: Brassam Steps
  */
 
+$titleLevel = wp_cache_get('titleLevel');
+
+if ($titleLevel === false) {
+  $titleLevel = 2;
+}
+
 ?>
 <section class="brassam-steps container">
-  <h2 class="brassam-steps-title"><?= get_the_title() ?></h2>
+
+  <h<?= $titleLevel; ?> class="brassam-steps-title"><?= get_the_title() ?></h<?= $titleLevel; ?>>
   <?= the_content(); ?>
   <ol>
     <?php

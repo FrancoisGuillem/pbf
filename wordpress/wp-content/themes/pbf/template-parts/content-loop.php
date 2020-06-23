@@ -6,6 +6,8 @@
  * @package pbf
  */
 
+wp_cache_set('titleLevel', 3);
+
 $getchilds = array(
   'parent'        => $post->ID,
   'child_of'      => $post->ID,

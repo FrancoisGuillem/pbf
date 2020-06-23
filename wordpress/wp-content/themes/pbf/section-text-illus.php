@@ -3,6 +3,12 @@
 /**
  * Template Name: Text + illustration
  */
+
+$titleLevel = wp_cache_get('titleLevel');
+
+if ($titleLevel === false) {
+  $titleLevel = 2;
+}
 ?>
 <section class="text-illus">
   <div class="container">
@@ -20,7 +26,7 @@
     </figure>
 
     <div class="text-illus-content">
-      <h2 class="text-illus-title"><?= get_the_title() ?></h2>
+      <h<?= $titleLevel; ?> class="text-illus-title"><?= get_the_title() ?></h<?= $titleLevel; ?>>
       <?= get_the_content_pbf(); ?>
     </div>
 

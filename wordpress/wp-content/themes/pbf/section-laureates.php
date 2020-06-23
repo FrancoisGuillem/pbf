@@ -4,9 +4,15 @@
  * Template Name: Laureates
  */
 
+$titleLevel = wp_cache_get('titleLevel');
+
+if ($titleLevel === false) {
+  $titleLevel = 2;
+}
+
 ?>
 <section class="laureates container">
-  <h2 class="laureates-title"><?= get_the_title() ?></h2>
+  <h<?= $titleLevel; ?> class="laureates-title"><?= get_the_title() ?></h<?= $titleLevel; ?>>
   <?= the_content(); ?>
   <ul class="laureates-list">
     <?php

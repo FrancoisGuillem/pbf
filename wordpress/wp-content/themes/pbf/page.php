@@ -52,10 +52,10 @@ get_header(); ?>
     $subPages = get_pages($getSubChilds);
 
     if (count($subPages)) {
+      $template = locate_template('template-parts/content-loop.php', false, false);
     } else {
       $template = locate_template('template-parts/content-' . $post->post_name . '.php', false, false);
     }
-
     if ($template) {
   ?>
       <h2 class="list-all-sub-title"><?= get_the_title() ?></h2>

@@ -4,6 +4,12 @@
  * Template Name: Hero
  */
 
+$titleLevel = wp_cache_get('titleLevel');
+
+if ($titleLevel === false) {
+  $titleLevel = 2;
+}
+
 $custom = get_post_custom();
 $heroInfo = $custom['hero-info'][0]  ?? "";
 $heroInfoLink = $custom['hero-info-link'][0]  ?? "";
@@ -12,7 +18,7 @@ $heroType = $custom['hero-type'][0]  ?? "primary";
 <div class="hero variant-<?= $heroType ?>">
   <div class="container">
     <div class="hero-heading">
-      <h2 class="hero-title"><?= get_the_title() ?></h2>
+      <h<?= $titleLevel; ?> class="hero-title"><?= get_the_title() ?></h<?= $titleLevel; ?>>
       <p role="doc-subtitle" class="hero-subtitle"><span><?php echo get_the_content(); ?></span></p>
       <?php if ($heroInfo) {
         if ($heroInfoLink) { ?>
