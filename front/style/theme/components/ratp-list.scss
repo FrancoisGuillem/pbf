@@ -1,0 +1,43 @@
+.ratp-list {
+  display: flex;
+  margin-top: rem( 8 );
+  flex-wrap: wrap;
+
+  dt, dd{
+    background-size: 100%;
+    color: rgba( $blue, 0 );
+    flex: 0 0 rem( 16 );
+    height: rem( 16 );
+    overflow: hidden;
+    margin: 0 rem( 1 );
+  }
+
+  dt:not(:first-child) {
+    margin-left: rem(16);
+  }
+
+  .metro {
+    background-image: url(#{$themePath}/inc/assets/ratp/metro.png);
+  }
+
+  .line-1 {
+    background-image: url(#{$themePath}/inc/assets/ratp/metro1.png);
+  }
+
+  .line-14 {
+    background-image: url(#{$themePath}/inc/assets/ratp/metro14.png);
+  }
+
+  .rer {
+    background-image: url(#{$themePath}/inc/assets/ratp/rer.png);
+  }
+
+  .line-a {
+    background-image: url(#{$themePath}/inc/assets/ratp/rera.png);
+  }
+
+  .line-d {
+    background-image: url(#{$themePath}/inc/assets/ratp/rerd.png);
+  }
+
+}

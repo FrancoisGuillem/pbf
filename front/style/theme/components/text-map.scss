@@ -1,0 +1,54 @@
+.text-map {
+  // background-color: $yellow-dark;
+  // color: white;
+  overflow: hidden;
+  padding: rem( 80 ) 0;
+  background: no-repeat 50% 50%;
+  background-size: cover;
+  background-image: url( /wp-content/themes/pbf/inc/assets/background/hero-secondary-small.jpg );
+
+  .cta-solid {
+    margin-top: rem( 8 );
+  }
+
+  @media ( min-width: $medium ) {
+    background-image: url( /wp-content/themes/pbf/inc/assets/background/hero-secondary.jpg );
+  }
+}
+
+.text-map-title {
+  @extend %title-level2;
+
+  @include title-separator(left, $purple);
+}
+
+.text-map-content {
+  p {
+    margin: rem( 16 * $line-height ) 0;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  ul, ol {
+    list-style-type: disc;
+    list-style-position: inside;
+  }
+}
+
+.map-preview {
+  margin-top: rem( 32 );
+  padding-top: (555/1110*100%);
+  position: relative;
+  width: 100%;
+
+  iframe {
+    border: 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}

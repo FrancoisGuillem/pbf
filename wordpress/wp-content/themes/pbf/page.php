@@ -19,8 +19,7 @@ add_filter('body_class', function ($classes) {
   return $classes;
 });
 
-$titleLevel = 3;
-
+global $titleLevel;
 
 get_header(); ?>
 

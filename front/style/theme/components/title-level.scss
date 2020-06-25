@@ -1,0 +1,10 @@
+.title-level{
+  display: inline-flex;
+
+  svg {
+    color: $purple;
+    flex-shrink: 0;
+    margin-right: rem( 8 );
+    width: rem( 24 );
+  }
+}

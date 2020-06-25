@@ -19,3 +19,15 @@ h6 {
   font-size: 1em;
   font-weight: 700;
 }
+
+dl {
+  &.inline {
+    dt, dd {
+      display: inline;
+    }
+
+    dt:after {
+      content: ' :'
+    }
+  }
+}

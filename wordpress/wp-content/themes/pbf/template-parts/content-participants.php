@@ -52,49 +52,51 @@ endwhile;
 $currentTitleLevel = isset($titleLevel) ? $titleLevel : 2;
 
 ?>
-<form class="category-filters" data-controls="categories-listing">
-  <legend>Categories</legend>
-  <ul>
-    <?php foreach ($categories as $category) { ?>
-      <li><input type="checkbox" name="category" id="cat-<?= $category["slug"]; ?>" value="<?= $category["slug"]; ?>"><label for="cat-<?= $category["slug"]; ?>" class="tag-solid"><?= $category["name"]; ?></label></li>
-    <?php } ?>
-  </ul>
-</form>
-<div id="categories-listing">
-  <?php
-  /* ---------------------------------------------------------------------
+<div class="container">
+  <form class="category-filters" data-controls="categories-listing">
+    <legend>Categories</legend>
+    <ul>
+      <?php foreach ($categories as $category) { ?>
+        <li><input type="checkbox" name="category" id="cat-<?= $category["slug"]; ?>" value="<?= $category["slug"]; ?>"><label for="cat-<?= $category["slug"]; ?>" class="tag-solid"><?= $category["name"]; ?></label></li>
+      <?php } ?>
+    </ul>
+  </form>
+  <div id="categories-listing">
+    <?php
+    /* ---------------------------------------------------------------------
 * Boucle sur les catégories de participants
 * ---------------------------------------------------------------------
 */
-  foreach ($categories as $category) :
-  ?>
-    <section class="participant-category" data-category="<?= $category["slug"]; ?>">
-      <?= '<h' . $currentTitleLevel; ?> class='participant-category-title'><?= $category["name"]; ?><?= '</h' . $currentTitleLevel . '>'; ?>
-      <ul>
-        <?php
-        /*
+    foreach ($categories as $category) :
+    ?>
+      <section class="participant-category" data-category="<?= $category["slug"]; ?>">
+        <?= '<h' . $currentTitleLevel; ?> class='participant-category-title'><?= $category["name"]; ?><?= '</h' . $currentTitleLevel . '>'; ?>
+        <ul>
+          <?php
+          /*
   * Boucle sur les participants d'une catégorie
   * Ne pas modifier les lignes ci-dessous. Modifier plutôt le Template
   * template-parts/content-participant-preview.php
   */
-        foreach ($category["participants"] as $participant) { ?>
-          <li>
-            <?php
-            // On rend disponible la variable $participant pour le template
-            set_query_var('participant', $participant);
-            get_template_part('template-parts/content-participant-preview');
-            ?>
-          </li>
-        <?php
-        } ?>
-      </ul>
-    </section>
-  <?php
+          foreach ($category["participants"] as $participant) { ?>
+            <li>
+              <?php
+              // On rend disponible la variable $participant pour le template
+              set_query_var('participant', $participant);
+              get_template_part('template-parts/content-participant-preview');
+              ?>
+            </li>
+          <?php
+          } ?>
+        </ul>
+      </section>
+    <?php
 
-  endforeach;
-  /* ---------------------------------------------------------------------
+    endforeach;
+    /* ---------------------------------------------------------------------
 * Boucle sur les catégories de participants
 * ---------------------------------------------------------------------
 */
-  ?>
+    ?>
+  </div>
 </div>

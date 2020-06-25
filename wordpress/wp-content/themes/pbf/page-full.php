@@ -12,6 +12,8 @@ add_filter('body_class', function ($classes) {
   return $classes;
 });
 
+global $titleLevel;
+
 $titleLevel = 3;
 
 

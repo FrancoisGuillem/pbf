@@ -24,9 +24,7 @@ get_header(); ?>
 <div class="page-header">
   <h1 class="page-title"><?= get_the_title() ?></h1>
 </div>
-<div class="container">
-  <?php get_template_part('template-parts/content-partners'); ?>
-</div>
+<?php get_template_part('template-parts/content-partners'); ?>
 
 <?php
 get_footer();

@@ -52,11 +52,7 @@ if (pbf_get_selected_date() >= "2020-09-03") { ?>
     } ?>
   </ul>
 <?php } ?>
-<div class="container">
-
-  <? get_template_part('template-parts/content-agenda'); ?>
-
-</div>
+<? get_template_part('template-parts/content-agenda'); ?>
 
 <?php
 get_footer();

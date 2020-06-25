@@ -1,0 +1,46 @@
+section.columns{
+  margin: rem( 80 ) 0;
+
+  .columns-content{
+    > .title-level {
+      @extend %title-level3;
+      margin: rem( 32 ) 0 rem( 16 );
+    }
+  }
+
+  .columns-title {
+    @extend %title-level2;
+
+    @include title-separator(left, $purple);
+  }
+
+  .cta-solid {
+    margin-top: rem( 16 );
+  }
+
+  .static-map{
+    margin-top: rem( 32 );
+
+    .title-level {
+      margin-top: rem( 24 );
+    }
+  }
+
+  @media ( min-width: $medium ) {
+
+    .columns-content{
+      width: 50%;
+      position: relative;
+      padding-right: rem( 15 );
+    }
+
+    .static-map{
+      left: 100%;
+      margin-top: 0;
+      padding-left: rem( 15 );
+      position: absolute;
+      top:0;
+      width: 100%;
+    }
+  }
+}

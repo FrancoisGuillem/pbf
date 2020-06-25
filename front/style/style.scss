@@ -1,3 +1,4 @@
+@import "./settings/wordpress";
 @import "./settings/mixins";
 @import "./settings/animations";
 @import "./settings/color";
@@ -17,9 +18,11 @@
 @import "./theme/components/image-wrapper";
 @import "./theme/components/link-page";
 @import "./theme/components/container";
+@import "./theme/components/columns";
 @import "./theme/components/text-illus";
 @import "./theme/components/list-text";
 @import "./theme/components/title-text";
+@import "./theme/components/text-map";
 @import "./theme/components/header";
 @import "./theme/components/hero";
 @import "./theme/components/comments";
@@ -42,6 +45,8 @@
 @import "./theme/components/sponsors";
 @import "./theme/components/widgets";
 @import "./theme/components/festival-intro";
+@import "./theme/components/title-level";
+@import "./theme/components/ratp-list";
 @import "./theme/pages/event";
 @import "./theme/pages/participants";
 @import "./theme/pages/participant";
