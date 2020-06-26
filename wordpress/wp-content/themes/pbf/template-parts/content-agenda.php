@@ -12,9 +12,9 @@ $args = array(
 );
 
 $query = new WP_Query($args);
-
-if ($query->have_posts()) { ?>
-  <div class="container">
+?>
+<div class="container">
+  <?php if ($query->have_posts()) { ?>
     <ul>
       <?php
       /* Start the Loop */
@@ -32,10 +32,11 @@ if ($query->have_posts()) { ?>
       the_posts_navigation();
       ?>
     </ul>
-  </div>
-<?php } else { ?>
-  <div class="events-empty">
-    <?php get_template_part("inc/assets/toast.svg"); ?>
-    <?= get_the_content_pbf(); ?>
-  </div>
-<?php }
+  <?php } else { ?>
+    <div class="events-empty">
+      <?php get_template_part("inc/assets/toast.svg"); ?>
+      <?= get_the_content_pbf(); ?>
+    </div>
+  <?php } ?>
+
+</div>

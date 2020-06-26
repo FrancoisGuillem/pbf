@@ -1,18 +1,11 @@
-// .title-text {
-//   padding: rem( 80 ) 0;
-// }
+.title-text {
+  margin-bottom: rem(  80 );
 
-.title-text-title {
-  @extend %title-level2;
-  text-align: center;
-
-  @include title-separator(center, $purple);
-}
-
-.title-text-content {
-  max-width: rem( 540 );
-  margin: 0 auto;
-  text-align: center;
+  .title-text-content > *:not(div) {
+    max-width: rem( 540 );
+    margin: 0 auto;
+    text-align: center;
+  }
 
   p {
     margin: rem( 16 * $line-height ) 0;
@@ -21,4 +14,14 @@
       margin-bottom: 0;
     }
   }
+  .title-text-content > div {
+    margin-top: rem( 32 );
+  }
+}
+
+.title-text-title {
+  @extend %title-level2;
+  text-align: center;
+
+  @include title-separator(center, $purple);
 }

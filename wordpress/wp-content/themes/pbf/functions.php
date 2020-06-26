@@ -405,6 +405,7 @@ require_once(get_template_directory() . '/inc/social-navwalker.php');
 include_once(get_template_directory() . '/inc/pbf_functions.php');
 
 include_once(get_template_directory() . '/inc/shortcode-list-text.php');
+include_once(get_template_directory() . '/inc/shortcode-list-card.php');
 include_once(get_template_directory() . '/inc/shortcode-heading-icon.php');
 // include_once(get_template_directory() . '/inc/shortcode-static-map.php');
 include_once(get_template_directory() . '/inc/shortcode-thumbnail.php');

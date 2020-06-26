@@ -1,0 +1,152 @@
+$scrollbarHeight: rem( 32 );
+$card-spacing: $gutter / 2;
+
+.list-card {
+  position: relative;
+  overflow: hidden;
+  margin: $gutter * -1 $gutter * -1 rem( 32 );
+}
+
+.list-card-wrapper {
+  margin-bottom: $scrollbarHeight * -1;
+
+  ul {
+    display: flex;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    padding-bottom: $scrollbarHeight;
+    scroll-snap-type: x mandatory;
+    width: 100%;
+
+    &::before {
+      content: '';
+      padding-left: $gutter / 2;
+    }
+
+    &::after {
+      content: '';
+      padding-left: $gutter;
+    }
+
+    li {
+      margin: 0 $card-spacing;
+      width: calc(100% - #{$card-spacing * 4});
+      flex-shrink: 0;
+      scroll-snap-align: center;
+      scroll-snap-stop: always;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+.list-card-index {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+
+  li {
+    flex: 0 0 auto;
+    margin: rem( 4 );
+    border-radius: 50%;
+    background-color: rgba( $blue, 0.5 );
+    height: rem( 8 );
+    width: rem( 8 );
+    transition: background-color $anim-duration $anim-easing;
+
+    &.current {
+      background-color: $blue;
+    }
+  }
+}
+
+.card {
+  border-radius: 8px;
+  box-shadow: $box-shadow;
+  color: white;
+  display: block;
+  margin: $gutter 0;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none;
+
+  @include interact() {
+    color: white;
+
+    .card-image {
+      transform: scale($anim-scale);
+    }
+  }
+
+  .card-image {
+    display: block;
+    padding-top: (800 / 700 * 100%);
+    transition: transform $anim-duration $anim-easing;
+
+    img {
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 1;
+    }
+
+    &::after {
+      content: '';
+      background-image: linear-gradient(
+        0deg,
+        rgba(42, 33, 80, 0.1),
+        rgba(42, 33, 80, 0.1)
+      );
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 2;
+    }
+  }
+
+  .label {
+    @extend %title-level3;
+
+    position: absolute;
+    width: 100%;
+    bottom: rem(40);
+    left: 0;
+    text-align: center;
+    z-index: 3;
+  }
+}
+
+
+
+@media ( min-width: $medium ) {
+  .list-card {
+    overflow: visible;
+    margin: $gutter * -1;
+  }
+
+  .list-card-wrapper {
+    ul {
+      overflow: visible;
+
+      li {
+        flex: 1 0 auto;
+        width: auto;
+      }
+    }
+  }
+
+  .list-card-index {
+  display: none;
+  }
+}

@@ -9,12 +9,16 @@ $titleLevel = wp_cache_get('titleLevel');
 if ($titleLevel === false) {
   $titleLevel = 2;
 }
+$image_data = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), '');
+
+$image_height = ((float) $image_data[2] / (float) $image_data[1] * 100) . '%';
+
 ?>
 <section class="text-illus">
   <div class="container">
     <figure class="text-illus-image">
-      <span class="image-wrapper">
-        <?php the_post_thumbnail([356, 540, 992]); ?>
+      <span class="image-wrapper" style="padding-top: <?= $image_height ?>;">
+        <?php the_post_thumbnail('medium'); ?>
       </span>
       <?php
       $caption = get_the_post_thumbnail_caption();

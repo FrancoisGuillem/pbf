@@ -1,6 +1,4 @@
 .text-map {
-  // background-color: $yellow-dark;
-  // color: white;
   overflow: hidden;
   padding: rem( 80 ) 0;
   background: no-repeat 50% 50%;
@@ -39,9 +37,13 @@
 
 .map-preview {
   margin-top: rem( 32 );
-  padding-top: (555/1110*100%);
+  padding-top: 80vh;
   position: relative;
   width: 100%;
+
+  @media ( min-width: $medium ) {
+    padding-top: (555/1110*100%);
+  }
 
   iframe {
     border: 0;
