@@ -12,8 +12,10 @@ function heading_function($atts, $content = null)
   $titleLevel = wp_cache_get('titleLevel');
 
   if ($titleLevel === false) {
-    $titleLevel = 3;
+    $titleLevel = 2;
   }
+
+  $titleLevel = $titleLevel + 1;
 
   $iconFile = '';
 

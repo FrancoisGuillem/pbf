@@ -11,4 +11,13 @@
   section + .list-all-sub-title{
     margin-top: rem( 32 );
   }
+
+  h3[class$=-title]{
+    @extend %title-level3;
+    padding-bottom: 0;
+
+    &::after {
+      content: none;
+    }
+  }
 }
