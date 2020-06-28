@@ -239,7 +239,7 @@ function get_the_content_pbf($more_link_text = '(more...)', $stripteaser = 0, $m
   $content = get_the_content($more_link_text, $stripteaser, $more_file);
   $content = apply_filters('the_content', $content);
   $content = str_replace(']]>', ']]&gt;', $content);
-  $content = preg_replace('#<a href(.*?)>(.*?)</a>#i', '<a class="link-page" \1>' . file_get_contents("inc/assets/arrow-right.svg.php", TRUE) . '<span>\2</span></a>', $content);
+  $content = preg_replace('#<a href(.*?)>(.*?)</a>#i', '<a class="link-page" href\1>' . file_get_contents("inc/assets/arrow-right.svg.php", TRUE) . '<span>\2</span></a>', $content);
 
   return $content;
 }
