@@ -3,6 +3,17 @@
 
   @include title-separator( center, $purple);
   text-align: center;
+
+  [role="doc-subtitle"]{
+    font-size: em(22/44);
+    margin-top: rem( 8 );
+    font-style: italic;
+  }
+}
+
+.laureate-content{
+  text-align: center;
+  margin: rem( 32 ) 0;
 }
 
 .laureates-list {
@@ -68,6 +79,28 @@
   .laureate-entry-year {
     flex: 0 0 auto;
     font-weight: bold;
+  }
+
+  ol {
+    counter-reset: laureate;
+
+    li {
+      margin-top: rem( 24 );
+      padding-left: rem( 34 );
+      position: relative;
+
+      i {
+        display: block;
+      }
+
+      &::before{
+        counter-increment: laureate;
+        content: "#" counter(laureate) " – ";
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+    }
   }
 
   @media ( min-width: $large ) {

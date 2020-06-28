@@ -10,10 +10,23 @@ if ($titleLevel === false) {
   $titleLevel = 2;
 }
 
+$subtitle = get_post_meta(get_the_ID(), 'sub-title', true);
+
 ?>
 <section class="laureates container">
-  <h<?= $titleLevel; ?> class="laureates-title"><?= get_the_title() ?></h<?= $titleLevel; ?>>
-  <?= the_content(); ?>
+  <?php if ($subtitle) { ?>
+    <header class="laureates-title">
+      <h<?= $titleLevel; ?>><?= get_the_title() ?></h<?= $titleLevel; ?>>
+      <p role="doc-subtitle"><?= $subtitle ?></p>
+    </header>
+  <?php } else { ?>
+    <h<?= $titleLevel; ?> class="laureates-title"><?= get_the_title() ?></h<?= $titleLevel; ?>>
+  <?php } ?>
+  <?php if (!empty(get_the_content())) { ?>
+    <div class="laureate-content">
+      <?= get_the_content_pbf(); ?>
+    </div>
+  <?php } ?>
   <ul class="laureates-list">
     <?php
     query_posts(array(
