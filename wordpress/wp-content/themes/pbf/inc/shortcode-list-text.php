@@ -34,14 +34,32 @@ function listtext_function($atts, $content = null)
           $iconFile = '';
         }
 
+        $link = get_post_meta(get_the_ID(), "card-link", true);
+        $external = ' rel="noopener noreferrer" target="_blank"';
+
+        if ($link && substr($link, 0, 4) !== "http") {
+          $external = '';
+          $link = get_permalink($link);
+        }
       ?>
         <li>
           <div>
             <?php if (has_post_thumbnail()) { ?>
-              <span class="list-image" role="presentation">
-                <?php the_post_thumbnail(); ?>
-              </span>
-            <?php } ?>
+              <?php
+              if ($link) { ?>
+                <a class="list-text-link" href="<?= $link ?>" <?= $external ?>>
+                  <span class="list-image" role="presentation">
+                    <?php the_post_thumbnail(); ?>
+                  </span>
+                </a>
+              <?php
+              } else {
+              ?>
+                <span class="list-image" role="presentation">
+                  <?php the_post_thumbnail(); ?>
+                </span>
+            <?php }
+            } ?>
             <p class="title"><?= $iconFile . get_the_title(); ?></p>
             <?= get_the_content_pbf(); ?>
           </div>
