@@ -9,9 +9,9 @@ $titleLevel = wp_cache_get('titleLevel');
 if ($titleLevel === false) {
   $titleLevel = 2;
 }
-$image_data = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), '');
+$image_data = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'medium');
 
-$image_height = ((float) $image_data[2] / (float) $image_data[1] * 100) . '%';
+$image_height = ($image_data[2] / $image_data[1] * 100) . '%';
 
 ?>
 <section class="text-illus">
