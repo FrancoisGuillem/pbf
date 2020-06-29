@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Template Name: Brassam Steps
+ * Template Name: Brassam Step
  */
 
 $titleLevel = wp_cache_get('titleLevel');
