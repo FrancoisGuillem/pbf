@@ -2,9 +2,13 @@
   margin-bottom: rem(  80 );
 
   .title-text-content > *:not(div) {
-    max-width: rem( 540 );
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
+  }
+
+  &:not(.variant-wide) .title-text-content > *:not(div) {
+    max-width: rem( 540 );
   }
 
   p {
