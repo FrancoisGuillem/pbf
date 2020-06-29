@@ -1,5 +1,6 @@
 section.columns{
   margin: rem( 80 ) 0;
+  overflow: hidden;
 
   .columns-content{
     > .title-level {
@@ -27,6 +28,13 @@ section.columns{
   }
 
   @media ( min-width: $medium ) {
+    .container {
+      &::before {
+        content: '';
+        float: left;
+        padding-top: (500% / 1110 * 100);
+      }
+    }
 
     .columns-content{
       width: 50%;
