@@ -20,15 +20,17 @@ function listcard_function($atts, $content = null)
       <ul>
         <?php
         while (have_posts()) : the_post();
-          $cardMetadata = get_post_meta(get_the_ID());
-          $link = $cardMetadata["card-link"][0] ?? "";
+          $link = get_post_meta(get_the_ID(), "card-link", true);
 
-          if (substr($link, 0, 4) !== "http") {
+          $external = ' rel="noopener noreferrer" target="_blank"';
+
+          if ($link && substr($link, 0, 4) !== "http") {
+            $external = '';
             $link = get_permalink($link);
           }
         ?>
           <li>
-            <a class="card" href="<?= $link ?>">
+            <a class="card" href="<?= $link ?>" <?= $external ?>>
               <span class="card-image">
                 <?php the_post_thumbnail('medium'); ?>
               </span>
