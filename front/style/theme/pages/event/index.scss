@@ -105,7 +105,6 @@
   margin: rem( 80 ) auto;
   max-width: rem( 540 );
   width: 100%;
-  text-align: center;
 
   .illustration.toast {
     display: block;
@@ -115,7 +114,18 @@
   }
 
   .intro {
-    @extend %title-level3;
+    font-weight: 700;
     margin: rem( 16 ) 0;
+    text-align: center;
+  }
+
+  p, ul {
+    margin-top: rem( 24 );
+  }
+
+  p[style="text-align: center;"] {
+    .cta-solid {
+      margin-top: rem( 8 );
+    }
   }
 }
