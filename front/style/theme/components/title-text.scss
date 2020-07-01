@@ -1,6 +1,10 @@
 .title-text {
   margin-bottom: rem(  80 );
 
+  .hero + & {
+    margin-top: rem( 80 );
+  }
+
   .title-text-content > *:not(div) {
     margin-left: auto;
     margin-right: auto;
