@@ -14,6 +14,8 @@
 	*/
 $categories = array();
 
+$allowed_presence = 'semaine';
+
 $args = array(
   'post_type' => 'participant',
 );
@@ -21,6 +23,17 @@ $args = array(
 $query = new WP_Query($args);
 
 while ($query->have_posts()) : $query->the_post();
+  // Filtrer les participants qui participent à la semaine
+  $presence = get_the_terms($post->ID, 'participant_presence');
+  if (!$presence) {
+    continue;
+  }
+  $presence = array_map(function ($x) {
+    return $x->slug;
+  }, $presence);
+  if (!in_array($allowed_presence, $presence)) {
+    continue;
+  }
 
   $terms = get_the_terms($post->ID, 'participant_cat');
   if (empty($terms)) {

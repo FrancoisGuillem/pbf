@@ -1,15 +1,7 @@
 <?php
 
 /**
- * Template pour afficher la liste des participants.
- * Ce fichier gère seulement la structure de la page et le titre des catégories.
- * Pour modifier l'affichage des partcipants, vous pouvez éditer le fichier
- * 'template_parts/content-participant-preview.php'
- *
- * Variables
- *----------
- * $category titre de la catégorie. Disponible uniquement dans la boucle des
- * catégories
+ * Template pour afficher la liste des partenaires.
  *
  * @package pbf
  */
@@ -22,18 +14,25 @@
 	*/
 $categories = array();
 
-$allowed_presence = wp_cache_get('participant_presence');
+$allowed_presence = 'weekend';
 
-while (have_posts()) : the_post();
+$args = array(
+  'post_type' => 'participant',
+);
+
+$query = new WP_Query($args);
+
+while ($query->have_posts()) : $query->the_post();
   // Filtrer les participants qui participent à la semaine
   $presence = get_the_terms($post->ID, 'participant_presence');
-  if ($presence) {
-    $presence = array_map(function ($x) {
-      return $x->slug;
-    }, $presence);
-    if (!in_array($allowed_presence, $presence)) {
-      continue;
-    }
+  if (!$presence) {
+    continue;
+  }
+  $presence = array_map(function ($x) {
+    return $x->slug;
+  }, $presence);
+  if (!in_array($allowed_presence, $presence)) {
+    continue;
   }
 
   $terms = get_the_terms($post->ID, 'participant_cat');
@@ -63,44 +62,35 @@ while (have_posts()) : the_post();
   array_push($categories[$category["slug"]]["participants"], $participant);
 endwhile;
 
-/* ----------------------------------------------------------------------------
-	* Fin de la préparation des données
-	* ----------------------------------------------------------------------------
- */
+$currentTitleLevel = isset($titleLevel) ? $titleLevel : 2;
+
 ?>
-
-<?php get_header(); ?>
-
-<div class="page-header">
-  <h1 class="page-title"><?= _e("[:fr]Participants[:en]Participants[:]") ?></h1>
-</div>
-
 <div class="container">
   <form class="category-filters" data-controls="categories-listing">
     <legend>Categories</legend>
     <ul>
       <?php foreach ($categories as $category) { ?>
-        <li><input type="checkbox" name="category" id="cat-<?= $category["slug"]; ?>" value="<?= $category["slug"]; ?>" checked><label for="cat-<?= $category["slug"]; ?>" class="tag-solid"><?= $category["name"]; ?></label></li>
+        <li><input type="checkbox" name="category" id="cat-<?= $category["slug"]; ?>" value="<?= $category["slug"]; ?>"><label for="cat-<?= $category["slug"]; ?>" class="tag-solid"><?= $category["name"]; ?></label></li>
       <?php } ?>
     </ul>
   </form>
   <div id="categories-listing">
     <?php
     /* ---------------------------------------------------------------------
-  * Boucle sur les catégories de participants
-  * ---------------------------------------------------------------------
-  */
+* Boucle sur les catégories de participants
+* ---------------------------------------------------------------------
+*/
     foreach ($categories as $category) :
     ?>
       <section class="participant-category" data-category="<?= $category["slug"]; ?>">
-        <h2 class='participant-category-title'><?= $category["name"]; ?></h2>
+        <?= '<h' . $currentTitleLevel; ?> class='participant-category-title'><?= $category["name"]; ?><?= '</h' . $currentTitleLevel . '>'; ?>
         <ul>
           <?php
           /*
-    * Boucle sur les participants d'une catégorie
-    * Ne pas modifier les lignes ci-dessous. Modifier plutôt le Template
-    * template-parts/content-participant-preview.php
-    */
+  * Boucle sur les participants d'une catégorie
+  * Ne pas modifier les lignes ci-dessous. Modifier plutôt le Template
+  * template-parts/content-participant-preview.php
+  */
           foreach ($category["participants"] as $participant) { ?>
             <li>
               <?php
@@ -117,15 +107,9 @@ endwhile;
 
     endforeach;
     /* ---------------------------------------------------------------------
-  * Fin boucle sur les catégories de participants
-  * ---------------------------------------------------------------------
-  */
+* Boucle sur les catégories de participants
+* ---------------------------------------------------------------------
+*/
     ?>
   </div>
-  <?php
-  //the_posts_navigation();
-  ?>
 </div>
-
-<?php
-get_footer();

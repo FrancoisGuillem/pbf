@@ -23,7 +23,7 @@ get_header(); ?>
   <h1 class="page-title"><?= get_the_title() ?></h1>
 </div>
 
-<? get_template_part('template-parts/content-participants'); ?>
+<? get_template_part('template-parts/content-participants-weekend'); ?>
 
 <?php
 get_footer();
