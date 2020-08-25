@@ -28,9 +28,11 @@ while ($query->have_posts()) : $query->the_post();
   if (!$presence) {
     continue;
   }
+
   $presence = array_map(function ($x) {
     return $x->slug;
   }, $presence);
+
   if (!in_array($allowed_presence, $presence)) {
     continue;
   }

@@ -48,9 +48,27 @@
 
   @media ( min-width: $large ) {
     .participant-description {
-      width: ( 100% / 3 );
-      flex: 1 0 auto;
-      max-width: rem( 350 );
+      &:not(.full-width){
+        width: ( 100% / 3 );
+        flex: 1 0 auto;
+        max-width: rem( 350 );
+      }
+
+      &.full-width{
+        display: flex;
+
+        .content {
+          p:first-child{
+            margin-top: 0;
+          }
+        }
+      }
+
+      .participant-header{
+        width: ( 100% / 3 );
+        flex: 0 0 auto;
+        padding-right: rem( 32 );
+      }
     }
 
     .participant-events {

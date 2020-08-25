@@ -96,6 +96,7 @@ $currentTitleLevel = isset($titleLevel) ? $titleLevel : 2;
               <?php
               // On rend disponible la variable $participant pour le template
               set_query_var('participant', $participant);
+
               get_template_part('template-parts/content-participant-preview');
               ?>
             </li>

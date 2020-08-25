@@ -1,31 +1,160 @@
 <?php
 
 /**
- * template pour afficher les participants au weekend de cloture
+ * Template de la page d'un participant.
  *
- * Variables
- *----------
- * $participant["id"] : ID du participant. Peut être utile pour récupérer
- *    plus d'info via l'API.
- * $participant["permalink"]: lien vers la page du partcipant
- * $participant["thumbnail"]: code html de l'image du participant
- * $participant["title"]: nom du participant
+ * variables
+ * ---------
+ * $title : nom du participant
+ * $thumbnail : code html de l'image du participant
+ * $content : description du participant
+ * $category : categorie du participant
+ * $address : adresse du participant
+ * $facebook : lien facebook (chaine vide si pas renseigné)
+ * $instagram : lien instagram (chaine vide si pas renseigné)
+ * $website : lien du site web du participant (chaine vide si non renseigné)
+ *
+ * Variables boucle événements
+ * ---------------------------
+ * $evt["title"] : titre de l'événement
+ * $evt["link"] : lien de l'évènement
+ * $evt["content"]: description de l'événement
+ * $evt["geo"]["address"]: addresse de l'évènement
+ * $evt["facebook"]: lien facebook de l'événement
  *
  * @package pbf
  */
-?>
 
-<article class="participant" id="post-<?= $participant["id"]; ?>">
-  <a href="<?= esc_url($participant["permalink"]) ?>">
-    <?php if ($participant["thumbnail"]) { ?>
+/* ----------------------------------------------------------------------------
+ * Préparation des données. Ne pas modifier.
+ * ----------------------------------------------------------------------------
+ *
+ * On récupère tous les participants et on les organise par catégorie.
+ */
+$title = get_the_title();
+$thumbnail = get_the_post_thumbnail_url();
+
+$metadata = get_post_meta(get_the_ID());
+
+$address = $metadata["address"][0];
+$facebook = $metadata["facebook"][0] ?? "";
+$instagram = $metadata["instagram"][0] ?? "";
+$website = $metadata["website"][0] ?? "";
+
+$terms = get_the_terms($post->ID, 'participant_cat');
+if (!empty($terms)) {
+  $category = $terms[0]->name;
+} else {
+  $category = __("[:fr]Non Classé[:en]No Category[:]");
+}
+
+$events = get_pbf_participant_events($metadata);
+
+/* ----------------------------------------------------------------------------
+ * Fin de la préparation des données
+ * ----------------------------------------------------------------------------
+*/
+?>
+<div class="page-header">
+  <h1 class="page-title"><?= $title ?></h1>
+</div>
+
+<p class="container">
+  <a class="link-page" href="<?= get_post_permalink("495", TRUE) ?>">
+    <?php get_template_part("inc/assets/arrow-left.svg"); ?>
+    <span><?= __("[:en]Participants list[:][:fr]Liste des participants[:]") ?></span>
+  </a>
+</p>
+<div class="container">
+  <div class="participant-description">
+    <?php if ($thumbnail) { ?>
       <span class="participant-img">
-        <img src="<?= $participant["thumbnail"] ?>" alt="" />
+        <img src="<?= $thumbnail; ?>" alt="" />
       </span>
     <?php } ?>
-    <div class="participant-title-wrapper">
-      <h3 class="participant-title">
-        <?= $participant["title"] ?>
-      </h3>
+    <p class="participant-title"><?= $title ?></p>
+    <p class="tag-solid variant-primary"><?= $category; ?></p>
+    <div class="content">
+      <?= the_content() ?>
     </div>
-  </a>
-</article>
+    <ul class="participant-links">
+      <?php
+      if (!empty($facebook)) { ?>
+        <li><a href="<?= $facebook ?>"><?php get_template_part("inc/assets/facebook.svg"); ?><span>Facebook</span></a></li>
+      <?php }
+      if (!empty($instagram)) { ?>
+        <li><a href="<?= $instagram ?>"><?php get_template_part("inc/assets/instagram.svg"); ?><span>Instagram</span></a></li>
+      <?php }
+      if (!empty($website)) { ?>
+        <li><a href="<?= $website ?>"><?php get_template_part("inc/assets/globe.svg"); ?><span><?= _e("[:fr]Site web[:en]Website[:]"); ?></span></a></li>
+      <?php }
+      ?>
+    </ul>
+  </div>
+  <?php if ($events) { ?>
+    <section class="participant-events">
+      <h2 class="participant-events-title"><?= __("[:en]Schedule[:][:fr]Évènements[:]") ?></h2>
+      <ul>
+        <?php
+        /*
+      * --------------------------------------------------------------------------
+      * Boucle des événements
+      * --------------------------------------------------------------------------
+      */
+        foreach ($events as $evt) {
+        ?><li>
+            <article class="event-detail">
+              <div class="event-detail-info">
+                <?php
+                set_query_var('evt', $evt["metadata"]);
+                get_template_part('template-parts/content-schedule');
+                ?>
+                <?php if ($evt["facebook"]) { ?>
+                  <a href=" <?= $evt["facebook"] ?>" class="event-detail-link"><?php get_template_part("inc/assets/facebook.svg"); ?><span><?= __("[:en]View the event on Facebook[:][:fr]Voir l'évènement sur Facebook[:]") ?></span></a>
+
+                <?php } ?>
+              </div>
+              <div class="event-detail-content">
+                <h2 class="event-detail-title"><?= $evt["title"] ?></h2>
+                <?php if (!empty($evt["geo"])) { ?>
+                  <p class="event-detail-address"><?= $evt["geo"]["address"] ?></p>
+                <?php } ?>
+                <?= $evt["content"] ?>
+                <footer class="event-detail-footer">
+                  <ul class="event-detail-organizers">
+                    <?php foreach ($evt["organizers"] as $organizer) { ?>
+                      <li>
+                        <a class="event-detail-organizer" href="<?= $organizer["permalink"]; ?>">
+                          <?php if ($organizer["thumbnail"]) { ?>
+                            <span class="event-organizer-img">
+                              <img src="<?= $organizer["thumbnail"] ?>" alt="" />
+                            </span>
+                          <?php } ?>
+                          <span class="event-organizer-title"><?= $organizer["title"] ?></span>
+                        </a>
+                      </li>
+                    <?php
+                    } ?>
+                  </ul>
+                </footer>
+              </div>
+            </article>
+          </li>
+        <?php
+        }
+        /* -------------------------------------------------------------------------
+      * Fin boucle des événements
+      * -------------------------------------------------------------------------
+      */
+        ?>
+      </ul>
+    </section>
+  <?php } else { ?>
+    <div class="participant-events">
+      <div class="participant-no-events">
+        <?php get_template_part("inc/assets/toast.svg"); ?>
+        <p><?= _e('[:fr]Événements à venir[:en]Events to come[:]') ?></p>
+      </div>
+    </div>
+  <?php } ?>
+</div>
