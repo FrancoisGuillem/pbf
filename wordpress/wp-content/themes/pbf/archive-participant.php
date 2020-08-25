@@ -23,6 +23,14 @@
 $categories = array();
 
 while (have_posts()) : the_post();
+  // Filtrer les participants qui participent à la semaine
+  $presence = get_the_terms($post->ID, 'participant_presence');
+  if ($presence) {
+    $presence = array_map(function($x) {return $x->slug;}, $presence);
+    if (!in_array("semaine", $presence)) {
+      continue;
+    }
+  }
 
   $terms = get_the_terms($post->ID, 'participant_cat');
   if (empty($terms)) {
@@ -74,7 +82,7 @@ endwhile;
   </form>
   <div id="categories-listing">
     <?php
-    /* ---------------------------------------------------------------------
+ /* ---------------------------------------------------------------------
   * Boucle sur les catégories de participants
   * ---------------------------------------------------------------------
   */
@@ -84,7 +92,7 @@ endwhile;
         <h2 class='participant-category-title'><?= $category["name"]; ?></h2>
         <ul>
           <?php
-          /*
+   /*
     * Boucle sur les participants d'une catégorie
     * Ne pas modifier les lignes ci-dessous. Modifier plutôt le Template
     * template-parts/content-participant-preview.php
@@ -104,8 +112,8 @@ endwhile;
     <?php
 
     endforeach;
-    /* ---------------------------------------------------------------------
-  * Boucle sur les catégories de participants
+ /* ---------------------------------------------------------------------
+  * Fin boucle sur les catégories de participants
   * ---------------------------------------------------------------------
   */
     ?>
