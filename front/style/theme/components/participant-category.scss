@@ -54,6 +54,7 @@ $participants-spacing: rem( 30 / 2 );
 
     img {
       height: 100%;
+      object-fit: contain;
     }
 
     & + .participant-title {
