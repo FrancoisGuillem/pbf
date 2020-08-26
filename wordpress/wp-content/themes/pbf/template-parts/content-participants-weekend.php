@@ -18,22 +18,21 @@ $allowed_presence = 'weekend';
 
 $args = array(
   'post_type' => 'participant',
+  'orderby' => 'title',
+  'order' => 'ASC',
+  'posts_per_page' => -1,
+  'tax_query' => array(
+    array(
+      'taxonomy' => 'participant_presence',
+      'field'    => 'slug',
+      'terms'    => $allowed_presence,
+    ),
+  ),
 );
 
 $query = new WP_Query($args);
 
 while ($query->have_posts()) : $query->the_post();
-  // Filtrer les participants qui participent à la semaine
-  $presence = get_the_terms($post->ID, 'participant_presence');
-  if (!$presence) {
-    continue;
-  }
-  $presence = array_map(function ($x) {
-    return $x->slug;
-  }, $presence);
-  if (!in_array($allowed_presence, $presence)) {
-    continue;
-  }
 
   $terms = get_the_terms($post->ID, 'participant_cat');
   if (empty($terms)) {
@@ -63,6 +62,8 @@ while ($query->have_posts()) : $query->the_post();
 endwhile;
 
 $currentTitleLevel = isset($titleLevel) ? $titleLevel : 2;
+
+array_multisort($categories, SORT_ASC);
 
 ?>
 <div class="container">
