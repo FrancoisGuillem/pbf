@@ -51,6 +51,7 @@ $day = get_post_meta(get_the_ID(), 'event_day', true);
 
       <li class="timeline-entry">
         <div class="header">
+          <span class="image-wrapper timeline-entry-image"><?php the_post_thumbnail([80, 80]); ?></span>
           <div class="title">
             <p class="timeline-entry-title"><?php the_title(); ?></p>
             <p class="timeline-entry-time"><?= $time ?></p>
