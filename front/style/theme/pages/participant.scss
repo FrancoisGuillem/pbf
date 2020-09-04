@@ -39,6 +39,12 @@
 
     .participant-description {
       order: 2;
+
+      .content {
+        > *:first-child{
+          margin-top: rem( 24 );
+        }
+      }
     }
 
     .participant-no-events {
@@ -56,6 +62,7 @@
 
       &.full-width{
         display: flex;
+        width: 100%;
 
         .content {
           p:first-child{
