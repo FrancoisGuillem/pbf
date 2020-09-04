@@ -33,7 +33,7 @@ class Filter {
 
   filter() {
     this.refs.list.forEach(el => {
-      const category = el.getAttribute('data-category');
+      const category = el.id;
       el[
         this.categories.includes(category) ? 'removeAttribute' : 'setAttribute'
       ]('hidden', true);

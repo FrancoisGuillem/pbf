@@ -642,7 +642,7 @@
         var _this2 = this;
 
         this.refs.list.forEach(function (el) {
-          var category = el.getAttribute('data-category');
+          var category = el.id;
           el[_this2.categories.includes(category) ? 'removeAttribute' : 'setAttribute']('hidden', true);
         });
       }

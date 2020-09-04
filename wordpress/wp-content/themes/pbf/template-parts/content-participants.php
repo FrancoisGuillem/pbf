@@ -82,7 +82,7 @@ array_multisort($categories, SORT_ASC);
 */
     foreach ($categories as $category) :
     ?>
-      <section class="participant-category" data-category="<?= $category["slug"]; ?>">
+      <section class="participant-category" id="<?= $category["slug"]; ?>" data-category>
         <?= '<h' . $currentTitleLevel; ?> class='participant-category-title'><?= $category["name"]; ?><?= '</h' . $currentTitleLevel . '>'; ?>
         <ul>
           <?php
