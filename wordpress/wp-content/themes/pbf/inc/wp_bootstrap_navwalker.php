@@ -117,7 +117,13 @@ if (!class_exists('WP_Bootstrap_Navwalker')) {
 
       $atts['class'] = $class_names;
 
-      // echo "<pre>" . $class_names . "</pre>";
+      if (!empty($item->target)) {
+        $atts['target'] = $item->target;
+
+        if ($item->target === '_blank') {
+          $atts['rel'] = 'noopener noreferrer';
+        }
+      }
 
       // If item has_children add atts to <a>.
       if (isset($args->has_children) && $args->has_children && 0 === $depth && $args->depth > 1) {
