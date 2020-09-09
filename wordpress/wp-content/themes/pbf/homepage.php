@@ -5,6 +5,8 @@ Template Name: Homepage
 
 $subtitle = "[:fr]" . get_theme_mod("pbf_subtitle") . "[:en]" . get_theme_mod("pbf_subtitle_en") . "[:]";
 $subtitle = __($subtitle);
+$cta = get_theme_mod("pbf_link");
+$cta_text = get_theme_mod("pbf_link_text");
 
 get_header(); ?>
 <div class="hero variant-primary">
@@ -15,6 +17,9 @@ get_header(); ?>
         <span><?php echo esc_attr(get_bloginfo('name')); ?></span>
       </h1>
       <p role="doc-subtitle" class="hero-subtitle"><span><?= $subtitle; ?></span></p>
+      <?php if (!empty($cta) && !empty($cta_text)) { ?>
+        <a href="<?= $cta ?>" target="_blank" rel="noopener noreferrer" class="cta-solid variant-primary hero-info"><?= $cta_text ?></a>
+      <?php } ?>
     </div>
 
     <div class="hero-image">

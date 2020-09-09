@@ -56,6 +56,31 @@ function wp_bootstrap_starter_customize_register($wp_customize)
     'type' => 'text'
   )));
 
+  $wp_customize->add_setting('pbf_link_text', array(
+    'default'   => '',
+    'type'       => 'theme_mod',
+    'sanitize_callback' => 'wp_filter_nohtml_kses',
+  ));
+
+  $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'pbf_link_text_control', array(
+    'label' => __('Titre du lien sous le logo', 'pbf'),
+    'section'    => 'pbf_home_content',
+    'settings'   => 'pbf_link_text',
+    'type' => 'text'
+  )));
+
+  $wp_customize->add_setting('pbf_link', array(
+    'default'   => '',
+    'type'       => 'theme_mod',
+    'sanitize_callback' => 'wp_filter_nohtml_kses',
+  ));
+
+  $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'pbf_link_control', array(
+    'label' => __('Lien sous le logo', 'pbf'),
+    'section'    => 'pbf_home_content',
+    'settings'   => 'pbf_link',
+    'type' => 'text'
+  )));
 }
 add_action('customize_register', 'wp_bootstrap_starter_customize_register');
 

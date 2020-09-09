@@ -205,12 +205,17 @@
   }
 
   @media ( min-width: $medium ) {
-    position: absolute;
-    right: $gutter * -1;
-    top: 0;
-    z-index: 3;
-    margin-top: ( -76% / 1110 * 100 );
-    padding-top: 0;
+    .variant-primary & {
+      margin-top: rem( 16 );
+    }
+
+    .variant-secondary & {
+      position: absolute;
+      right: $gutter * -1;
+      top: 0;
+      z-index: 3;
+      margin-top: ( -76% / 1110 * 100 );
+    }
 
     &.cta-solid,
     span {
