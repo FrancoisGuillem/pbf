@@ -87,13 +87,13 @@ $events = get_pbf_participant_events($metadata);
         <ul class="participant-links">
           <?php
           if (!empty($facebook)) { ?>
-            <li><a href="<?= $facebook ?>"><?php get_template_part("inc/assets/facebook.svg"); ?><span>Facebook</span></a></li>
+            <li><a href="<?= $facebook ?>" rel="noopener noreferrer" target="_blank"><?php get_template_part("inc/assets/facebook.svg"); ?><span>Facebook</span></a></li>
           <?php }
           if (!empty($instagram)) { ?>
-            <li><a href="<?= $instagram ?>"><?php get_template_part("inc/assets/instagram.svg"); ?><span>Instagram</span></a></li>
+            <li><a href="<?= $instagram ?>" rel="noopener noreferrer" target="_blank"><?php get_template_part("inc/assets/instagram.svg"); ?><span>Instagram</span></a></li>
           <?php }
           if (!empty($website)) { ?>
-            <li><a href="<?= $website ?>"><?php get_template_part("inc/assets/globe.svg"); ?><span><?= _e("[:fr]Site web[:en]Website[:]"); ?></span></a></li>
+            <li><a href="<?= $website ?>" rel="noopener noreferrer" target="_blank"><?php get_template_part("inc/assets/globe.svg"); ?><span><?= _e("[:fr]Site web[:en]Website[:]"); ?></span></a></li>
           <?php }
           ?>
         </ul>
@@ -117,13 +117,13 @@ $events = get_pbf_participant_events($metadata);
       <ul class="participant-links">
         <?php
         if (!empty($facebook)) { ?>
-          <li><a href="<?= $facebook ?>"><?php get_template_part("inc/assets/facebook.svg"); ?><span>Facebook</span></a></li>
+          <li><a href="<?= $facebook ?>" rel="noopener noreferrer" target="_blank"><?php get_template_part("inc/assets/facebook.svg"); ?><span>Facebook</span></a></li>
         <?php }
         if (!empty($instagram)) { ?>
-          <li><a href="<?= $instagram ?>"><?php get_template_part("inc/assets/instagram.svg"); ?><span>Instagram</span></a></li>
+          <li><a href="<?= $instagram ?>" rel="noopener noreferrer" target="_blank"><?php get_template_part("inc/assets/instagram.svg"); ?><span>Instagram</span></a></li>
         <?php }
         if (!empty($website)) { ?>
-          <li><a href="<?= $website ?>"><?php get_template_part("inc/assets/globe.svg"); ?><span><?= _e("[:fr]Site web[:en]Website[:]"); ?></span></a></li>
+          <li><a href="<?= $website ?>" rel="noopener noreferrer" target="_blank"><?php get_template_part("inc/assets/globe.svg"); ?><span><?= _e("[:fr]Site web[:en]Website[:]"); ?></span></a></li>
         <?php }
         ?>
       </ul>

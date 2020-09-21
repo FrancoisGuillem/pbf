@@ -16,7 +16,7 @@
 ?>
 
 <article class="participant" id="post-<?= $participant["id"]; ?>">
-  <a href="<?= esc_url($participant["permalink"]) ?>">
+  <a href="<?= esc_url($participant["permalink"]) ?>" rel="noopener noreferrer" target="_blank">
     <?php if ($participant["thumbnail"]) { ?>
       <span class="participant-img">
         <img src="<?= $participant["thumbnail"] ?>" alt="" />
