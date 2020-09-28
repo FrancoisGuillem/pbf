@@ -83,6 +83,7 @@ $events = get_pbf_participant_events($metadata);
           </span>
         <?php } ?>
         <p class="participant-title"><?= $title ?></p>
+        <p class="participant-address"><a href="https://www.google.com/maps/search/?api=1&query=<?= urlencode(html_entity_decode($title)); ?>, <?= urlencode($address); ?>" rel="noopener noreferrer" target="_blank"><?= $address ?></a></p>
         <p class="tag-solid variant-primary"><?= $category; ?></p>
         <ul class="participant-links">
           <?php
@@ -110,6 +111,7 @@ $events = get_pbf_participant_events($metadata);
         </span>
       <?php } ?>
       <p class="participant-title"><?= $title ?></p>
+      <p class="participant-address"><a href="https://www.google.com/maps/search/?api=1&query=<?= urlencode(html_entity_decode($title)); ?>, <?= urlencode($address); ?>" rel="noopener noreferrer" target="_blank"><?= $address ?></a></p>
       <p class="tag-solid variant-primary"><?= $category; ?></p>
       <div class="content">
         <?= the_content() ?>
