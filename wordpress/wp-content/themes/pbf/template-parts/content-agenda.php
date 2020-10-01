@@ -9,6 +9,9 @@
 $args = array(
   'post_type' => 'event',
   'filter' => 'date',
+  'meta_key' => 'start_time',
+  'orderby' => 'meta_value_num',
+  'order' => 'ASC',
 );
 
 $query = new WP_Query($args);
@@ -28,8 +31,6 @@ $query = new WP_Query($args);
       ?><li><?php get_template_part('template-parts/content-event-preview'); ?></li>
       <?php
       endwhile;
-
-      the_posts_navigation();
       ?>
     </ul>
   <?php } else { ?>

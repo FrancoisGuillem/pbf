@@ -34,9 +34,6 @@ if (empty($end)) {
   </div>
   <div class="event-detail-content">
     <h2 class="event-detail-title">
-      <!-- <a href="<?= esc_url(get_permalink()) ?>">
-          <?= the_title() ?>
-        </a> -->
       <?= the_title(); ?>
     </h2>
     <?php if (!empty($geo["address"])) { ?>
