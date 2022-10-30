@@ -31,7 +31,7 @@
   "devDependencies": {
     "@babel/register": "^7.10.3",
     "autoprefixer": "^9.8.2",
-    "browser-sync": "^2.26.7",
+    "browser-sync": "^2.27.10",
     "clean-css": "^4.2.3",
     "fibers": "^4.0.3",
     "gulp": "^4.0.2",
